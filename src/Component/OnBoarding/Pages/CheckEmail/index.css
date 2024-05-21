@@ -1,0 +1,121 @@
+* {
+    padding: 0;
+    margin: 0;
+    /* overflow-x: hidden; */
+  }
+
+  .bgImage {
+
+    background-image: url("../../../assetsimg/bg.svg");
+  }
+
+  .Check-otp-input-cont{
+    display: grid;
+  }
+  
+  .authContainer {
+    display: flex;
+    height: 100vh;
+    width: 100%;
+    align-items: center;
+    /* font-family: Arial; */
+    color: black;
+  }
+  
+  .appLayoutRouterView {
+    overflow-y: hidden;
+    overflow-x: hidden;
+  }
+  
+  .authLayout {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 28rem;
+  }
+  
+  .authContainerRouterView {
+    flex-grow: 1;
+  }
+  .headerH {
+    margin-top: 0.5rem;
+    color: #656161;
+  }
+  .authLayoutHeader {
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 1.875rem;
+    line-height: 2.25rem;
+    font-weight: 700;
+  }
+  
+  .authLayoutLogo {
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 1.25rem;
+    width: 225px;
+  }
+  
+  .authLayoutHeaderSubtext {
+    margin-top: 0.5rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    font-weight: 400;
+  }
+  
+  .authLayout a {
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: gray;
+    text-decoration: none;
+  }
+  .authLayout a:hover {
+    text-decoration: underline;
+  }
+  
+  .pLink {
+    cursor: pointer;
+  }
+  
+  .pContent {
+    display: grid;
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+    gap: 1rem;
+  }
+  .inputAndButton {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 15px;
+  }
+  .inputAndButton input {
+    padding: 10px;
+    width: 94%;
+  }
+  .inputAndButton input::placeholder {
+    padding: 10px;
+  }
+  .inputAndButton button {
+    background: #0f629e;
+    color: #fff;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 10px;
+  }
+  
+  @media screen and (max-width: 426px) {
+    .pContent {
+      padding-left: 60px;
+      padding-right: 60px;
+    }
+  }
+  
+  @media screen and (max-width: 325px) {
+    .headerH {
+      font-size: 30px;
+    }
+  }
+  

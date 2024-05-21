@@ -1,0 +1,305 @@
+.MainSub {
+    margin-left: 561px;
+    margin-top: 150px;
+
+}
+
+.MainSub-MainTitle {
+    font-size: 50px;
+    font-family: "Roboto", sans-serif;
+    bottom: 50px;
+    position: relative;
+}
+
+
+.line {
+    background-color: #ff40b4;
+    width: 60%;
+    height: 0.1px;
+    position: relative;
+    right: 400px;
+    top: 20px;
+}
+
+.lines {
+    background-color: #ff40b4;
+    width: 60%;
+    height: 0.1px;
+    position: relative;
+    top: 150px;
+    right: 400px;
+}
+
+.MainSub-ContentWrapperRight {
+    position: relative;
+    top: 15px;
+}
+
+.MainSub-ContentWrapperLeft {
+    position: relative;
+    bottom: 25px;
+}
+
+.content {
+    position: relative;
+    top: 120px;
+    right: 400px;
+    font-family: "Roboto", sans-serif;
+}
+
+.MainSub-RealTitle {
+    font-size: 18px;
+    position: relative;
+    bottom: 18px;
+}
+
+.MainSub-Correlate {
+    position: relative;
+    bottom: 1px;
+    line-height: 25px;
+}
+
+.orangeLine {
+    background-color: #ff8300;
+    width: 60%;
+    height: 1px;
+    position: relative;
+    bottom: 120px;
+    left: 250px;
+}
+
+.MainSub-contents {
+    position: relative;
+    bottom: 60px;
+    font-family: "Roboto", sans-serif;
+    margin-left: 250px;
+}
+
+.MainSub-RealTitles {
+    font-size: 18px;
+    width: 400px;
+    position: relative;
+    top: 20px;
+}
+
+.MainSub-Correlates {
+    position: relative;
+    top: 40px;
+    line-height: 25px;
+
+}
+
+.orangeLines {
+    background-color: #ff8300;
+    width: 60%;
+    height: 1px;
+    position: relative;
+    top: 15px;
+    left: 250px;
+}
+
+.MainSub-content1 {
+    position: relative;
+    top: 200px;
+    right: 400px;
+    font-family: "Roboto", sans-serif;
+}
+
+.MainSub-RealTitle1 {
+    font-size: 18px;
+    position: relative;
+    bottom: 30px;
+}
+
+.MainSub-Correlate1 {
+    position: relative;
+    bottom: 10px;
+    line-height: 25px;
+}
+
+.MainSub-contents2 {
+    position: relative;
+    top: 10px;
+    font-family: "Roboto", sans-serif;
+    margin-left: 250px;
+}
+
+.MainSub-RealTitles2 {
+    font-size: 18px;
+    position: relative;
+    top: 20px;
+
+}
+
+.MainSub-Correlates2 {
+    position: relative;
+    top: 40px;
+    line-height: 25px;
+}
+
+
+@media only screen and (max-width: 768px) {
+    .MainSub-Why {
+        position: relative;
+        top: 10px;
+        left: 80px;
+    }
+
+    .line {
+        background-color: #ff40b4;
+        width: 450px;
+        height: 0.1px;
+        position: relative;
+        top: 45px;
+    }
+
+    .lines {
+        background-color: #ff40b4;
+        width: 470px;
+        height: 0.1px;
+    }
+
+    .MainSub-ContentWrapperLeft {
+        display: grid;
+    }
+
+    .MainSub-ContentWrapperRight {
+        display: grid;
+        position: relative;
+        top: 1px;
+    }
+
+    .MainSub-RealTitles {
+        position: relative;
+        bottom: 50px;
+    }
+
+    .orangeLine {
+        width: 450px;
+        height: 0.1px;
+        position: relative;
+        bottom: 100px;
+    }
+
+    .orangeLines {
+        width: 450px;
+        height: 0.1px;
+        position: relative;
+        bottom: 100px;
+    }
+
+}
+
+
+@media only screen and (min-width: 768px) and (max-width:1024px) {
+    .MainSub-Why {
+        position: relative;
+        bottom: 5px;
+        left: 65px;
+    }
+
+    .MainSub-MainTitle {
+        position: relative;
+        bottom: 25px;
+    }
+
+    .line {
+        background-color: #ff40b4;
+        width: 450px;
+        height: 0.1px;
+        position: relative;
+        top: 45px;
+    }
+
+    .lines {
+        background-color: #ff40b4;
+        width: 470px;
+        height: 0.1px;
+    }
+
+    .MainSub-ContentWrapperLeft {
+        display: grid;
+    }
+
+    .MainSub-ContentWrapperRight {
+        display: grid;
+        position: relative;
+        top: 1px;
+    }
+
+    .MainSub-RealTitles {
+        position: relative;
+        bottom: 50px;
+    }
+
+    .orangeLine {
+        width: 450px;
+        height: 0.1px;
+        position: relative;
+        bottom: 100px;
+    }
+
+    .orangeLines {
+        width: 450px;
+        height: 0.1px;
+        position: relative;
+        bottom: 100px;
+    }
+}
+
+
+@media only screen and (min-width: 1025px) and (max-width:1440px) {
+    .MainSub-Why {
+        position: relative;
+        bottom: 4px;
+        left: 10px;
+    }
+
+    .MainSub-MainTitle {
+        position: relative;
+        bottom: 25px;
+    }
+
+    .line {
+        background-color: #ff40b4;
+        width: 450px;
+        height: 0.1px;
+        position: relative;
+        top: 45px;
+    }
+
+    .lines {
+        background-color: #ff40b4;
+        width: 470px;
+        height: 0.1px;
+    }
+
+    .MainSub-ContentWrapperLeft {
+        display: grid;
+    }
+
+    .MainSub-ContentWrapperRight {
+        display: grid;
+        position: relative;
+        top: 1px;
+    }
+
+    .MainSub-RealTitles {
+        position: relative;
+        bottom: 50px;
+    }
+
+    .orangeLine {
+        width: 450px;
+        height: 0.1px;
+        position: relative;
+        bottom: 100px;
+    }
+
+    .orangeLines {
+        width: 450px;
+        height: 0.1px;
+        position: relative;
+        bottom: 100px;
+    }
+}

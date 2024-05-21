@@ -1,0 +1,244 @@
+.inbox-content {
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.inbox-content-img {
+  width: 30%;
+}
+.inbox-content-img img {
+  margin-top: 10px;
+  width: 180px;
+}
+.inbox-content-sec1 {
+  margin-top: 20px;
+  width: 30%;
+}
+/* .inbox-content-sec2 {
+  margin: 185px;
+  opacity: 0.2;
+} */
+.inbox-content-sec3 {
+  margin-top: 480px;
+  width: 45%;
+}
+.inbox-content-sec1 > h4 {
+  font-size: 20px;
+  font-weight: 600;
+}
+.inbox-content-sec1 > p {
+  letter-spacing: 1px;
+  font-size: 15px;
+  color: rgb(105, 105, 105);
+  text-align: justify;
+  margin-top: 10px;
+}
+.Expire-Email-page-button{
+  margin-top: 30px;
+}
+.inbox-content-sec3 .stepper-wrapper {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  /* margin-bottom: 20px; */
+}
+.inbox-content-sec3 .stepper-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+}
+
+.inbox-content-sec3 .stepper-item::before {
+  position: absolute;
+  content: "";
+  border-bottom: 2px solid #ccc;
+  width: 100%;
+  top: 9px;
+  left: -50%;
+  z-index: 2;
+}
+
+.inbox-content-sec3 .stepper-item::after {
+  position: absolute;
+  content: "";
+  border-bottom: 2px solid #ccc;
+  width: 100%;
+  top: 9px;
+  left: 50%;
+  z-index: 2;
+}
+
+.inbox-content-sec3 .stepper-item .step-counter {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ccc;
+  margin-bottom: 6px;
+}
+
+.inbox-content-sec3 .stepper-item.completed {
+  font-weight: bold;
+}
+
+.inbox-content-sec3 .stepper-item.completed .step-counter {
+  background-color: #0f629e;
+}
+
+.inbox-content-sec3 .stepper-item.completed::after {
+  position: absolute;
+  content: "";
+  border-bottom: 2px solid gray;
+  width: 100%;
+  top: 9px;
+  left: 50%;
+  z-index: 3;
+}
+
+.inbox-content-sec3 .stepper-item:first-child::before {
+  content: none;
+}
+.inbox-content-sec3 .stepper-item:last-child::after {
+  content: none;
+}
+
+/* media queries */
+
+@media only screen and (max-width: 1366px) {
+  .inbox-content-img {
+    width: 45%;
+  }
+  .inbox-content-img img {
+    width: 180px;
+  }
+  .inbox-content-sec1 {
+    width: 45%;
+  }
+  /* .inbox-content-sec2 {
+    margin: 165px;
+  } */
+  .inbox-content-sec3 {
+    width: 60%;
+    margin-top: 400px;
+  }
+  .inbox-content-sec1 > h4 {
+    font-size: 22px;
+  }
+  .inbox-content-sec1 > p {
+    font-size: 14px;
+  }
+  .step-name {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .inbox-content-img {
+    width: 55%;
+  }
+  .inbox-content-img img {
+    width: 160px;
+  }
+  .inbox-content-sec1 {
+    width: 55%;
+  }
+  /* .inbox-content-sec2 {
+    margin: 145px;
+  } */
+  .inbox-content-sec3 {
+    width: 75%;
+    margin-top: 420px;
+  }
+  .inbox-content-sec1 > h4 {
+    font-size: 19px;
+  }
+  .inbox-content-sec1 > p {
+    font-size: 11px;
+  }
+  .step-name {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .inbox-content-img {
+    width: 65%;
+  }
+  .inbox-content-img img {
+    width: 140px;
+  }
+  .inbox-content-sec1 {
+    width: 65%;
+  }
+  /* .inbox-content-sec2 {
+    margin: 125px;
+  } */
+  .inbox-content-sec3 {
+    width: 85%;
+    margin-top: 435px;
+  }
+  .inbox-content-sec1 > h4 {
+    font-size: 16px;
+  }
+  .inbox-content-sec1 > p {
+    font-size: 9px;
+  }
+  .step-name {
+    font-size: 10px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .inbox-content-img {
+    width: 75%;
+  }
+  .inbox-content-img img {
+    width: 120px;
+  }
+  .inbox-content-sec1 {
+    width: 75%;
+  }
+  /* .inbox-content-sec2 {
+    margin: 115px;
+  } */
+  .inbox-content-sec3 {
+    width: 100%;
+    margin-top: 440px;
+  }
+  .inbox-content-sec1 > h4 {
+    font-size: 16px;
+  }
+  .inbox-content-sec1 > p {
+    font-size: 8px;
+  }
+  .step-name {
+    font-size: 8px;
+  }
+}
+@media only screen and (max-width: 330px) {
+  .inbox-content-sec3 {
+    width: 100%;
+    margin-top: 440px;
+  }
+}
+@media only screen and (max-width: 300px) {
+  /* .inbox-content-sec2 {
+    margin: 100px;
+  } */
+  .inbox-content-sec1 > h4 {
+    font-size: 15px;
+  }
+}

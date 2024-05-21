@@ -1,0 +1,197 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: #ffffff;
+    height: 94px;
+    z-index: 9999;
+}
+
+.Navbar-logo {
+    width: 180px;
+    padding: 15px;
+}
+
+.Navbar-Seacrh {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 550px;
+    bottom: 25px;
+    position: relative;
+}
+
+.Navbar-SearchBox {
+    position: relative;
+    right: 110px;
+    bottom: 40px;
+
+}
+
+.Navbar-SearchInput {
+    width: 130%;
+    height: 35px;
+    border: 2px solid gray;
+    border-radius: 5px;
+    padding: 0px 0px 0px 10px;
+}
+
+.Navbar-SearchBox.Navbar-SearchInput::placeholder {
+    position: relative;
+    left: 20px;
+    right: -10px;
+    font-size: 15px;
+    padding: 0 30px;
+
+}
+
+.NavbarSearchIcon {
+    width: 50px;
+    height: 35px;
+    color: #ffffff;
+    position: relative;
+    left: 255px;
+    bottom: 36.5px;
+    background-color: #0F629E;
+    cursor: pointer;
+    border-top-right-radius: 3px;
+    border-bottom-right-radius: 3px;
+    border-top-left-radius: 1.5px;
+    border-bottom-left-radius: 1.5px;
+
+}
+
+.Navbar-login {
+    position: relative;
+    right: 10px;
+    bottom: 60px;
+    color: #ffffff;
+    font-family: "Roboto", sans-serif;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 20px;
+    text-decoration: none;
+    color: #000;
+}
+
+.Navbar-login:hover {
+    color: #FF7A00;
+
+}
+
+.NavbarDemoBtn {
+    position: relative;
+    left: 10px;
+    bottom: 60px;
+    background-color: #0F629E;
+    color: #ffffff;
+    padding: 7px 14px;
+    height: 50px;
+    border: 1px solid #ffffff;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+@media only screen and (max-width: 768px) {
+    .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background-color: #ffffff;
+        height: 90px;
+        z-index: 9999;
+    }
+
+    .Navbar-logo {
+        width: 160px;
+        padding: 15px;
+    }
+
+    .Navbar-Seacrh {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 90px;
+        bottom: 25px;
+        position: relative;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width:1024px) {
+    .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background-color: #ffffff;
+        height: 90px;
+        z-index: 9999;
+    }
+
+    .Navbar-logo {
+        width: 160px;
+        padding: 15px;
+    }
+
+    .Navbar-Seacrh {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 50px;
+        bottom: 25px;
+        position: relative;
+    }
+
+}
+
+@media only screen and (min-width: 1025px) and (max-width:1440px) {
+    .navbar {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background-color: #ffffff;
+        height: 90px;
+        z-index: 9999;
+    }
+
+    .Navbar-logo {
+        width: 160px;
+        padding: 15px;
+    }
+
+    .Navbar-Seacrh {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-right: 50px;
+        bottom: 25px;
+        position: relative;
+    }
+
+    .Navbar-SearchBox {
+        position: relative;
+        right: 110px;
+        bottom: 40px;
+
+    }
+
+    .Navbar-SearchInput {
+        width: 130%;
+        height: 35px;
+        border: 2px solid gray;
+        border-radius: 5px;
+    }
+
+    .Navbar-SearchBox.Navbar-SearchInput::placeholder {
+        position: relative;
+        left: 20px;
+        right: -10px;
+        font-size: 15px;
+        padding: 0 30px;
+    }
+}

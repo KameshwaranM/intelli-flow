@@ -1,10 +1,9 @@
-import logo from './logo.svg';
-import './App.css';
+import Rout from "./All-Routes/Route";
 
 function App() {
   return (
     <div>
-      
+      <Rout />
     </div>
   );
 }

@@ -1,0 +1,242 @@
+.password-content {
+  font-family: Arial, Helvetica, sans-serif;
+  height: 100vh;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.password-content-img {
+  width: 30%;
+}
+.password-content-img img {
+  margin-top: 10px;
+  width: 180px;
+}
+.password-content-sec1 {
+  margin-top: 10px;
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+}
+.password-content-sec1 > h4 {
+  font-size: 25px;
+  font-weight: 600;
+}
+.password-content-sec1 > p {
+    color: rgb(105, 105, 105);
+    word-spacing: 3px;
+    margin-top: 10px;
+    line-height: 1.5;
+    letter-spacing: 1px;
+}
+.password-content-sec1 > input {
+  border: 1px solid;
+  /* height: 40px; */
+  padding: 15px;
+  /* margin-bottom: 70px; */
+  margin-top: 30px;
+}
+.password-content-sec1 > button {
+  height: 32px;
+  margin-bottom: 20px;
+  cursor: pointer;
+  background-color: #0f629e;
+  color: white;
+  border: none;
+  margin-top: 20px;
+  border-radius: 4px;
+}
+.password-content-sec1 > button:hover {
+  background-color: #0f7ac6;
+}
+.password-content-sec2 {
+  margin-top: 235px;
+  width: 45%;
+}
+
+.password-content-sec2 .stepper-wrapper {
+  margin-top: auto;
+  display: flex;
+  justify-content: space-between;
+  /* margin-bottom: 20px; */
+}
+.password-content-sec2 .stepper-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+
+  @media (max-width: 768px) {
+    font-size: 12px;
+  }
+}
+
+.password-content-sec2 .stepper-item::before {
+  position: absolute;
+  content: "";
+  border-bottom: 2px solid #ccc;
+  width: 100%;
+  top: 9px;
+  left: -50%;
+  z-index: 2;
+}
+
+.password-content-sec2 .stepper-item::after {
+  position: absolute;
+  content: "";
+  border-bottom: 2px solid #ccc;
+  width: 100%;
+  top: 9px;
+  left: 50%;
+  z-index: 2;
+}
+
+.password-content-sec2 .stepper-item .step-counter {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ccc;
+  margin-bottom: 6px;
+}
+
+.password-content-sec2 .stepper-item.completed {
+  font-weight: bold;
+}
+
+.password-content-sec2 .stepper-item.completed .step-counter {
+  background-color: #0f629e;
+}
+
+.password-content-sec2 .stepper-item.completed::after {
+  position: absolute;
+  content: "";
+  border-bottom: 2px solid gray;
+  width: 100%;
+  top: 9px;
+  left: 50%;
+  z-index: 3;
+}
+
+.password-content-sec2 .stepper-item:first-child::before {
+  content: none;
+}
+.password-content-sec2 .stepper-item:last-child::after {
+  content: none;
+}
+
+/* media queries */
+
+@media only screen and (max-width: 1366px) {
+  .password-content-img {
+    width: 45%;
+  }
+  .password-content-img img {
+    width: 180px;
+  }
+  .password-content-sec1 {
+    width: 45%;
+  }
+  .password-content-sec2 {
+    width: 60%;
+    margin-top: 160px;
+  }
+  .password-content-sec1 > h4 {
+    font-size: 22px;
+  }
+  .password-content-sec1 > p {
+    font-size: 14px;
+  }
+  .password-content-sec2 .step-name {
+    font-size: 14px;
+  }
+}
+
+@media only screen and (max-width: 1024px) {
+  .password-content-img {
+    width: 55%;
+  }
+  .password-content-img img {
+    width: 160px;
+  }
+  .password-content-sec1 {
+    width: 55%;
+  }
+  .password-content-sec2 {
+    width: 75%;
+    margin-top: 200px;
+  }
+  .password-content-sec1 > h4 {
+    font-size: 19px;
+  }
+  .password-content-sec1 > p {
+    font-size: 11px;
+  }
+  .password-content-sec2 .step-name {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  .password-content-img {
+    width: 65%;
+  }
+  .password-content-img img {
+    width: 140px;
+  }
+  .password-content-sec1 {
+    width: 65%;
+  }
+  .password-content-sec2 {
+    width: 85%;
+    margin-top: 220px;
+  }
+  .password-content-sec1 > h4 {
+    font-size: 16px;
+  }
+  .password-content-sec1 > p {
+    font-size: 9px;
+  }
+  .password-content-sec2 .step-name {
+    font-size: 10px;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .password-content-img {
+    width: 75%;
+  }
+  .password-content-img img {
+    width: 120px;
+  }
+  .password-content-sec1 {
+    width: 75%;
+  }
+  .password-content-sec2 {
+    width: 100%;
+    margin-top: 215px;
+  }
+  .password-content-sec1 > h4 {
+    font-size: 16px;
+  }
+  .password-content-sec1 > p {
+    font-size: 8px;
+  }
+  .password-content-sec2 .step-name {
+    font-size: 8px;
+  }
+}
+
+@media only screen and (max-width: 330px){
+  .password-content-sec2 {
+    width: 100%;
+    margin-top: 205px;
+}
+}

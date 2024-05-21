@@ -1,0 +1,259 @@
+body {
+    overflow-x: hidden;
+}
+
+
+.LandingPage {
+    margin-top: 80px;
+    position: relative;
+}
+.error-alert{
+    position: absolute;
+    right: 10px;
+    top:15px
+
+}
+.LandingPage-bgImage {
+    color: aliceblue;
+    width: 1520px !important;
+    height: 100vh !important;
+}
+
+.LandingPage-bgImage::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: inherit;
+    filter: blur(5px);
+    z-index: -1;
+}
+
+.LandingPage-left {
+    text-align: center;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #ffffff;
+}
+
+.LandingPage-title {
+    font-size: 60px;
+    font-family: "Roboto", sans-serif;
+    right: 150px;
+    position: relative;
+    top: 100px;
+    letter-spacing: 4px;
+    overflow: hidden;
+    font-weight: 600;
+
+}
+
+#ani {
+    opacity: 0;
+}
+
+
+.animate-bottom {
+    position: relative;
+    animation: animatebottom 3s;
+    color: orange;
+    right: 100px;
+    bottom: 10px;
+}
+
+.LandingPage-animation {
+    display: flex;
+    position: relative;
+    left: 450px;
+    top: 40px;
+    bottom: 15px;
+    font-size: 50px;
+    font-weight: 600;
+    font-family: "Roboto", sans-serif;
+}
+
+@keyframes animatebottom {
+    0% {
+        bottom: -30px;
+        opacity: 0
+    }
+
+    25% {
+        bottom: 0px;
+        opacity: 1
+    }
+
+    95% {
+        bottom: 0px;
+        opacity: 1;
+    }
+
+    100% {
+        bottom: 20px;
+        opacity: 0
+    }
+}
+
+
+.textSpin {
+    color: #FF7A00;
+    height: 100%;
+    display: block;
+    margin-top: 10px;
+
+}
+
+.LandingPage-subTitle1 {
+    position: relative;
+    top: 100px;
+    right: 60px;
+}
+
+.LandingPage-subTitle {
+    font-family: "Roboto", sans-serif;
+    font-size: 15px;
+    color: gray;
+    margin-left: 100px;
+    letter-spacing: 2px;
+}
+
+.LandingPage-form {
+    position: relative;
+    top: 120px;
+}
+
+.LandingPage-inputForm {
+    display: flex;
+    margin-left: 50px;
+    margin-top: 50px;
+}
+
+.LandingPage-nameInput {
+    width: 200px;
+    height: 66px;
+    background-color: #ffffff;
+    border-radius: 7px;
+    border-right: 1px solid gray;
+    padding-left: 30px;
+    margin: 1px;
+    font-size: 15px;
+
+}
+
+.LandingPage-nameInput::placeholder {
+    position: relative;
+    left: 20px;
+    font-size: 18px;
+    text-align: left;
+    padding-left: -10px;
+
+}
+
+.LandingPage-emailInput {
+    width: 200px;
+    height: 66px;
+    background-color: #ffffff;
+    border-radius: 7px;
+    border-right: 1px solid gray;
+    padding-left: 30px;
+    font-size: 15px;
+    margin-left: 5px;
+}
+
+.LandingPage-emailInput::placeholder {
+    position: relative;
+    left: 20px;
+    font-size: 18px;
+}
+
+.LandingPage-GetStart {
+    margin-left: 10px;
+    background-color: #FF7A00;
+    width: 180px;
+    height: 70px;
+    border-radius: 7px;
+    font-size: 19px;
+    cursor: pointer;
+    border: none;
+}
+
+.LandingPage-Detail {
+    color: white;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 25px;
+    letter-spacing: 0.5px;
+    position: absolute;
+    top: 131%;
+    right: 370px;
+    cursor: pointer;
+}
+
+.LandingPage-underline {
+    text-decoration: underline;
+}
+
+.LandingPage-creditCard {
+    position: relative;
+    left: 200px;
+    top: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    line-height: 25px;
+    letter-spacing: 0.5px;
+}
+
+@media only screen and (max-width: 768px) {
+    .LandingPage {
+        margin-top: 80px;
+    }
+
+    .LandingPage-left {
+        text-align: center;
+        position: absolute;
+        top: 40%;
+        left: 720px;
+        transform: translate(-50%, -50%);
+        color: #ffffff;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+    .LandingPage {
+        margin-top: 80px;
+    }
+
+
+    .LandingPage-left {
+        text-align: center;
+        position: absolute;
+        top: 40%;
+        left: 720px;
+        transform: translate(-50%, -50%);
+        color: #ffffff;
+    }
+}
+
+@media only screen and (min-width: 1025px) and (max-width:1440px) {
+    .LandingPage {
+        margin-top: 80px;
+    }
+
+    .LandingPage-left {
+        text-align: center;
+        position: absolute;
+        top: 35%;
+        left: 720px;
+        transform: translate(-50%, -50%);
+        color: #ffffff;
+    }
+}

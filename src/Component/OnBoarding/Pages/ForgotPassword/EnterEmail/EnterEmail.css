@@ -1,0 +1,16 @@
+.login-link{
+  width: 100%;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.forgotPassword_Button {
+  background-color: #0F629E;
+  color: white;
+  font-size: 17px;
+  border-radius: 8px;
+  width: 100%;
+  margin-top: 22px;
+  height: 45px;
+  cursor: pointer;
+}
