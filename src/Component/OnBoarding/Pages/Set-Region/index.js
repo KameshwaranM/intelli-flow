@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import Logo from '../../../assetsimg/auto-intelli-logo.png';
+import Logo from '../../../../Assets/auto-intelli-logo.png';
 // import { countryData } from "../Region/countryData";
 import "../Region/index.css";
 import { useParams } from "react-router-dom";

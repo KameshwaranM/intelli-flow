@@ -1,6 +1,6 @@
 import "./VerifyEmail.css";
 import React, { useState } from "react";
-import image from "../../../../assetsimg/auto-intelli-logo.png";
+import image from "../../../../../Assets/auto-intelli-logo.png";
 import { ImSpinner } from "react-icons/im";
 import { URL_ResendOTP, URL_VerifyUserCode } from "../../../API-URL";
 

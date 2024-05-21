@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Logo from '../../../assets/auto-intelli-logo.png'
+import Logo from '../../../../Assets/auto-intelli-logo.png'
 import "../Region/index.css";
 import { useParams } from "react-router-dom";
 import { ImSpinner } from "react-icons/im";

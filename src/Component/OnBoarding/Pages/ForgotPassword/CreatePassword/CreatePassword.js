@@ -6,7 +6,7 @@ import Visibility from "@mui/icons-material/Visibility";
 import VisibilityOff from "@mui/icons-material/VisibilityOff";
 import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
-import image from '../../../../assetsimg/auto-intelli-logo.png';
+import image from '../../../../../Assets/auto-intelli-logo.png';
 import "./CreatePassword.css";
 import { URL_ResetPassword } from "../../../API-URL";
 
