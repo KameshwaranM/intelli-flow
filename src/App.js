@@ -1,9 +1,12 @@
 import Rout from "./All-Routes/Route";
+import { ThemeContextProvider } from "./Component/Theams/Theam";
 
 function App() {
   return (
     <div>
-      <Rout />
+      <ThemeContextProvider>
+        <Rout />
+      </ThemeContextProvider>
     </div>
   );
 }

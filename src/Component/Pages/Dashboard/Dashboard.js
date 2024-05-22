@@ -11,7 +11,6 @@ import {
   CardActions,
 } from "@mui/material";
 import Sidebar from "../../Sidebar/Sidebar";
-// import CustomDrawer from "../../components/CustomDrawer";
 
 const Dashboard = () => {
   return (
@@ -29,7 +28,7 @@ const Dashboard = () => {
           >
             <Typography variant="h4">Dashboard</Typography>
           </Box>
-          <Grid container spacing={3} sx={{ mb: 4 }}>
+          <Grid container spacing={1} sx={{ mb: 2 }}>
             <Grid item xs={12}>
               <Card sx={{ width: '100%' }}>
                 <CardContent>
@@ -48,7 +47,7 @@ const Dashboard = () => {
               </Card>
             </Grid>
           </Grid>
-          <Grid container spacing={3}>
+          <Grid container spacing={2}>
             <Grid item xs={12} md={8}>
               <Paper
                 sx={{
