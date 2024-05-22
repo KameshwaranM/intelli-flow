@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import "../LandingPage/index.css";
 import Blur from "react-blur";
-import BackgroundImage from "../../../Assests/background11.png";
+import BackgroundImage from "../../../../Assets/background11.png";
 import Navbar from "../Navbar";
 import MainSub from "./Autointelli";
 import Footer from "../Footer";

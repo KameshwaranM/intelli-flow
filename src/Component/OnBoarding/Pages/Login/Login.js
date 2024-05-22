@@ -28,7 +28,7 @@ const Login = () => {
       if (response.status === 200) {
         console.log("Data sent successfully:", response.data);
         setLoginSuccess(true);
-        // window.location.href = "/Dashboard_Sub";
+        window.location.href = "/Create-workflow";
         setTimeout(() => {
           setLoginSuccess(false);
         }, 3000);

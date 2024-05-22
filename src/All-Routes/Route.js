@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-// import Landing from "../Component/OnBoarding/Pages/LandingPage";
+import Landing from "../Component/OnBoarding/Pages/LandingPage";
 import CheckYourEmail from "../Component/OnBoarding/Pages/CheckEmail";
 import SetPassword from "../Component/OnBoarding/Pages/SetPassword";
 import SelectRegion from "../Component/OnBoarding/Pages/Region";
@@ -9,13 +9,16 @@ import CreatePassword from "../Component/OnBoarding/Pages/ForgotPassword/CreateP
 import SetRegion from "../Component/OnBoarding/Pages/Set-Region";
 import Login from "../Component/OnBoarding/Pages/Login/Login";
 import SignUP from "../Component/OnBoarding/Pages/Sign-Up";
+import FirstLogin from "../Component/FirstLogin/FirstLogin";
 
 function Rout() {
   return (
     <>
       <Router>
         <Routes>
-          {/* <Route path="/" element={<Landing />} /> */}
+          <Route path="/" element={<Landing />} />
+
+          {/* User OnBoarding */}
           <Route path="/SignUp" element={<SignUP />} />
           <Route path="/verify_code" element={<CheckYourEmail />} />
           <Route path="/Create_Password" element={<SetPassword />} />
@@ -25,6 +28,9 @@ function Rout() {
           <Route path="/Verify_user_code" element={<VerifyEmail />} />
           <Route path="/Reset_Password" element={<CreatePassword />} />
           <Route path="/Set_Region/:id" element={<SetRegion />} />
+
+          {/* Tool */}
+          <Route path="/Create-workflow" element={<FirstLogin />} />
         </Routes>
       </Router>
     </>
