@@ -35,7 +35,7 @@ const FirstLogin = () => {
       setError(false);
       setOpen(true);
       setTimeout(() => {
-        navigate("/dashboard");
+        navigate("/Dashboard");
       }, 3000);
     }
   };

@@ -10,6 +10,8 @@ import SetRegion from "../Component/OnBoarding/Pages/Set-Region";
 import Login from "../Component/OnBoarding/Pages/Login/Login";
 import SignUP from "../Component/OnBoarding/Pages/Sign-Up";
 import FirstLogin from "../Component/FirstLogin/FirstLogin";
+import Dashboard from "../Component/Pages/Dashboard/Dashboard";
+import Sidebar from "../Component/Sidebar/Sidebar";
 
 function Rout() {
   return (
@@ -31,6 +33,8 @@ function Rout() {
 
           {/* Tool */}
           <Route path="/Create-workflow" element={<FirstLogin />} />
+          <Route path="/Sidebar" element={<Sidebar />} />
+          <Route path="/Dashboard" element={<Dashboard />} />
         </Routes>
       </Router>
     </>
