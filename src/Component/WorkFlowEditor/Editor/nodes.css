@@ -1,0 +1,102 @@
+.node {
+    padding: 10px;
+    border: 2px solid #bbb;
+    background-color: #000000;
+    border-radius: 5px;
+    color: white;
+}
+
+.workflow-node-icon {
+    margin-right: 10px;
+    font-size: 25px;
+}
+
+.selected .node {
+    box-shadow: 0px 0px 19px 2px #DBDBDB;
+    border-color: #000;
+}
+.btn .btn-primary .code-disply-save-btn{
+  position: absolute;
+  top: 10px;  /* Adjust as needed */
+  right: 10px; /* Adjust as needed */
+}
+
+.container-fluid {
+    height: 100vh;
+    background-color: black;
+}
+
+.workflow-content-heading {
+    color: white;
+}
+
+.container .react-flow__edge-path {
+    stroke: #ccc;
+    stroke-width: 3pt;
+}
+
+.container .selected .react-flow__edge-path {
+    stroke: #000;
+}
+
+.container .selected .react-flow__edge-path .react-flow__arrowhead {
+    stroke: #000;
+}
+
+.container .node input {
+    width: 120px;
+}
+
+.cont-work-flow {
+    display: flex;
+}
+.flex-container {
+    display: flex;
+    background-color:black;
+    position:relative;
+    justify-content: space-between; /* Adjust as needed: space-around, space-evenly, etc. */
+    gap: 10px; /* Optional: adds space between columns */
+    
+  }
+  .headers {
+    
+    padding: 10px; /* Optional: adds padding inside columns */
+    /* Optional: background color for visibility */
+   /* Optional: border for visibility */
+   width: 100%;
+   height: 50px;
+   border: 1px solid #6b0f0f; 
+    box-sizing: border-box; /* Ensure padding and border are included in the width/height */
+  }
+ 
+  .column-actions {
+    flex: 1; /* Distribute the columns evenly */
+    padding: 10px; /* Optional: adds padding inside columns */
+    /* Optional: background color for visibility */
+   /* Optional: border for visibility */
+    box-sizing: border-box; /* Ensure padding and border are included in the width/height */
+  }
+  .column-canvas {
+    flex: 6; /* Distribute the columns evenly */
+    padding: 10px; /* Optional: adds padding inside columns */
+   /* Optional: background color for visibility */
+    border: 1px solid #ccc; /* Optional: border for visibility */
+    box-sizing: border-box; /* Ensure padding and border are included in the width/height */
+  }
+  .column-property {
+    flex: 2; /* Distribute the columns evenly */
+    padding: 10px; /* Optional: adds padding inside columns */
+   /* Optional: background color for visibility */
+   /* Optional: border for visibility */
+    box-sizing: border-box; /* Ensure padding and border are included in the width/height */
+  }
+ 
+  /* Optional: Make columns responsive */
+  @media (max-width: 768px) {
+    .flex-container {
+      flex-direction: column;
+    }
+  }
+  .row{
+        display: flex;
+  }

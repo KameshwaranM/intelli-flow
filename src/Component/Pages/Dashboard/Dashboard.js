@@ -61,7 +61,7 @@ const Dashboard = () => {
               </Paper>
             </Grid>
             <Grid item xs={12} md={4}>
-              <Grid container spacing={3}>
+              <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <Paper
                     sx={{

@@ -102,10 +102,10 @@ const Sidebar = () => {
         <Divider />
         <Box sx={{ flex: 1, overflowY: "auto" }}>
           <List>
-            <ListItem button onClick={() => handleNavigation("/dashboard")}>
+            <ListItem button onClick={() => handleNavigation("/Dashboard")}>
               <ListItemText primary="Dashboard" />
             </ListItem>
-            <ListItem button onClick={() => handleNavigation("/workflow")}>
+            <ListItem button onClick={() => handleNavigation("/Workflow_Dashboard")}>
               <ListItemText primary="Workflows" />
             </ListItem>
             {[

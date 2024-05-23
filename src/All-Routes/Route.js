@@ -12,6 +12,8 @@ import SignUP from "../Component/OnBoarding/Pages/Sign-Up";
 import FirstLogin from "../Component/FirstLogin/FirstLogin";
 import Dashboard from "../Component/Pages/Dashboard/Dashboard";
 import Sidebar from "../Component/Sidebar/Sidebar";
+import WorkflowDashboard from "../Component/Pages/WorkflowDashboard/WorkflowDashboard";
+import Canvas from "../Component/WorkFlowEditor/Editor/Canvas";
 
 function Rout() {
   return (
@@ -35,6 +37,8 @@ function Rout() {
           <Route path="/Create-workflow" element={<FirstLogin />} />
           <Route path="/Sidebar" element={<Sidebar />} />
           <Route path="/Dashboard" element={<Dashboard />} />
+          <Route path="/Workflow_Dashboard" element={<WorkflowDashboard />} />
+          <Route path="/Workflow_Editor" element={<Canvas />} />
         </Routes>
       </Router>
     </>
