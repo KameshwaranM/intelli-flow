@@ -13,7 +13,7 @@ import FirstLogin from "../Component/FirstLogin/FirstLogin";
 import Dashboard from "../Component/Pages/Dashboard/Dashboard";
 import Sidebar from "../Component/Sidebar/Sidebar";
 import WorkflowDashboard from "../Component/Pages/WorkflowDashboard/WorkflowDashboard";
-import Canvas from "../Component/WorkFlowEditor/Editor/Canvas";
+import WorkFlowEditor from "../Component/WorkFlowEditor";
 
 function Rout() {
   return (
@@ -38,7 +38,7 @@ function Rout() {
           <Route path="/Sidebar" element={<Sidebar />} />
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Workflow_Dashboard" element={<WorkflowDashboard />} />
-          <Route path="/Workflow_Editor" element={<Canvas />} />
+          <Route path="/Workflow_Editor" element={<WorkFlowEditor />} />
         </Routes>
       </Router>
     </>
