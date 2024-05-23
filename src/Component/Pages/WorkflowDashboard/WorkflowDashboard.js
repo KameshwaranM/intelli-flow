@@ -105,6 +105,10 @@ const WorkflowDashboard = () => {
     workflow.name.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  const handleOpenEditor = () => {
+    window.location.href = "/Workflow_Editor";
+  };
+
   return (
     <Box className="workflowContainer" display="flex">
       <Sidebar />
@@ -225,7 +229,7 @@ const WorkflowDashboard = () => {
                         open={Boolean(anchorEl)}
                         onClose={handleMenuClose}
                       >
-                        <MenuItem onClick={() => alert("Edit")}>Edit</MenuItem>
+                        <MenuItem onClick={handleOpenEditor}>Edit</MenuItem>
                         <MenuItem onClick={handleDeleteOpen}>Delete</MenuItem>
                         <MenuItem onClick={() => alert("Run")}>Run</MenuItem>
                       </Menu>
