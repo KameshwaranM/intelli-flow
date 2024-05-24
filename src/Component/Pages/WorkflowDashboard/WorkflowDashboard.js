@@ -48,9 +48,11 @@ const WorkflowDashboard = () => {
       activity: 40,
     },
   ]);
-  const [searchTerm, setSearchTerm] = useState("");
-  const [newWorkflowName, setNewWorkflowName] = useState("");
-  const [newWorkflowDescription, setNewWorkflowDescription] = useState("");
+  const [formData, setFormData] = useState({
+    searchTerm: "",
+    newWorkflowName: "",
+    newWorkflowDescription: "",
+  });
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
@@ -66,7 +68,10 @@ const WorkflowDashboard = () => {
   };
   const handleMenuClose = () => setAnchorEl(null);
 
-  const handleCreateWorkflow = () => {
+  const handleCreateWorkflow = (event) => {
+    event.preventDefault();
+    const { newWorkflowName, newWorkflowDescription } = formData;
+
     if (newWorkflowName && newWorkflowDescription) {
       setWorkflows([
         ...workflows,
@@ -79,13 +84,16 @@ const WorkflowDashboard = () => {
           activity: 0,
         },
       ]);
-      setNewWorkflowName("");
-      setNewWorkflowDescription("");
+      setFormData({
+        ...formData,
+        newWorkflowName: "",
+        newWorkflowDescription: "",
+      });
       setSnackbarMessage("Workflow created successfully");
       setSnackbarSeverity("success");
       setSnackbarOpen(true);
       handleCreateClose();
-      window.location.href = "/Dashboard"
+      window.location.href = "/Dashboard";
     } else {
       setSnackbarMessage("Please provide a valid name and description");
       setSnackbarSeverity("error");
@@ -103,11 +111,19 @@ const WorkflowDashboard = () => {
   };
 
   const filteredWorkflows = workflows.filter((workflow) =>
-    workflow.name.toLowerCase().includes(searchTerm.toLowerCase())
+    workflow.name.toLowerCase().includes(formData.searchTerm.toLowerCase())
   );
 
   const handleOpenEditor = () => {
     window.location.href = "/Workflow_Editor";
+  };
+
+  const handleFormDataChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
   };
 
   return (
@@ -125,8 +141,9 @@ const WorkflowDashboard = () => {
             <TextField
               variant="outlined"
               placeholder="Search Workflows"
-              value={searchTerm}
-              onChange={(e) => setSearchTerm(e.target.value)}
+              name="searchTerm"
+              value={formData.searchTerm}
+              onChange={handleFormDataChange}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -230,84 +247,47 @@ const WorkflowDashboard = () => {
         </Container>
       </Box>
       <Dialog open={openCreateDialog} onClose={handleCreateClose}>
-        <form onClick={handleCreateWorkflow}>
-        <Box className="createDialog" sx={{ p: 2 }}>
-          <Typography variant="h5" align="center" gutterBottom>
-            Welcome to Intelli Flow Cloud
-          </Typography>
-          <Typography align="center" gutterBottom>
-            Start by naming your project - each account may contain multiple
-            projects. You can use projects to organize your Tasks and Workflows.
-          </Typography>
-          <DialogTitle>Create New Workflow</DialogTitle>
-          <DialogContent>
-            <label>Name</label>
-            <input
-              className="first-time-login-card-input"
-              type="text"
-              required
-              value={newWorkflowName}
-              onChange={(e) => setNewWorkflowName(e.target.value)}
-            />
-            <label>Description</label>
-            <input
-              className="first-time-login-card-input"
-              type="text"
-              required
-              value={newWorkflowDescription}
-              onChange={(e) => setNewWorkflowDescription(e.target.value)}
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCreateClose} color="primary">
-              Cancel
-            </Button>
-            <Button  color="primary">
-              Create
-            </Button>
-          </DialogActions>
-        </Box>
+        <form onSubmit={handleCreateWorkflow}>
+          <Box className="createDialog" sx={{ p: 2 }}>
+            <Typography variant="h5" align="center" gutterBottom>
+              Welcome to Intelli Flow Cloud
+            </Typography>
+            <Typography align="center" gutterBottom>
+              Start by naming your project - each account may contain multiple
+              projects. You can use projects to organize your Tasks and
+              Workflows.
+            </Typography>
+            <DialogTitle>Create New Workflow</DialogTitle>
+            <DialogContent>
+              <label>Name</label>
+              <input
+                className="first-time-login-card-input"
+                type="text"
+                required
+                name="newWorkflowName"
+                value={formData.newWorkflowName}
+                onChange={handleFormDataChange}
+              />
+              <label>Description</label>
+              <input
+                className="first-time-login-card-input"
+                type="text"
+                required
+                name="newWorkflowDescription"
+                value={formData.newWorkflowDescription}
+                onChange={handleFormDataChange}
+              />
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleCreateClose} color="primary">
+                Cancel
+              </Button>
+              <Button type="submit" color="primary">
+                Create
+              </Button>
+            </DialogActions>
+          </Box>
         </form>
-      </Dialog>
-
-      <Dialog open={openCreateDialog} onClose={handleCreateClose}>
-        <Box className="createDialog">
-          <Typography variant="h5" align="center" gutterBottom>
-            Welcome to Intelli Flow Cloud
-          </Typography>
-          <Typography align="center" gutterBottom>
-            Start by naming your project - each account may contain multiple
-            projects. You can use projects to organize your Tasks and Workflows.
-          </Typography>
-          <DialogTitle>Create New Workflow</DialogTitle>
-          <DialogContent>
-            <TextField
-              autoFocus
-              margin="dense"
-              label="Workflow Name"
-              fullWidth
-              value={newWorkflowName}
-              onChange={(e) => setNewWorkflowName(e.target.value)}
-              className="newWorkflowNameInput"
-            />
-            <TextField
-              margin="dense"
-              label="Workflow Description"
-              fullWidth
-              value={newWorkflowDescription}
-              onChange={(e) => setNewWorkflowDescription(e.target.value)}
-              className="newWorkflowDescriptionInput"
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCreateClose} color="primary">
-              Cancel
-            </Button>
-            <Button onClick={handleCreateWorkflow} color="primary">
-              Create
-            </Button>
-          </DialogActions>
-        </Box>
       </Dialog>
 
       <Dialog open={openDeleteDialog} onClose={handleDeleteClose}>
@@ -341,4 +321,5 @@ const WorkflowDashboard = () => {
     </Box>
   );
 };
+
 export default WorkflowDashboard;
