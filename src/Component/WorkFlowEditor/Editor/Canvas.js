@@ -15,14 +15,15 @@ const Canvas = () => {
       type: "start",
       position: { x: 150, y: 25 },
     },
+   
   ]);
 
   const [codeData, setCodeData] = useState({
     node_0: {
       id: "node_0",
       type: "start",
-      data: {},
-    },
+      data: {}, 
+    }
   });
 
   const [activeCodeData, setActiveCodeData] = useState({ id: null, type: "" });
@@ -54,16 +55,16 @@ const Canvas = () => {
   const onDisplayCode = () => {
     const dataToSave = {
       nodes: nodes,
-      codeData: codeData,
+      codeData: codeData
     };
     const tempOutput = JSON.stringify(dataToSave);
     //setOutput(tempOutput);
-    localStorage.setItem("final", tempOutput);
-    console.log(localStorage.getItem("final"));
+    localStorage.setItem('final', tempOutput);
+    console.log(localStorage.getItem('final'));
   };
 
   const restoreData = () => {
-    const savedData = localStorage.getItem("final");
+    const savedData = localStorage.getItem('final');
     if (savedData) {
       try {
         const parsedData = JSON.parse(savedData);
@@ -72,6 +73,7 @@ const Canvas = () => {
         console.log(codeData);
         setNodes(nodes);
         setCodeData(codeData);
+
       } catch (error) {
         console.error("Failed to parse JSON data:", error);
       }
@@ -82,7 +84,9 @@ const Canvas = () => {
   //   restoreData();
   // }, []);
 
+
   const renderPropertyEditor = () => {
+ 
     if (activeCodeData.id !== null && Config[activeCodeData.type]) {
       const PropertyEditor =
         Config[activeCodeData.type].propertyEditorComponent;
@@ -103,14 +107,18 @@ const Canvas = () => {
   };
 
   return (
-    <div>
+
+    <div >
       <div className="headers">
-        <button className="Canvas-workflow-save-btn" onClick={onDisplayCode}>
-          Save
-        </button>
-        <button className="Canvas-workflow-save-btn" onClick={restoreData}>
-          Restore
-        </button>
+
+        
+          <button className="btn btn-primary code-disply-save-btn" onClick={onDisplayCode}>
+            Save
+          </button>
+          <button className="btn btn-primary code-disply-save-btn" onClick={restoreData}>
+            Restore
+          </button>
+        
       </div>
       <div className="flex-container">
         <div className="column-actions">
@@ -125,13 +133,17 @@ const Canvas = () => {
             onAddNode={onAddNode}
             onActivateNode={onActivateNode}
             onDeactivateAll={onDeactivateAll}
+
           />
         </div>
+
         <div className="column-property">
+          
           <h2 className="workflow-content-heading">Property Panel</h2>
           {renderPropertyEditor()}
         </div>
       </div>
+
     </div>
   );
 };

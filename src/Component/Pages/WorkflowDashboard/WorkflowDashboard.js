@@ -216,7 +216,7 @@ const WorkflowDashboard = () => {
                         open={Boolean(anchorEl)}
                         onClose={handleMenuClose}
                       >
-                        <MenuItem onClick={() => alert("Edit")}>Edit</MenuItem>
+                        <MenuItem onClick={handleOpenEditor}>Edit</MenuItem>
                         <MenuItem onClick={handleDeleteOpen}>Delete</MenuItem>
                         <MenuItem onClick={() => alert("Run")}>Run</MenuItem>
                       </Menu>
