@@ -23,13 +23,17 @@ const FirstLogin = () => {
   const [error, setError] = useState(false);
   const navigate = useNavigate();
 
-  const handleCreate = () => {
+  const handleCreate = (e) => {
+    e.preventDefault();
     const nameRegex = /^[a-zA-Z0-9]+$/;
     const descriptionRegex = /^[a-zA-Z0-9 ]+$/;
 
     if (!nameRegex.test(projectName) || !descriptionRegex.test(description)) {
       setError(true);
       setOpen(true);
+      setTimeout(() => {
+        navigate("/Dashboard");
+      }, 3000);
     } else {
       setError(false);
       setOpen(true);
@@ -115,6 +119,7 @@ const FirstLogin = () => {
               borderRadius: 2,
               backgroundColor: "white",
             }}
+            onSubmit={handleCreate}
           >
             <Typography variant="h5" align="center" gutterBottom>
               Welcome to Intelli Flow Cloud
@@ -125,55 +130,36 @@ const FirstLogin = () => {
               Workflows.
             </Typography>
             <div className="first-time-login-input">
-              <form onSubmit={handleCreate}>
-                <label>Name</label>
-                <input
-                  className="first-time-login-card-input"
-                  type="text"
-                  required
-                  value={projectName}
-                  onChange={(e) => setProjectName(e.target.value)}
-                />
-                <label style={{ color: "none" }}>Description</label>
-                <input
-                  className="first-time-login-card-input"
-                  type="text"
-                  required
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                />
-
-                {/* <TextField
-            label="Name"
-            variant="outlined"
-            value={projectName}
-            onChange={(e) => setProjectName(e.target.value)}
-            fullWidth
-            className="nameInput"
-          />
-          <TextField
-            label="Description"
-            variant="outlined"
-            value={description}
-            onChange={(e) => setDescription(e.target.value)}
-            fullWidth
-            className="descriptionInput"
-          /> */}
-                <Box
-                  className="createButtonContainer"
-                  sx={{ display: "flex", justifyContent: "end" }}
+              <label>Name</label>
+              <input
+                className="first-time-login-card-input"
+                type="text"
+                required
+                value={projectName}
+                onChange={(e) => setProjectName(e.target.value)}
+              />
+              <label>Description</label>
+              <input
+                className="first-time-login-card-input"
+                type="text"
+                required
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+              />
+              <Box
+                className="createButtonContainer"
+                sx={{ display: "flex", justifyContent: "end" }}
+              >
+                <Button
+                  variant="contained"
+                  color="primary"
+                  type="submit"
+                  sx={{ width: "20%" }}
+                  className="createButton"
                 >
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    type="submit"
-                    sx={{ width: "20%" }}
-                    className="createButton"
-                  >
-                    Create
-                  </Button>
-                </Box>
-              </form>
+                  Create
+                </Button>
+              </Box>
             </div>
           </Box>
           <Snackbar
