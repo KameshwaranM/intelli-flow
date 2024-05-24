@@ -85,6 +85,7 @@ const WorkflowDashboard = () => {
       setSnackbarSeverity("success");
       setSnackbarOpen(true);
       handleCreateClose();
+      window.location.href = "/Dashboard"
     } else {
       setSnackbarMessage("Please provide a valid name and description");
       setSnackbarSeverity("error");
@@ -110,27 +111,14 @@ const WorkflowDashboard = () => {
   };
 
   return (
-    <Box className="workflowContainer" display="flex">
+    <Box className="workflowContainer">
       <Sidebar />
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Container maxWidth="xl">
-          <Box
-            className="workflowHeader"
-            display="flex"
-            justifyContent="space-between"
-            alignItems="center"
-            mb={2}
-          >
+          <Box className="workflowHeader">
             <Typography variant="h4">Workflows</Typography>
           </Box>
-          <Box
-            className="workflowActions"
-            display="flex"
-            justifyContent="flex-end"
-            alignItems="center"
-            mb={2}
-            gap={2}
-          >
+          <Box className="workflowActions">
             <IconButton onClick={handleCreateOpen}>
               <AddIcon />
             </IconButton>
@@ -229,7 +217,7 @@ const WorkflowDashboard = () => {
                         open={Boolean(anchorEl)}
                         onClose={handleMenuClose}
                       >
-                        <MenuItem onClick={handleOpenEditor}>Edit</MenuItem>
+                        <MenuItem onClick={() => alert("Edit")}>Edit</MenuItem>
                         <MenuItem onClick={handleDeleteOpen}>Delete</MenuItem>
                         <MenuItem onClick={() => alert("Run")}>Run</MenuItem>
                       </Menu>
@@ -269,7 +257,31 @@ const WorkflowDashboard = () => {
               value={newWorkflowDescription}
               onChange={(e) => setNewWorkflowDescription(e.target.value)}
             />
-            {/* <TextField
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCreateClose} color="primary">
+              Cancel
+            </Button>
+            <Button  color="primary">
+              Create
+            </Button>
+          </DialogActions>
+        </Box>
+        </form>
+      </Dialog>
+
+      <Dialog open={openCreateDialog} onClose={handleCreateClose}>
+        <Box className="createDialog">
+          <Typography variant="h5" align="center" gutterBottom>
+            Welcome to Intelli Flow Cloud
+          </Typography>
+          <Typography align="center" gutterBottom>
+            Start by naming your project - each account may contain multiple
+            projects. You can use projects to organize your Tasks and Workflows.
+          </Typography>
+          <DialogTitle>Create New Workflow</DialogTitle>
+          <DialogContent>
+            <TextField
               autoFocus
               margin="dense"
               label="Workflow Name"
@@ -285,18 +297,17 @@ const WorkflowDashboard = () => {
               value={newWorkflowDescription}
               onChange={(e) => setNewWorkflowDescription(e.target.value)}
               className="newWorkflowDescriptionInput"
-            /> */}
+            />
           </DialogContent>
           <DialogActions>
             <Button onClick={handleCreateClose} color="primary">
               Cancel
             </Button>
-            <Button  color="primary">
+            <Button onClick={handleCreateWorkflow} color="primary">
               Create
             </Button>
           </DialogActions>
         </Box>
-        </form>
       </Dialog>
 
       <Dialog open={openDeleteDialog} onClose={handleDeleteClose}>
@@ -330,5 +341,4 @@ const WorkflowDashboard = () => {
     </Box>
   );
 };
-
 export default WorkflowDashboard;
