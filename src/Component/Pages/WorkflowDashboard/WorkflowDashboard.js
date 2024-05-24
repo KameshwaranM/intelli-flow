@@ -242,6 +242,7 @@ const WorkflowDashboard = () => {
         </Container>
       </Box>
       <Dialog open={openCreateDialog} onClose={handleCreateClose}>
+        <form onClick={handleCreateWorkflow}>
         <Box className="createDialog" sx={{ p: 2 }}>
           <Typography variant="h5" align="center" gutterBottom>
             Welcome to Intelli Flow Cloud
@@ -252,7 +253,23 @@ const WorkflowDashboard = () => {
           </Typography>
           <DialogTitle>Create New Workflow</DialogTitle>
           <DialogContent>
-            <TextField
+            <label>Name</label>
+            <input
+              className="first-time-login-card-input"
+              type="text"
+              required
+              value={newWorkflowName}
+              onChange={(e) => setNewWorkflowName(e.target.value)}
+            />
+            <label>Description</label>
+            <input
+              className="first-time-login-card-input"
+              type="text"
+              required
+              value={newWorkflowDescription}
+              onChange={(e) => setNewWorkflowDescription(e.target.value)}
+            />
+            {/* <TextField
               autoFocus
               margin="dense"
               label="Workflow Name"
@@ -268,17 +285,18 @@ const WorkflowDashboard = () => {
               value={newWorkflowDescription}
               onChange={(e) => setNewWorkflowDescription(e.target.value)}
               className="newWorkflowDescriptionInput"
-            />
+            /> */}
           </DialogContent>
           <DialogActions>
             <Button onClick={handleCreateClose} color="primary">
               Cancel
             </Button>
-            <Button onClick={handleCreateWorkflow} color="primary">
+            <Button  color="primary">
               Create
             </Button>
           </DialogActions>
         </Box>
+        </form>
       </Dialog>
 
       <Dialog open={openDeleteDialog} onClose={handleDeleteClose}>

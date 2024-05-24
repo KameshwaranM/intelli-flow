@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "./index.css";
-import logo from '../../../../Assets/auto-intelli-logo.png'
+import logo from '../../../../Assets/Intellil-Flow-Logo.png'
 import { ImSpinner } from "react-icons/im";
 import { URL_ResendOTP, URL_VerifyCode } from "../../API-URL";
 

@@ -27,7 +27,7 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import SettingsIcon from "@mui/icons-material/Settings";
 import AddIcon from "@mui/icons-material/Add";
-import LogoImage from "../../Assets/auto-intelli-logo.png";
+import LogoImage from "../../Assets/Intellil-Flow-Logo.png";
 import { ThemeContext } from "../Theams/Theam";
 
 const Sidebar = () => {
@@ -86,11 +86,9 @@ const Sidebar = () => {
             sx={{
               display: "flex",
               justifyContent: "center",
-              padding: "3px",
-              backgroundColor: "#fff",
             }}
           >
-            <img src={LogoImage} alt="Logo" style={{ width: 150 }} />
+            <img src={LogoImage} alt="Logo" style={{ width: 210, marginBottom: 10 }} />
           </Box>
           <Box
             sx={{ cursor: "pointer" }}

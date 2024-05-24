@@ -1,6 +1,6 @@
 import React from "react";
 import './index.css';
-import Logo from "../../../Assests/auto-intelli-logo.png";
+import Logo from "../../../Assests/Intellil-Flow-Logo.png";
 
 const EmailVerify = () => {
     return (

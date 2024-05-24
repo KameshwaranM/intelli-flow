@@ -28,7 +28,7 @@ const Footer = () => {
         <div className="leftFooter">
           <img
             className="leftfooterImage"
-            src={require("../../../../Assets/auto-intelli-logo.png")}
+            src={require("../../../../Assets/Intellil-Flow-Logo.png")}
             alt="sss"
           />
           <div className="Footer-Rights">

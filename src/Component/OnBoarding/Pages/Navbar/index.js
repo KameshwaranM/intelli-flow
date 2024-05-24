@@ -13,7 +13,7 @@ const Navbar = () => {
       <div>
         <img
           className="Navbar-logo"
-          src={require("../../../../Assets/auto-intelli-logo.png")}
+          src={require("../../../../Assets/Intellil-Flow-Logo.png")}
           alt="cc"
         />
         <div className="Navbar-Seacrh">

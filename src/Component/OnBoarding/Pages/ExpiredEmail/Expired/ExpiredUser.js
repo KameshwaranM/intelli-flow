@@ -1,6 +1,6 @@
 import React from "react";
 import '../../EmailVerify/index.css'
-import Logo from "../../../../Assests/auto-intelli-logo.png";
+import Logo from "../../../../Assests/Intellil-Flow-Logo.png";
 
 function ExpireUser() {
 

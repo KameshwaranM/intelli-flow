@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import "../Login/login.css";
-import autointlogo from '../../../../Assets/auto-intelli-logo.png';
+import autointlogo from '../../../../Assets/Intellil-Flow-Logo.png';
 
 import axios from "axios"; 
 import { ImSpinner } from "react-icons/im";

@@ -1,5 +1,5 @@
 import "./index.css";
-import logo from "../../../Assests/auto-intelli-logo.png";
+import logo from "../../../Assests/Intellil-Flow-Logo.png";
 import { Sidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";

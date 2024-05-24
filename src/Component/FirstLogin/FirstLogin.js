@@ -12,7 +12,7 @@ import {
   ListItem,
   ListItemText,
 } from "@mui/material";
-import LogoImage from "../../Assets/auto-intelli-logo.png";
+import LogoImage from "../../Assets/Intellil-Flow-Logo.png";
 import "./FirstLogin.css";
 import "../OnBoarding/Pages/Login/login.css";
 
@@ -76,7 +76,7 @@ const FirstLogin = () => {
           <img
             src={LogoImage}
             alt="Logo"
-            style={{ width: 150, marginBottom: 20 }}
+            style={{ width: 180, marginBottom: 20 }}
           />
           <List
             className="drawerList"
@@ -125,7 +125,7 @@ const FirstLogin = () => {
               Workflows.
             </Typography>
             <div className="first-time-login-input">
-              <form>
+              <form onSubmit={handleCreate}>
                 <label>Name</label>
                 <input
                   className="first-time-login-card-input"
@@ -166,7 +166,7 @@ const FirstLogin = () => {
                   <Button
                     variant="contained"
                     color="primary"
-                    onClick={handleCreate}
+                    type="submit"
                     sx={{ width: "20%" }}
                     className="createButton"
                   >
