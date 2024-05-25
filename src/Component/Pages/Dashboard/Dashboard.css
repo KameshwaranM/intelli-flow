@@ -5,3 +5,41 @@
 .code-disply-cont{
     margin-top: 30px;
 }
+
+.main-content {
+    flex-grow: 1;
+    padding: 24px;
+  }
+  
+  .dashboard-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .grid-container {
+    margin-bottom: 32px;
+  }
+  
+  .welcome-card {
+    width: 100%;
+  }
+  
+  .card-actions {
+    justify-content: flex-end;
+  }
+  
+  .workflow-runs-paper {
+    padding: 16px;
+    width: 100%;
+    height: 400px;
+  }
+  
+  .task-runs-paper,
+  .upcoming-runs-paper {
+    padding: 16px;
+    height: 188px;
+    width: 100%;
+  }
+  

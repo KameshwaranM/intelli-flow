@@ -29,6 +29,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import AddIcon from "@mui/icons-material/Add";
 import LogoImage from "../../Assets/Intellil-Flow-Logo.png";
 import { ThemeContext } from "../Theams/Theam";
+import "./Sidebar.css"
 
 const Sidebar = () => {
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -51,7 +52,7 @@ const Sidebar = () => {
 
   const handleProfileMenuClose = () => {
     setAnchorEl(null);
-  };
+  };  
 
   const handlePopperOpen = (event) => {
     setPopperAnchorEl(popperAnchorEl ? null : event.currentTarget);
@@ -70,9 +71,8 @@ const Sidebar = () => {
     <>
       <Drawer
         variant="permanent"
+        className="drawer-container"
         sx={{
-          width: 240,
-          flexShrink: 0,
           [`& .MuiDrawer-paper`]: {
             width: 240,
             boxSizing: "border-box",
@@ -82,23 +82,17 @@ const Sidebar = () => {
         }}
       >
         <Box sx={{ p: 1, display: "flex", flexDirection: "column", gap: 1 }}>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-            }}
-          >
-            <img src={LogoImage} alt="Logo" style={{ width: 210, marginBottom: 10 }} />
+          <Box className="logo-container">
+            <img src={LogoImage} alt="Logo" style={{ width: 150 }} />
           </Box>
-          <Box
-            sx={{ cursor: "pointer" }}
-            onClick={handlePopperOpen}
-          >
-            <Typography><span style={{fontSize:"20px", fontWeight:"500"}}>Business Name</span> <br /> Project Name</Typography>
+          <Box className="business-name" onClick={handlePopperOpen}>
+            <Typography>
+              Business Name <br /> Project Name
+            </Typography>
           </Box>
         </Box>
         <Divider />
-        <Box sx={{ flex: 1, overflowY: "auto" }}>
+        <Box className="list-container">
           <List>
             <ListItem button onClick={() => handleNavigation("/Dashboard")}>
               <ListItemText primary="Dashboard" />
@@ -126,7 +120,7 @@ const Sidebar = () => {
               <List component="div" disablePadding>
                 {["General", "Account Settings", "On-Prem Executor"].map(
                   (text) => (
-                    <ListItem button key={text} sx={{ pl: 4 }}>
+                    <ListItem button key={text} className="settings-collapse">
                       <ListItemText primary={text} />
                     </ListItem>
                   )
@@ -137,24 +131,21 @@ const Sidebar = () => {
         </Box>
         <Divider />
         <Box sx={{ p: 2 }}>
-          <Box sx={{ display: "flex", alignItems: "center", mb: 2 }}>
+          <Box className="help-container" mb={2}>
             <IconButton>
               <HelpOutlineIcon />
             </IconButton>
             <Typography variant="body1">Help</Typography>
           </Box>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
+          <Box className="profile-container">
             <ClickAwayListener onClickAway={handleProfileMenuClose}>
               <Box>
                 <Box
-                  sx={{ cursor: "pointer", display: "flex" }}
-                  gap={2}
+                  className="profile-avatar-container"
                   onClick={handleProfileMenuOpen}
                 >
-                  <Box>
-                    <Avatar alt="Ramanan AR" src="/static/images/avatar/1.jpg" />
-                  </Box>
-                  <Box>
+                  <Avatar alt="Ramanan AR" src="/static/images/avatar/1.jpg" />
+                  <Box className="profile-info">
                     <Typography variant="body2">Ramanan AR</Typography>
                     <Typography variant="body2">ramanan@gmail.com</Typography>
                   </Box>
@@ -167,15 +158,7 @@ const Sidebar = () => {
                   style={{ zIndex: 1201 }}
                 >
                   <Paper sx={{ mt: 1, p: 2 }}>
-                    <Box
-                      sx={{
-                        p: 3,
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        gap: "3px",
-                      }}
-                    >
+                    <Box className="popper-content">
                       <LightModeIcon />
                       <FormControlLabel
                         control={
@@ -215,18 +198,13 @@ const Sidebar = () => {
         style={{ zIndex: 1201 }}
       >
         <ClickAwayListener onClickAway={handlePopperClose}>
-          <Paper
-            sx={{
-              mt: 1,
-              p: 2,
-              width: 300, // Adjusted width
-              border: "1px solid black",
-            }}
-          >
-            <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <Paper className="business-popper-content">
+            <Box className="business-header">
               <Typography variant="h6">Business Name</Typography>
-              <Typography variant="body2" sx={{ background: "lightgray", borderRadius: "3px", padding: "2px 4px" }}>FREE</Typography>
-              <Box sx={{ display: "flex", gap: 1 }}>
+              <Typography className="business-badge" variant="body2">
+                FREE
+              </Typography>
+              <Box className="business-actions">
                 <IconButton size="small">
                   <SettingsIcon />
                 </IconButton>
@@ -245,7 +223,7 @@ const Sidebar = () => {
                 }}
               />
             </Box>
-            <Box mt={2} sx={{ display: "flex", justifyContent: "flex-end" }}>
+            <Box className="business-browse">
               <Button variant="contained" color="primary" size="small">
                 Browse all
               </Button>

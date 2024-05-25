@@ -26,12 +26,14 @@ import {
   Select,
   LinearProgress,
 } from "@mui/material";
-import AddIcon from "@mui/icons-material/Add";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SearchIcon from "@mui/icons-material/Search";
 import CircleIcon from "@mui/icons-material/Circle";
 import "./WorkflowDashboard.css";
 import Sidebar from "../../Sidebar/Sidebar";
+import "./WorkflowDashboard.css";
+import { Padding } from "@mui/icons-material";
 
 const WorkflowDashboard = () => {
   const [openCreateDialog, setOpenCreateDialog] = useState(false);
@@ -118,8 +120,11 @@ const WorkflowDashboard = () => {
             <Typography variant="h4">Workflows</Typography>
           </Box>
           <Box className="workflowActions">
-            <IconButton onClick={handleCreateOpen}>
-              <AddIcon />
+            <IconButton
+              onClick={handleCreateOpen}
+              sx={{ transform: "scale(1.5)" }}
+            >
+              <AddCircleIcon />
             </IconButton>
             <TextField
               variant="outlined"
@@ -148,52 +153,55 @@ const WorkflowDashboard = () => {
                 <TableRow>
                   <TableCell
                     align="center"
-                    sx={{ fontSize: "18px", fontWeight: "600" }}
+                    sx={{ fontSize: "15px", fontWeight: "600" }}
                   >
                     Name
                   </TableCell>
                   <TableCell
                     align="center"
-                    sx={{ fontSize: "18px", fontWeight: "600" }}
+                    sx={{ fontSize: "15px", fontWeight: "600" }}
                   >
                     Last Run
                   </TableCell>
                   <TableCell
                     align="center"
-                    sx={{ fontSize: "18px", fontWeight: "600" }}
+                    sx={{ fontSize: "15px", fontWeight: "600" }}
                   >
                     Next Run
                   </TableCell>
                   <TableCell
                     align="center"
-                    sx={{ fontSize: "18px", fontWeight: "600" }}
+                    sx={{ fontSize: "15px", fontWeight: "600" , padding:"10px" }}
                   >
                     Deployed
                   </TableCell>
                   <TableCell
                     align="center"
-                    sx={{ fontSize: "18px", fontWeight: "600" }}
+                    sx={{ fontSize: "15px", fontWeight: "600" }}
                   >
                     Activity
                   </TableCell>
                   <TableCell
                     align="center"
-                    sx={{ fontSize: "18px", fontWeight: "600" }}
+                    sx={{ fontSize: "15px", fontWeight: "600" }}
                   ></TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {filteredWorkflows.map((workflow, index) => (
                   <TableRow key={index} className="workflowTableRow">
-                    <TableCell align="center">{workflow.name}</TableCell>
-                    <TableCell align="center">{workflow.lastRun}</TableCell>
-                    <TableCell align="center">{workflow.nextRun}</TableCell>
-                    <TableCell align="center">
+                    <TableCell sx={{padding:"7px"}} align="center">{workflow.name}</TableCell>
+                    <TableCell sx={{padding:"7px"}} align="center">{workflow.lastRun}</TableCell>
+                    <TableCell sx={{padding:"7px"}} align="center">{workflow.nextRun}</TableCell>
+                    <TableCell sx={{padding:"7px"}} align="center">
                       <CircleIcon
-                        style={{ color: workflow.deployed ? "green" : "red" }}
+                        style={{
+                          color: workflow.deployed ? "green" : "red",
+                          transform: "scale(0.8)",
+                        }}
                       />
                     </TableCell>
-                    <TableCell align="center">
+                    <TableCell sx={{padding:"7px"}} align="center">
                       <Box sx={{ display: "flex", alignItems: "center" }}>
                         <LinearProgress
                           variant="buffer"
@@ -205,7 +213,7 @@ const WorkflowDashboard = () => {
                         />
                       </Box>
                     </TableCell>
-                    <TableCell align="center">
+                    <TableCell sx={{padding:"7px"}} align="center">
                       <IconButton
                         onClick={(event) => handleMenuOpen(event, workflow)}
                       >
@@ -228,35 +236,37 @@ const WorkflowDashboard = () => {
           </TableContainer>
         </Container>
       </Box>
+
       <Dialog open={openCreateDialog} onClose={handleCreateClose}>
         <form onClick={handleCreateWorkflow}>
-        <Box className="createDialog" sx={{ p: 2 }}>
-          <Typography variant="h5" align="center" gutterBottom>
-            Welcome to Intelli Flow Cloud
-          </Typography>
-          <Typography align="center" gutterBottom>
-            Start by naming your project - each account may contain multiple
-            projects. You can use projects to organize your Tasks and Workflows.
-          </Typography>
-          <DialogTitle>Create New Workflow</DialogTitle>
-          <DialogContent>
-            <label>Name</label>
-            <input
-              className="first-time-login-card-input"
-              type="text"
-              required
-              value={newWorkflowName}
-              onChange={(e) => setNewWorkflowName(e.target.value)}
-            />
-            <label>Description</label>
-            <input
-              className="first-time-login-card-input"
-              type="text"
-              required
-              value={newWorkflowDescription}
-              onChange={(e) => setNewWorkflowDescription(e.target.value)}
-            />
-            {/* <TextField
+          <Box className="createDialog" sx={{ p: 2 }}>
+            <Typography variant="h5" align="center" gutterBottom>
+              Welcome to Intelli Flow Cloud
+            </Typography>
+            <Typography align="center" gutterBottom>
+              Start by naming your project - each account may contain multiple
+              projects. You can use projects to organize your Tasks and
+              Workflows.
+            </Typography>
+            <DialogTitle>Create New Workflow</DialogTitle>
+            <DialogContent>
+              <label>Name</label>
+              <input
+                className="first-time-login-card-input"
+                type="text"
+                required
+                value={newWorkflowName}
+                onChange={(e) => setNewWorkflowName(e.target.value)}
+              />
+              <label>Description</label>
+              <input
+                className="first-time-login-card-input"
+                type="text"
+                required
+                value={newWorkflowDescription}
+                onChange={(e) => setNewWorkflowDescription(e.target.value)}
+              />
+              {/* <TextField
               autoFocus
               margin="dense"
               label="Workflow Name"
@@ -273,57 +283,15 @@ const WorkflowDashboard = () => {
               onChange={(e) => setNewWorkflowDescription(e.target.value)}
               className="newWorkflowDescriptionInput"
             /> */}
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCreateClose} color="primary">
-              Cancel
-            </Button>
-            <Button  color="primary">
-              Create
-            </Button>
-          </DialogActions>
-        </Box>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleCreateClose} color="primary">
+                Cancel
+              </Button>
+              <Button color="primary">Create</Button>
+            </DialogActions>
+          </Box>
         </form>
-      </Dialog>
-
-      <Dialog open={openCreateDialog} onClose={handleCreateClose}>
-        <Box className="createDialog">
-          <Typography variant="h5" align="center" gutterBottom>
-            Welcome to Intelli Flow Cloud
-          </Typography>
-          <Typography align="center" gutterBottom>
-            Start by naming your project - each account may contain multiple
-            projects. You can use projects to organize your Tasks and Workflows.
-          </Typography>
-          <DialogTitle>Create New Workflow</DialogTitle>
-          <DialogContent>
-            <TextField
-              autoFocus
-              margin="dense"
-              label="Workflow Name"
-              fullWidth
-              value={newWorkflowName}
-              onChange={(e) => setNewWorkflowName(e.target.value)}
-              className="newWorkflowNameInput"
-            />
-            <TextField
-              margin="dense"
-              label="Workflow Description"
-              fullWidth
-              value={newWorkflowDescription}
-              onChange={(e) => setNewWorkflowDescription(e.target.value)}
-              className="newWorkflowDescriptionInput"
-            />
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleCreateClose} color="primary">
-              Cancel
-            </Button>
-            <Button onClick={handleCreateWorkflow} color="primary">
-              Create
-            </Button>
-          </DialogActions>
-        </Box>
       </Dialog>
 
       <Dialog open={openDeleteDialog} onClose={handleDeleteClose}>

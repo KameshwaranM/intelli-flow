@@ -1,0 +1,50 @@
+.workflowContainer {
+    display: flex;
+}
+
+.workflowHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.workflowActions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 16px;
+    gap: 16px;
+}
+
+.searchInput {
+    width: 300px;
+}
+
+.tagSelect,
+.statusSelect {
+    width: 150px;
+}
+
+.workflowTableContainer {
+    margin-top: 16px;
+}
+
+.activityProgress {
+    height: 10px;
+    border-radius: 5px;
+}
+
+.createDialog {
+    padding: 16px;
+}
+
+.newWorkflowNameInput,
+.newWorkflowDescriptionInput {
+    margin-bottom: 16px;
+}
+
+.Workflow-Dashboard-table-title{
+    font-size: 14px !important;
+    font-weight: 600 !important;
+}

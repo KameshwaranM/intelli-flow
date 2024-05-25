@@ -99,7 +99,7 @@ const CreatePassword = () => {
 
   return (
     <div className="enterpassword">
-      <div className="enterpassword-page">
+      <div className="enterpassword-page region-card-bg-color">
         <div className="autointelli-image">
           <img alt="enterpassword-autointelli-logo" src={image} />
 

@@ -1,0 +1,89 @@
+.drawer-container {
+    width: 240px;
+    flex-shrink: 0;
+  }
+  
+  .drawer-paper {
+    width: 240px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .logo-container {
+    display: flex;
+    justify-content: center;
+    padding: 3px;
+    background-color: #fff;
+  }
+  
+  .business-name {
+    cursor: pointer;
+    font-size: 20px;
+    font-weight: 500;
+  }
+  
+  .list-container {
+    flex: 1;
+    overflow-y: auto;
+  }
+  
+  .settings-collapse {
+    padding-left: 16px;
+  }
+  
+  .help-container,
+  .profile-container {
+    display: flex;
+    align-items: center;
+  }
+  
+  .profile-avatar-container {
+    display: flex;
+    gap: 16px;
+    cursor: pointer;
+  }
+  
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .popper-content {
+    margin-top: 8px;
+    padding: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+  }
+  
+  .business-popper-content {
+    margin-top: 8px;
+    padding: 16px;
+    width: 300px;
+    border: 1px solid black;
+  }
+  
+  .business-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .business-badge {
+    background: lightgray;
+    border-radius: 3px;
+    padding: 2px 4px;
+  }
+  
+  .business-actions {
+    display: flex;
+    gap: 8px;
+  }
+  
+  .business-browse {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 16px;
+  }
