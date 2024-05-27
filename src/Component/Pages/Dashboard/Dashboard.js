@@ -22,7 +22,7 @@ const Dashboard = () => {
           <Box className="dashboard-header">
             <Typography variant="h4">Dashboard</Typography>
           </Box>
-          <Grid container spacing={3} className="grid-container">
+          <Grid container spacing={2} className="grid-container">
             <Grid item xs={12}>
               <Card className="welcome-card">
                 <CardContent>
@@ -39,7 +39,7 @@ const Dashboard = () => {
               </Card>
             </Grid>
           </Grid>
-          <Grid container spacing={3}>
+          <Grid container spacing={2}>
             <Grid item xs={12} md={8}>
               <Paper className="workflow-runs-paper">
                 <Typography variant="h6">Workflow Runs</Typography>
@@ -47,7 +47,7 @@ const Dashboard = () => {
               </Paper>
             </Grid>
             <Grid item xs={12} md={4}>
-              <Grid container spacing={3}>
+              <Grid container spacing={2}>
                 <Grid item xs={12}>
                   <Paper className="task-runs-paper">
                     <Typography variant="h6">Task Runs</Typography>

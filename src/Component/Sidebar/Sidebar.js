@@ -83,11 +83,14 @@ const Sidebar = () => {
       >
         <Box sx={{ p: 1, display: "flex", flexDirection: "column", gap: 1 }}>
           <Box className="logo-container">
-            <img src={LogoImage} alt="Logo" style={{ width: 150 }} />
+            <img src={LogoImage} alt="Logo" style={{ width: 180 }} />
           </Box>
           <Box className="business-name" onClick={handlePopperOpen}>
+            <Typography className="business-name-p">
+              Business Name
+            </Typography>
             <Typography>
-              Business Name <br /> Project Name
+              Project Name
             </Typography>
           </Box>
         </Box>

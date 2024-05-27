@@ -18,7 +18,7 @@
 }
 
 .searchInput {
-    width: 300px;
+    width: 250px;
 }
 
 .tagSelect,
@@ -44,7 +44,30 @@
     margin-bottom: 16px;
 }
 
+.css-zxdg2z{
+    background-color: #f7f7f766;
+    height: 100vh;
+}
+
 .Workflow-Dashboard-table-title{
     font-size: 14px !important;
     font-weight: 600 !important;
+}
+
+.css-1o9s3wi-MuiInputBase-input-MuiOutlinedInput-input{
+    padding: 10.5px 10px !important;
+}
+.css-1ea1xhh-MuiInputBase-input-MuiOutlinedInput-input{
+    padding: 10.5px 10px !important;
+}
+
+.css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input{
+    padding: 10.5px 10px !important;
+}
+.css-v3zyv7-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
+    padding: 10.5px 10px !important;
+}
+
+.css-15wwp11-MuiTableHead-root{
+    background-color: #a4a4a4;
 }

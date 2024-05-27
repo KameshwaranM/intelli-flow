@@ -9,6 +9,8 @@
 .main-content {
     flex-grow: 1;
     padding: 24px;
+    background-color: #f7f7f766;
+    height: 100vh;
   }
   
   .dashboard-header {
@@ -19,7 +21,7 @@
   }
   
   .grid-container {
-    margin-bottom: 32px;
+    margin-bottom: 18px;
   }
   
   .welcome-card {
@@ -41,5 +43,9 @@
     padding: 16px;
     height: 188px;
     width: 100%;
+  }
+
+  .css-12i7wg6-MuiPaper-root-MuiDrawer-paper{
+    background-color: #f7f7f766 !important;
   }
   

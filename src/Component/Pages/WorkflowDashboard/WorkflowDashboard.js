@@ -33,7 +33,6 @@ import CircleIcon from "@mui/icons-material/Circle";
 import "./WorkflowDashboard.css";
 import Sidebar from "../../Sidebar/Sidebar";
 import "./WorkflowDashboard.css";
-import { Padding } from "@mui/icons-material";
 
 const WorkflowDashboard = () => {
   const [openCreateDialog, setOpenCreateDialog] = useState(false);
@@ -122,9 +121,9 @@ const WorkflowDashboard = () => {
           <Box className="workflowActions">
             <IconButton
               onClick={handleCreateOpen}
-              sx={{ transform: "scale(1.5)" }}
+              sx={{ transform: "scale(1.5)"}}
             >
-              <AddCircleIcon />
+              <AddCircleIcon sx={{width:"25px"}} />
             </IconButton>
             <TextField
               variant="outlined"
@@ -149,7 +148,7 @@ const WorkflowDashboard = () => {
           </Box>
           <TableContainer component={Paper} className="workflowTableContainer">
             <Table>
-              <TableHead sx={{ backgroundColor: "#ECEFF7" }}>
+              <TableHead>
                 <TableRow>
                   <TableCell
                     align="center"
@@ -285,10 +284,10 @@ const WorkflowDashboard = () => {
             /> */}
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleCreateClose} color="primary">
+              <Button onClick={handleCreateClose} variant="contained" color="error">
                 Cancel
               </Button>
-              <Button color="primary">Create</Button>
+              <Button type="submit" variant="contained" color="success">Create</Button>
             </DialogActions>
           </Box>
         </form>
