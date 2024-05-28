@@ -14,10 +14,15 @@ import Dashboard from "../Component/Pages/Dashboard/Dashboard";
 import Sidebar from "../Component/Sidebar/Sidebar";
 import WorkflowDashboard from "../Component/Pages/WorkflowDashboard/WorkflowDashboard";
 import WorkFlowEditor from "../Component/WorkFlowEditor";
+import BusinessSettingsAccount from "../Component/Pages/Business-Settings-Account/Business-Settings-Account";
+import BusinessSettingsProjects from "../Component/Pages/Business-Settings-Projects/Business-Settings-Projects";
+import BusinessSettingsMember from "../Component/Pages/Business-Settings-Members/Business-Settings-Members";
+import BusinessSettingsBilling from "../Component/Pages/Business-Settings-Billing/Business-Settings-Billing";
+import BusinessSettingsBillingUpgrade from "../Component/Pages/Business-Settings-Billing-Upgrade/Business-Settings-Billing-Upgrade";
 
 function Rout() {
   return (
-    <>
+    <div>
       <Router>
         <Routes>
           <Route path="/" element={<Landing />} />
@@ -39,9 +44,15 @@ function Rout() {
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Workflow_Dashboard" element={<WorkflowDashboard />} />
           <Route path="/Workflow_Editor" element={<WorkFlowEditor />} />
+          {/* BusinessName Settings */}
+          <Route path="/BusinessName/Settings/Account" element={<BusinessSettingsAccount />} />
+          <Route path="/BusinessName/Settings/Project" element={<BusinessSettingsProjects />} />
+          <Route path="/BusinessName/Settings/Members" element={<BusinessSettingsMember />} />
+          <Route path="/BusinessName/Settings/Billing" element={<BusinessSettingsBilling />} />
+          <Route path="/BusinessName/Settings/Billing/Upgrade" element={<BusinessSettingsBillingUpgrade />} />
         </Routes>
       </Router>
-    </>
+    </div>
   );
 }
 

@@ -1,0 +1,78 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f9f9f9;
+}
+
+.bsProject {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+.bsProject-container {
+    font-size: 18px;
+    padding: 0.8rem;
+    width: 100%;
+}
+
+.bsSearch {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.bsProjPlusIcon {
+    font-size: 26px;
+    margin-right: 10px;
+    cursor: pointer;
+    color: rgb(103, 102, 102);
+}
+
+.bsProjSearchBar {
+    position: relative;
+}
+
+.bsProjSearch-icon {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    transform: translateY(-50%);
+    font-size: 22px;
+    color: rgb(164, 161, 161);
+}
+
+.bsSearch input[type='text'] {
+    width: 250px;
+    padding: 10px 35px;
+}
+
+.bsSearch input::placeholder {
+    font-size: 14px;
+    margin-left: 50px;
+}
+
+.bsProjTable {
+    margin-top: 20px;
+}
+
+.bsProjTable .rdt_Table .rdt_TableHeadRow {
+    border: 1px solid grey;
+    border-bottom: 0;
+    border-radius: 5px;
+    margin: 0;
+    background: rgb(238, 235, 235) !important;
+    font-size: 18px;
+}
+
+.bsProjTable .rdt_TableRow {
+    height: 50px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    background-color: #fff !important;
+    font-size: 16px;
+}

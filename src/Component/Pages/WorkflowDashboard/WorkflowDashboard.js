@@ -25,6 +25,7 @@ import {
   InputAdornment,
   Select,
   LinearProgress,
+  TablePagination
 } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -55,6 +56,8 @@ const WorkflowDashboard = () => {
   const [snackbarOpen, setSnackbarOpen] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   const [snackbarSeverity, setSnackbarSeverity] = useState("success");
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(7);
 
   const handleCreateOpen = () => setOpenCreateDialog(true);
   const handleCreateClose = () => setOpenCreateDialog(false);
@@ -109,6 +112,21 @@ const WorkflowDashboard = () => {
   const handleOpenEditor = () => {
     window.location.href = "/Workflow_Editor";
   };
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  const paginatedWorkflows = filteredWorkflows.slice(
+    page * rowsPerPage,
+    page * rowsPerPage + rowsPerPage
+  );
+
 
   return (
     <Box className="workflowContainer">
@@ -187,7 +205,7 @@ const WorkflowDashboard = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {filteredWorkflows.map((workflow, index) => (
+              {paginatedWorkflows.map((workflow, index) => (
                   <TableRow key={index} className="workflowTableRow">
                     <TableCell sx={{padding:"7px"}} align="center">{workflow.name}</TableCell>
                     <TableCell sx={{padding:"7px"}} align="center">{workflow.lastRun}</TableCell>
@@ -232,6 +250,16 @@ const WorkflowDashboard = () => {
                 ))}
               </TableBody>
             </Table>
+            <TablePagination
+              rowsPerPageOptions={[7, 14, 21]}
+              component="div"
+              count={filteredWorkflows.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+            />
+
           </TableContainer>
         </Container>
       </Box>
@@ -240,7 +268,7 @@ const WorkflowDashboard = () => {
         <form onClick={handleCreateWorkflow}>
           <Box className="createDialog" sx={{ p: 2 }}>
             <Typography variant="h5" align="center" gutterBottom>
-              Welcome to Intelli Flow Cloud
+              Create New Workflow
             </Typography>
             <Typography align="center" gutterBottom>
               Start by naming your project - each account may contain multiple

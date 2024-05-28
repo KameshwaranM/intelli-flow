@@ -1,5 +1,5 @@
-import React, { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useContext, useEffect } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import {
   Drawer,
   List,
@@ -37,12 +37,34 @@ const Sidebar = () => {
   const [popperAnchorEl, setPopperAnchorEl] = useState(null);
   const navigate = useNavigate();
   const { darkMode, toggleDarkMode } = useContext(ThemeContext);
+  const [businessSetClicked, setBusinessSetClicked] = useState(false);
+  const location = useLocation();
 
   const handleSettingsClick = () => {
     setSettingsOpen(!settingsOpen);
   };
 
+  const handleBusinessSetClicked = () => {
+    setBusinessSetClicked(!businessSetClicked)
+    if(!businessSetClicked)
+      navigate('/BusinessName/Settings/Account')
+  } 
+ 
+useEffect(() => {
+  if (location.pathname === "/BusinessName/Settings/Account" || location.pathname === "/BusinessName/Settings/Project" || location.pathname === "/BusinessName/Settings/Members" || location.pathname === "/BusinessName/Settings/Billing" || location.pathname === "/BusinessName/Settings/Billing/Upgrade" || location.pathname === "/BusinessName/Settings/Billing/Upgrade/Checkout") {
+    setBusinessSetClicked(true);
+  } else {
+    setBusinessSetClicked(false);
+  }
+}, [location.pathname]);
+
   const handleNavigation = (path) => {
+    
+    if (path === "/BusinessName/Settings/Account" || path === "/BusinessName/Settings/Project" || path === "/BusinessName/Settings/Members" || path === "/BusinessName/Settings/Billing") {
+      setBusinessSetClicked(false);
+    } else {
+      setBusinessSetClicked(false);
+    }
     navigate(path);
   };
 
@@ -95,42 +117,76 @@ const Sidebar = () => {
           </Box>
         </Box>
         <Divider />
-        <Box className="list-container">
-          <List>
-            <ListItem button onClick={() => handleNavigation("/Dashboard")}>
-              <ListItemText primary="Dashboard" />
-            </ListItem>
-            <ListItem button onClick={() => handleNavigation("/Workflow_Dashboard")}>
-              <ListItemText primary="Workflows" />
-            </ListItem>
-            {[
-              "Executions",
-              "Ad hoc Execution",
-              "Schedules",
-              "Reports",
-              "Vault",
-              "Devices",
-            ].map((text) => (
-              <ListItem button key={text}>
+        <Box sx={{ flex: 1, overflowY: "auto" }}>
+        {businessSetClicked ? (
+    <List>
+      <ListItem button onClick={() => handleNavigation("/BusinessName/Settings/Account")}>
+        <ListItemText primary="Account" />
+      </ListItem>
+      <ListItem button onClick={() => handleNavigation("/BusinessName/Settings/Project")}>
+        <ListItemText primary="Projects" />
+      </ListItem>
+      <ListItem button onClick={() => handleNavigation("/BusinessName/Settings/Members")}>
+        <ListItemText primary="Members" />
+      </ListItem>
+      <ListItem button onClick={() => handleNavigation("/BusinessName/Settings/Billing")}>
+        <ListItemText primary="Billing" />
+      </ListItem>
+      <ListItem button onClick={handleSettingsClick}>
+        <ListItemText primary="Settings" />
+        {settingsOpen ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={settingsOpen} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          {["General", "Account Settings", "On-Prem Executor"].map(
+            (text) => (
+              <ListItem button key={text} sx={{ pl: 4 }}>
                 <ListItemText primary={text} />
               </ListItem>
-            ))}
-            <ListItem button onClick={handleSettingsClick}>
-              <ListItemText primary="Settings" />
-              {settingsOpen ? <ExpandLess /> : <ExpandMore />}
-            </ListItem>
-            <Collapse in={settingsOpen} timeout="auto" unmountOnExit>
-              <List component="div" disablePadding>
-                {["General", "Account Settings", "On-Prem Executor"].map(
-                  (text) => (
-                    <ListItem button key={text} className="settings-collapse">
-                      <ListItemText primary={text} />
-                    </ListItem>
-                  )
-                )}
-              </List>
-            </Collapse>
-          </List>
+            )
+          )}
+        </List>
+      </Collapse>
+    </List>
+  ) : (
+    <List>
+      <ListItem button onClick={() => handleNavigation("/Dashboard")}>
+        <ListItemText primary="Dashboard" />
+      </ListItem>
+      <ListItem button onClick={() => handleNavigation("/Workflow_Dashboard")}>
+        <ListItemText primary="Workflows" />
+      </ListItem>
+      {[
+        "Executions",
+        "Ad hoc Execution",
+        "Schedules",
+        "Reports",
+        "Vault",
+        "Devices",
+      ].map((text) => (
+        <ListItem button key={text}>
+          <ListItemText primary={text} />
+        </ListItem>
+      ))}
+      {/* Settings */}
+      <ListItem button onClick={handleSettingsClick}>
+        <ListItemText primary="Settings" />
+        {settingsOpen ? <ExpandLess /> : <ExpandMore />}
+      </ListItem>
+      <Collapse in={settingsOpen} timeout="auto" unmountOnExit>
+        <List component="div" disablePadding>
+          {["General", "Account Settings", "On-Prem Executor"].map(
+            (text) => (
+              <ListItem button key={text} sx={{ pl: 4 }}>
+                <ListItemText primary={text} />
+              </ListItem>
+            )
+          )}
+        </List>
+      </Collapse>
+    </List>
+  )}
+          
         </Box>
         <Divider />
         <Box sx={{ p: 2 }}>
@@ -208,7 +264,7 @@ const Sidebar = () => {
                 FREE
               </Typography>
               <Box className="business-actions">
-                <IconButton size="small">
+                <IconButton size="small" onClick={handleBusinessSetClicked}>
                   <SettingsIcon />
                 </IconButton>
                 <IconButton size="small">

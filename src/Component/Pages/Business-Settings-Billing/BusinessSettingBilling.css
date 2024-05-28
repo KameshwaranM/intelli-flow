@@ -1,0 +1,101 @@
+.d-flex {
+  display: flex;
+}
+
+.BS-Billing {
+  height: 100vh;
+  width: 100vw;
+}
+
+.content-containers {
+  /* flex-grow: 1; */
+  padding-left: 20px;
+  width: 80vw;
+  height: 100vh;
+}
+
+.content-containers .Billing page Billing-head {
+  margin-left: 20px;
+}
+
+.Billingpage-custom-card {
+  margin: 20px 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s;
+  width: 100%;
+  height: 200px;
+}
+
+.Billingpage-custom-card:hover {
+  transform: translateY(-10px);
+}
+
+.Billingpage-Uniquecard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  height: 101%;
+}
+
+ .Billingpage-Uniquetitle {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.Billingpage-Uniquetext {
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.Billinngpage-Uniquebutton {
+  background-color: #b6bbc1;
+  border: none;
+  padding: 10px 20px;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  margin-left: auto;
+}
+
+.Billingpage-Uniquecard .Billinngpage-Uniquebutton:hover {
+  background-color: #003d7e;
+}
+
+.Billingpage-Uniquecard .Billingpage-Uniquefreebutton {
+  background-color: #e1e3e5;
+  border-color: rgb(247, 247, 247);
+  padding: 8px 20px;
+  font-size: 14px;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+  text-decoration: none;
+  font-weight: bold;
+  border-color: grey;
+}
+
+.Billingpage-Uniquecard .Billinngpage-Uniquebutton {
+  text-decoration: none;
+  font-weight: bold;
+  border-width: 10px;
+}
+
+.Billingpage-Uniquecard .Billinngpage-Uniquebutton.free {
+  color: blue;
+}
+
+.Billingpage-Uniquecard .btn-primary,
+.Billingpage-Uniquecard .Billinngpage-Uniquebutton:hover {
+  border-color: rgb(247, 247, 247);
+}
+
+.card .Billingpage-Uniquecard .Billinngpage-Uniquebutton {
+  color: black;
+}
+
+.card .Billingpage-Uniquecard .Billinngpage-Uniquebutton:hover {
+  color: white;
+}

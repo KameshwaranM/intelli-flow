@@ -1,0 +1,56 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.bsAccount{
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+.bsAccount-container{
+    font-size: 18px;
+    padding: 0.5rem;
+}
+.bsAccount-container > h2{
+    font-weight: 600;
+    font-size: 22px;
+}
+.bsCard-top, .bsCard-bottom{
+    position: relative;
+    width: 83vw;
+    border: 2px solid grey;
+    border-radius: 10px;
+    padding: 1rem;
+    background-color: #fff;
+    margin: 20px 0;
+}
+.bsCard-top > h4{
+    margin-top: 0.5rem;
+    margin-bottom: 1.2rem;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+}
+.bsCard-bottom > h4{
+    font-weight: 600;
+}
+.infoIcon{
+    font-size: 22px;
+    place-items: center;
+    margin-right: 5px;
+}
+.bsCard-bottom > p{
+    margin: 0.4rem 0.2rem;
+    font-size: 20px;
+}
+.bsCard-bottom > span{
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+}
+.bsCard-bottom a{
+    text-decoration: none;
+    margin-left: 5px;
+    color: #007bff;
+}
