@@ -8,10 +8,11 @@
 }
 
 .content-containers {
-  /* flex-grow: 1; */
   padding-left: 20px;
-  width: 80vw;
+  width: 84.5vw;
   height: 100vh;
+  background-color: #f7f7f766;
+  padding-right: 25px;
 }
 
 .content-containers .Billing page Billing-head {

@@ -11,16 +11,16 @@ const BusinessSettingsAccount = () => {
         <h2>Account</h2>
         <div className="bsCard-top">
           <p>Name</p>
-          <h4>Business Name</h4>
+          <h6>Business Name</h6>
           <p>Account ID</p>
-          <h4>Nano ID</h4>
+          <h6>Nano ID</h6>
           <p>Billing Email</p>
-          <h4>owneremail@gmail.com</h4>
+          <h6>owneremail@gmail.com</h6>
           <p>Instance Regions</p>
-          <h4>EU / US /India</h4>
+          <h6>EU / US /India</h6>
         </div>
         <div className="bsCard-bottom">
-          <h4>Workflow History Retention Period</h4>
+          <h6>Workflow History Retention Period</h6>
           <p>7 Days</p>
           <span>
             <IoInformationCircle className="infoIcon" /> Workflow History that

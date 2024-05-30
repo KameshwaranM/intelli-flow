@@ -15,15 +15,17 @@
 .bsBillingUpgarde-container .plan{
     border: 2px solid darkgray;
     border-radius: 10px;
-    height: 480px;
+    /* height: 520px; */
     padding: 1rem;
-    width: 27%;
+    /* width: 27%; */
     width: 370px;
     height: 77%;
     transition: 0.5s;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    background-color: white;
+    color: black;
 }
 .selected-plan .plan{
     height: auto;

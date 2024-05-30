@@ -1,55 +1,67 @@
-*{
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
-.bsAccount{
+.bsAccount {
     display: flex;
     height: 100vh;
     width: 100vw;
 }
-.bsAccount-container{
-    font-size: 18px;
-    padding: 0.5rem;
+
+.bsAccount-container {
+    padding: 0px 20px;
+    background-color: #f7f7f766;
+    height: 100vh;
+    width: 100vw;
 }
-.bsAccount-container > h2{
+
+.bsAccount-container>h2 {
     font-weight: 600;
-    font-size: 22px;
+    font-size: 20px;
+    margin-top: 18px;
 }
-.bsCard-top, .bsCard-bottom{
+
+.bsCard-top,
+.bsCard-bottom {
     position: relative;
-    width: 83vw;
-    border: 2px solid grey;
+    width: 80vw;
+    border: 2px solid #e7e7e7;
     border-radius: 10px;
     padding: 1rem;
     background-color: #fff;
     margin: 20px 0;
 }
-.bsCard-top > h4{
+
+.bsCard-top>h6 {
     margin-top: 0.5rem;
     margin-bottom: 1.2rem;
-    letter-spacing: 0.5px;
     font-weight: 600;
 }
-.bsCard-bottom > h4{
+
+.bsCard-bottom>h6 {
     font-weight: 600;
 }
-.infoIcon{
+
+.infoIcon {
     font-size: 22px;
     place-items: center;
     margin-right: 5px;
 }
-.bsCard-bottom > p{
+
+.bsCard-bottom>p {
     margin: 0.4rem 0.2rem;
     font-size: 20px;
 }
-.bsCard-bottom > span{
+
+.bsCard-bottom>span {
     display: flex;
     align-items: center;
     font-size: 16px;
 }
-.bsCard-bottom a{
+
+.bsCard-bottom a {
     text-decoration: none;
     margin-left: 5px;
     color: #007bff;

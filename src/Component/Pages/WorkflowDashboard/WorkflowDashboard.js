@@ -33,7 +33,6 @@ import SearchIcon from "@mui/icons-material/Search";
 import CircleIcon from "@mui/icons-material/Circle";
 import "./WorkflowDashboard.css";
 import Sidebar from "../../Sidebar/Sidebar";
-import "./WorkflowDashboard.css";
 
 const WorkflowDashboard = () => {
   const [openCreateDialog, setOpenCreateDialog] = useState(false);
@@ -293,23 +292,6 @@ const WorkflowDashboard = () => {
                 value={newWorkflowDescription}
                 onChange={(e) => setNewWorkflowDescription(e.target.value)}
               />
-              {/* <TextField
-              autoFocus
-              margin="dense"
-              label="Workflow Name"
-              fullWidth
-              value={newWorkflowName}
-              onChange={(e) => setNewWorkflowName(e.target.value)}
-              className="newWorkflowNameInput"
-            />
-            <TextField
-              margin="dense"
-              label="Workflow Description"
-              fullWidth
-              value={newWorkflowDescription}
-              onChange={(e) => setNewWorkflowDescription(e.target.value)}
-              className="newWorkflowDescriptionInput"
-            /> */}
             </DialogContent>
             <DialogActions>
               <Button onClick={handleCreateClose} variant="contained" color="error">

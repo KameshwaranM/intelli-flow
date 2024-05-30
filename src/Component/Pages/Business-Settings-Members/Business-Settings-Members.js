@@ -1,5 +1,13 @@
 import React, { useState } from "react";
-import ReactModal from "react-modal";
+import {
+  Dialog,
+  Box,
+  DialogTitle,
+  DialogContent,
+  DialogActions,
+  Button,
+  Typography,
+} from "@mui/material";
 import { FaPlusCircle, FaSearch } from "react-icons/fa";
 import DataTable from "react-data-table-component";
 import "./Business-Settings-Members.css";
@@ -137,66 +145,55 @@ const BusinessSettingsMember = () => {
             <input type="text" placeholder="Search Projects" />
           </form>
         </div>
-        <ReactModal
-          isOpen={modalIsOpen}
-          onRequestClose={closeModal}
-          contentLabel="Add Member"
-          className="Member-Modal"
-          overlayClassName="Member-Overlay"
-        >
-          <h1>Invite New Member</h1>
-          <form className="Member-invite-form" onSubmit={handleFormSubmit}>
-            <div className="Member-form-group">
-              <label htmlFor="name">Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={formData.name}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-            <div className="Member-form-group">
-              <label htmlFor="email">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                value={formData.email}
-                onChange={handleInputChange}
-                required
-              />
-            </div>
-            <div className="Member-form-group">
-              <label htmlFor="role">Account Role</label>
-              <select
-                id="role"
-                name="role"
-                value={formData.role}
-                onChange={handleInputChange}
-                required
-              >
-                <option value="admin">Admin</option>
-                <option value="editor">Editor</option>
-                <option value="viewer">Viewer</option>
-                <option value="owner">Owner</option>
-              </select>
-            </div>
-            <div className="Member-button-group">
-              <button
-                type="button"
-                className="Member-cancel-button"
-                onClick={closeModal}
-              >
-                Cancel
-              </button>
-              <button type="submit" className="Member-invite-button">
-                Invite
-              </button>
-            </div>
+        <Dialog open={modalIsOpen} onClose={closeModal}>
+          <form onSubmit={handleFormSubmit}>
+            <Box className="createDialog" sx={{ p: 2 }}>
+              <Typography variant="h5"  gutterBottom>
+                Invite New Member
+              </Typography>
+              <DialogContent>
+                <label>Name</label>
+                <input
+                  className="first-time-login-card-input"
+                  type="text"
+                  required
+                  value={formData.name}
+                  onChange={handleInputChange}
+                />
+                <label>Email</label>
+                <input
+                  className="first-time-login-card-input"
+                  type="text"
+                  required
+                  value={formData.email}
+                  onChange={handleInputChange}
+                />
+                <label htmlFor="role">Account Role</label>
+                <select
+                  id="role"
+                  name="role"
+                  value={formData.role}
+                  onChange={handleInputChange}
+                  required
+                >
+                  <option value="admin">Admin</option>
+                  <option value="editor">Editor</option>
+                  <option value="viewer">Viewer</option>
+                  <option value="owner">Owner</option>
+                </select>
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={closeModal} variant="contained" color="error">
+                  Cancel
+                </Button>
+                <Button type="submit" variant="contained" color="success">
+                  Invite
+                </Button>
+              </DialogActions>
+            </Box>
           </form>
-        </ReactModal>
+        </Dialog>
+
         <div className="Member-ProjTable">
           <DataTable columns={columns} data={members} className="dataTable" />
         </div>

@@ -55,7 +55,7 @@ const DiagramAdapter = ({
         } else if (params.sourceHandle === "false") {
           params.label = "FALSE";
         }
-        if (params.label===null){params.label = "X";}
+        if (params.label===null){params.label = " ";}
         
         params.style = { stroke: "#fff" };
         params.animated = true;
