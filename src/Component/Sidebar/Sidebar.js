@@ -17,7 +17,6 @@ import {
   ClickAwayListener,
   Switch,
   FormControlLabel,
-  TextField,
   Button,
 } from "@mui/material";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
@@ -33,7 +32,13 @@ import "./Sidebar.css";
 
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
-import { BorderColor } from "@mui/icons-material";
+import FitbitIcon from '@mui/icons-material/Fitbit';
+import AutoGraphIcon from '@mui/icons-material/AutoGraph';
+import ScheduleIcon from '@mui/icons-material/Schedule';
+import SummarizeIcon from '@mui/icons-material/Summarize';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
+import PhonelinkIcon from '@mui/icons-material/Phonelink';
+import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
 
 const Sidebar = () => {
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -124,7 +129,7 @@ const Sidebar = () => {
       >
         <Box sx={{ p: 1, display: "flex", flexDirection: "column", gap: 1 }}>
           <Box className="logo-container">
-            <img src={LogoImage} alt="Logo" style={{ width: 180 }} />
+            <img src={LogoImage} alt="Logo" style={{ width: 190 }} />
           </Box>
           <Box className="business-name" onClick={handlePopperOpen}>
             <Typography className="business-name-p">Business Name</Typography>
@@ -215,7 +220,61 @@ const Sidebar = () => {
               >
                 <AccountTreeIcon className="sidebar-icons"/><ListItemText primary="Workflows" />
               </ListItem>
-              {[
+              <ListItem
+                button
+                onClick={() => handleNavigation("/Executions")}
+                style={{
+                  ...(window.location.pathname === "/Executions" ? activeStyle : {}),
+                }}
+              >
+                <FitbitIcon className="sidebar-icons"/><ListItemText primary="Executions" />
+              </ListItem>
+              <ListItem
+                button
+                onClick={() => handleNavigation("/Ad_hoc_Execution")}
+                style={{
+                  ...(window.location.pathname === "/Ad_hoc_Execution" ? activeStyle : {}),
+                }}
+              >
+                <AutoGraphIcon className="sidebar-icons"/><ListItemText primary="Ad hoc Execution" />
+              </ListItem>
+              <ListItem
+                button
+                onClick={() => handleNavigation("/Schedules")}
+                style={{
+                  ...(window.location.pathname === "/Schedules" ? activeStyle : {}),
+                }}
+              >
+                <ScheduleIcon className="sidebar-icons"/><ListItemText primary="Schedules" />
+              </ListItem>
+              <ListItem
+                button
+                onClick={() => handleNavigation("/Reports")}
+                style={{
+                  ...(window.location.pathname === "/Reports" ? activeStyle : {}),
+                }}
+              >
+                <SummarizeIcon className="sidebar-icons"/><ListItemText primary="Reports" />
+              </ListItem>
+              <ListItem
+                button
+                onClick={() => handleNavigation("/Vault")}
+                style={{
+                  ...(window.location.pathname === "/Vault" ? activeStyle : {}),
+                }}
+              >
+                <AccountBalanceWalletIcon className="sidebar-icons"/><ListItemText primary="Vault" />
+              </ListItem>
+              <ListItem
+                button
+                onClick={() => handleNavigation("/Devices")}
+                style={{
+                  ...(window.location.pathname === "/Devices" ? activeStyle : {}),
+                }}
+              >
+                <PhonelinkIcon className="sidebar-icons"/><ListItemText primary="Devices" />
+              </ListItem>
+              {/* {[
                 "Executions",
                 "Ad hoc Execution",
                 "Schedules",
@@ -226,10 +285,10 @@ const Sidebar = () => {
                 <ListItem button key={text}>
                   <ListItemText primary={text} />
                 </ListItem>
-              ))}
+              ))} */}
               {/* Settings */}
               <ListItem button onClick={handleSettingsClick}>
-                <ListItemText primary="Settings" />
+                <SettingsApplicationsIcon className="sidebar-icons" /><ListItemText primary="Settings" />
                 {settingsOpen ? <ExpandLess /> : <ExpandMore />}
               </ListItem>
               <Collapse in={settingsOpen} timeout="auto" unmountOnExit>

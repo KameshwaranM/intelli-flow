@@ -12,8 +12,7 @@
 
 .logo-container {
     display: flex;
-    justify-content: center;
-    padding: 3px;
+    padding-top: 3px;
 }
 
 .business-name {
@@ -96,7 +95,7 @@
 .css-bshv44-MuiButtonBase-root-MuiListItem-root {
     padding-top: 3px !important;
     padding-bottom: 3px !important;
-    padding-left: 35px !important;
+    padding-left: 20px !important;
     margin: 0px 7px;
     width: 95%;
     border-radius: 20px !important;
@@ -109,7 +108,7 @@
 .css-ltlrkn-MuiButtonBase-root-MuiListItem-root {
     padding-top: 3px !important;
     padding-bottom: 3px !important;
-    padding-left: 28px !important;
+    padding-left: 14px !important;
     margin: 0px 7px !important;
     width: 95% !important;
     border-radius: 20px !important;
@@ -121,6 +120,13 @@
 
 .active {
     background-color: blue;
+}
+
+.css-vqj3ch-MuiListItemText-root{
+    padding-left: 20px !important;
+}
+.css-10hburv-MuiTypography-root{
+    font-size: 14px !important;
 }
 
 .sidebar-business-card-project {
