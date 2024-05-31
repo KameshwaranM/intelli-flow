@@ -96,9 +96,10 @@
 .css-bshv44-MuiButtonBase-root-MuiListItem-root {
     padding-top: 3px !important;
     padding-bottom: 3px !important;
-    padding-left: 20px !important;
+    padding-left: 35px !important;
     margin: 0px 7px;
     width: 95%;
+    border-radius: 20px !important;
 }
 
 .css-bshv44-MuiButtonBase-root-MuiListItem-root:hover {
@@ -108,9 +109,10 @@
 .css-ltlrkn-MuiButtonBase-root-MuiListItem-root {
     padding-top: 3px !important;
     padding-bottom: 3px !important;
-    padding-left: 14px !important;
+    padding-left: 28px !important;
     margin: 0px 7px !important;
     width: 95% !important;
+    border-radius: 20px !important;
 }
 
 .css-ltlrkn-MuiButtonBase-root-MuiListItem-root:hover  {

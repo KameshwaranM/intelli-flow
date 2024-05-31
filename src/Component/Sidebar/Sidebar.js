@@ -33,6 +33,7 @@ import "./Sidebar.css";
 
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AccountTreeIcon from '@mui/icons-material/AccountTree';
+import { BorderColor } from "@mui/icons-material";
 
 const Sidebar = () => {
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -44,8 +45,8 @@ const Sidebar = () => {
   const location = useLocation();
 
   const activeStyle = {
-    backgroundColor: "#f8f9fa",
-    color: "#333",
+    backgroundColor: "#1976d2",
+    color: "#fff",
   };
 
   const handleSettingsClick = () => {
@@ -139,6 +140,9 @@ const Sidebar = () => {
                 onClick={() =>
                   handleNavigation("/BusinessName/Settings/Account")
                 }
+                style={{
+                  ...(window.location.pathname === "/BusinessName/Settings/Account" ? activeStyle : {}),
+                }}
               >
                 <ListItemText primary="Account" />
               </ListItem>
@@ -147,6 +151,9 @@ const Sidebar = () => {
                 onClick={() =>
                   handleNavigation("/BusinessName/Settings/Project")
                 }
+                style={{
+                  ...(window.location.pathname === "/BusinessName/Settings/Project" ? activeStyle : {}),
+                }}
               >
                 <ListItemText primary="Projects" />
               </ListItem>
@@ -155,6 +162,9 @@ const Sidebar = () => {
                 onClick={() =>
                   handleNavigation("/BusinessName/Settings/Members")
                 }
+                style={{
+                  ...(window.location.pathname === "/BusinessName/Settings/Members" ? activeStyle : {}),
+                }}
               >
                 <ListItemText primary="Members" />
               </ListItem>
@@ -163,6 +173,9 @@ const Sidebar = () => {
                 onClick={() =>
                   handleNavigation("/BusinessName/Settings/Billing")
                 }
+                style={{
+                  ...(window.location.pathname === "/BusinessName/Settings/Billing" ? activeStyle : {}),
+                }}
               >
                 <ListItemText primary="Billing" />
               </ListItem>
@@ -188,9 +201,7 @@ const Sidebar = () => {
                 button
                 onClick={() => handleNavigation("/Dashboard")}
                 style={{
-                  ...(window.location.pathname === `/Dashboard`
-                    ? activeStyle
-                    : {}),
+                  ...(window.location.pathname === "/Dashboard" ? activeStyle : {}),
                 }}
               >
                 <DashboardIcon className="sidebar-icons"/><ListItemText primary="Dashboard" />
@@ -198,6 +209,9 @@ const Sidebar = () => {
               <ListItem
                 button
                 onClick={() => handleNavigation("/Workflow_Dashboard")}
+                style={{
+                  ...(window.location.pathname === "/Workflow_Dashboard" ? activeStyle : {}),
+                }}
               >
                 <AccountTreeIcon className="sidebar-icons"/><ListItemText primary="Workflows" />
               </ListItem>

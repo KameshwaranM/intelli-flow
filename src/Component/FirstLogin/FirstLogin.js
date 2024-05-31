@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import {
   Container,
@@ -13,15 +13,26 @@ import {
   Avatar,
   ListItem,
   ListItemText,
+  Popper,
+  Paper,
+  FormControlLabel,
+  Switch,
+  Divider,
+  MenuItem,
 } from "@mui/material";
 import LogoImage from "../../Assets/Intellil-Flow-Logo.png";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import "./FirstLogin.css";
 import "../OnBoarding/Pages/Login/login.css";
+import { ThemeContext } from "../Theams/Theam";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
+import LightModeIcon from "@mui/icons-material/LightMode";
 
 const FirstLogin = () => {
   const [projectName, setProjectName] = useState("");
   const [description, setDescription] = useState("");
+  const [anchorEl, setAnchorEl] = useState(null);
+  const { darkMode, toggleDarkMode } = useContext(ThemeContext);
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(false);
   const navigate = useNavigate();
@@ -52,6 +63,17 @@ const FirstLogin = () => {
     }
     setOpen(false);
   };
+
+  const handleProfileMenuOpen = (event) => {
+    setAnchorEl(anchorEl ? null : event.currentTarget);
+  };
+
+  const handleProfileMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const opens = Boolean(anchorEl);
+  const id = open ? "simple-popper" : undefined;
 
   return (
     <Box
@@ -93,8 +115,48 @@ const FirstLogin = () => {
               <HelpOutlineIcon />
             </IconButton>
             <div style={{marginTop:"10px"}}>
+            <Box
+                  className="profile-avatar-container"
+                  onClick={handleProfileMenuOpen}
+                >
             <Avatar alt="Ramanan AR" src="/static/images/avatar/1.jpg" />
+            </Box>
             </div>
+            <Popper
+                  id={id}
+                  open={opens}
+                  anchorEl={anchorEl}
+                  placement="right-end"
+                  style={{ zIndex: 1201 }}
+                >
+                  <Paper sx={{ mt: 1, p: 2 }}>
+                    <Box className="popper-content">
+                      <LightModeIcon />
+                      <FormControlLabel
+                        control={
+                          <Switch
+                            checked={darkMode}
+                            onChange={toggleDarkMode}
+                          />
+                        }
+                      />
+                      <DarkModeIcon />
+                    </Box>
+                    <Divider />
+                    {[
+                      "Profile",
+                      "API Keys",
+                      "Preferences",
+                      "Feature previews",
+                      "Security",
+                      "Sign out",
+                    ].map((text) => (
+                      <MenuItem key={text} onClick={handleProfileMenuClose}>
+                        {text}
+                      </MenuItem>
+                    ))}
+                  </Paper>
+                </Popper>
           </Box>
         </Box>
       </Drawer>
@@ -121,6 +183,7 @@ const FirstLogin = () => {
               boxShadow: 3,
               borderRadius: 2,
               backgroundColor: "white",
+              color:"black"
             }}
             onSubmit={handleCreate}
           >
@@ -140,6 +203,14 @@ const FirstLogin = () => {
                 required
                 value={projectName}
                 onChange={(e) => setProjectName(e.target.value)}
+                onKeyPress={(event) => {
+                  const keyCode = event.keyCode || event.which;
+                  const keyValue = String.fromCharCode(keyCode);
+                  const regex = /^[A-Za-z\s]*$/;
+                  if (!regex.test(keyValue)) {
+                    event.preventDefault();
+                  }
+                }}
               />
               <label>Description</label>
               <input
@@ -148,6 +219,14 @@ const FirstLogin = () => {
                 required
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
+                onKeyPress={(event) => {
+                  const keyCode = event.keyCode || event.which;
+                  const keyValue = String.fromCharCode(keyCode);
+                  const regex = /^[A-Za-z\s]*$/;
+                  if (!regex.test(keyValue)) {
+                    event.preventDefault();
+                  }
+                }}
               />
               <Box
                 className="createButtonContainer"
