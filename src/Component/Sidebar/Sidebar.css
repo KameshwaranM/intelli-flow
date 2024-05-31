@@ -76,9 +76,10 @@
 }
 
 .business-badge {
-    background: lightgray;
+    background-color: lightgray;
     border-radius: 3px;
-    padding: 2px 4px;
+    padding: 4px 10px;
+    color: rgb(25, 118, 210);
 }
 
 .business-actions {

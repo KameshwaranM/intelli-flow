@@ -63,6 +63,13 @@ const Sidebar = () => {
     if (!businessSetClicked) navigate("/BusinessName/Settings/Account");
   };
 
+  const handleOpenCreateWorkflow = () => {
+    navigate("/Create_Workflow")
+  }
+  
+  const handleopenProject = () => {
+    window.location.href = "/BusinessName/Settings/Project"
+  }
   useEffect(() => {
     if (
       location.pathname === "/BusinessName/Settings/Account" ||
@@ -387,8 +394,8 @@ const Sidebar = () => {
                 <IconButton size="small" onClick={handleBusinessSetClicked}>
                   <SettingsIcon />
                 </IconButton>
-                <IconButton sx={{ transform: "scale(1.5)" }}>
-                  <AddCircleIcon sx={{ width: "18px" }} />
+                <IconButton size="small" onClick={handleOpenCreateWorkflow} >
+                  <AddCircleIcon  />
                 </IconButton>
               </Box>
             </Box>
@@ -396,7 +403,7 @@ const Sidebar = () => {
               <lable>Project Name</lable>
             </div>
             <Box className="business-browse">
-              <Button variant="contained" color="primary" size="small">
+              <Button onClick={handleopenProject} variant="contained" color="primary" size="small">
                 Browse all
               </Button>
             </Box>
