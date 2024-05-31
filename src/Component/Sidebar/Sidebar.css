@@ -101,5 +101,10 @@
 .css-ltlrkn-MuiButtonBase-root-MuiListItem-root {
     padding-top: 6px !important;
     padding-bottom: 6px !important;
-    padding-left: 32px !important;
+    padding-left: 25px !important;
 }
+
+.active {
+    background-color: blue;
+  }
+  

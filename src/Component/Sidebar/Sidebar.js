@@ -29,7 +29,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import AddIcon from "@mui/icons-material/Add";
 import LogoImage from "../../Assets/Intellil-Flow-Logo.png";
 import { ThemeContext } from "../Theams/Theam";
-import "./Sidebar.css"
+import "./Sidebar.css";
 
 const Sidebar = () => {
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -40,27 +40,42 @@ const Sidebar = () => {
   const [businessSetClicked, setBusinessSetClicked] = useState(false);
   const location = useLocation();
 
+  const activeStyle = {
+    backgroundColor: "#f8f9fa",
+    color: "#333",
+  };
+
   const handleSettingsClick = () => {
     setSettingsOpen(!settingsOpen);
   };
 
   const handleBusinessSetClicked = () => {
-    setBusinessSetClicked(!businessSetClicked)
-    if(!businessSetClicked)
-      navigate('/BusinessName/Settings/Account')
-  } 
- 
-useEffect(() => {
-  if (location.pathname === "/BusinessName/Settings/Account" || location.pathname === "/BusinessName/Settings/Project" || location.pathname === "/BusinessName/Settings/Members" || location.pathname === "/BusinessName/Settings/Billing" || location.pathname === "/BusinessName/Settings/Billing/Upgrade" || location.pathname === "/BusinessName/Settings/Billing/Upgrade/Checkout") {
-    setBusinessSetClicked(true);
-  } else {
-    setBusinessSetClicked(false);
-  }
-}, [location.pathname]);
+    setBusinessSetClicked(!businessSetClicked);
+    if (!businessSetClicked) navigate("/BusinessName/Settings/Account");
+  };
+
+  useEffect(() => {
+    if (
+      location.pathname === "/BusinessName/Settings/Account" ||
+      location.pathname === "/BusinessName/Settings/Project" ||
+      location.pathname === "/BusinessName/Settings/Members" ||
+      location.pathname === "/BusinessName/Settings/Billing" ||
+      location.pathname === "/BusinessName/Settings/Billing/Upgrade" ||
+      location.pathname === "/BusinessName/Settings/Billing/Upgrade/Checkout"
+    ) {
+      setBusinessSetClicked(true);
+    } else {
+      setBusinessSetClicked(false);
+    }
+  }, [location.pathname]);
 
   const handleNavigation = (path) => {
-    
-    if (path === "/BusinessName/Settings/Account" || path === "/BusinessName/Settings/Project" || path === "/BusinessName/Settings/Members" || path === "/BusinessName/Settings/Billing") {
+    if (
+      path === "/BusinessName/Settings/Account" ||
+      path === "/BusinessName/Settings/Project" ||
+      path === "/BusinessName/Settings/Members" ||
+      path === "/BusinessName/Settings/Billing"
+    ) {
       setBusinessSetClicked(false);
     } else {
       setBusinessSetClicked(false);
@@ -74,7 +89,7 @@ useEffect(() => {
 
   const handleProfileMenuClose = () => {
     setAnchorEl(null);
-  };  
+  };
 
   const handlePopperOpen = (event) => {
     setPopperAnchorEl(popperAnchorEl ? null : event.currentTarget);
@@ -108,85 +123,107 @@ useEffect(() => {
             <img src={LogoImage} alt="Logo" style={{ width: 180 }} />
           </Box>
           <Box className="business-name" onClick={handlePopperOpen}>
-            <Typography className="business-name-p">
-              Business Name
-            </Typography>
-            <Typography>
-              Project Name
-            </Typography>
+            <Typography className="business-name-p">Business Name</Typography>
+            <Typography>Project Name</Typography>
           </Box>
         </Box>
         <Divider />
         <Box sx={{ flex: 1, overflowY: "auto" }}>
-        {businessSetClicked ? (
-    <List>
-      <ListItem button onClick={() => handleNavigation("/BusinessName/Settings/Account")}>
-        <ListItemText primary="Account" />
-      </ListItem>
-      <ListItem button onClick={() => handleNavigation("/BusinessName/Settings/Project")}>
-        <ListItemText primary="Projects" />
-      </ListItem>
-      <ListItem button onClick={() => handleNavigation("/BusinessName/Settings/Members")}>
-        <ListItemText primary="Members" />
-      </ListItem>
-      <ListItem button onClick={() => handleNavigation("/BusinessName/Settings/Billing")}>
-        <ListItemText primary="Billing" />
-      </ListItem>
-      <ListItem button onClick={handleSettingsClick}>
-        <ListItemText primary="Settings" />
-        {settingsOpen ? <ExpandLess /> : <ExpandMore />}
-      </ListItem>
-      <Collapse in={settingsOpen} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          {["General", "Account Settings", "On-Prem Executor"].map(
-            (text) => (
-              <ListItem button key={text} sx={{ pl: 4 }}>
-                <ListItemText primary={text} />
+          {businessSetClicked ? (
+            <List>
+              <ListItem
+                button
+                onClick={() =>
+                  handleNavigation("/BusinessName/Settings/Account")
+                }
+              >
+                <ListItemText primary="Account" />
               </ListItem>
-            )
-          )}
-        </List>
-      </Collapse>
-    </List>
-  ) : (
-    <List>
-      <ListItem button onClick={() => handleNavigation("/Dashboard")}>
-        <ListItemText primary="Dashboard" />
-      </ListItem>
-      <ListItem button onClick={() => handleNavigation("/Workflow_Dashboard")}>
-        <ListItemText primary="Workflows" />
-      </ListItem>
-      {[
-        "Executions",
-        "Ad hoc Execution",
-        "Schedules",
-        "Reports",
-        "Vault",
-        "Devices",
-      ].map((text) => (
-        <ListItem button key={text}>
-          <ListItemText primary={text} />
-        </ListItem>
-      ))}
-      {/* Settings */}
-      <ListItem button onClick={handleSettingsClick}>
-        <ListItemText primary="Settings" />
-        {settingsOpen ? <ExpandLess /> : <ExpandMore />}
-      </ListItem>
-      <Collapse in={settingsOpen} timeout="auto" unmountOnExit>
-        <List component="div" disablePadding>
-          {["General", "Account Settings", "On-Prem Executor"].map(
-            (text) => (
-              <ListItem button key={text} sx={{ pl: 4 }}>
-                <ListItemText primary={text} />
+              <ListItem
+                button
+                onClick={() =>
+                  handleNavigation("/BusinessName/Settings/Project")
+                }
+              >
+                <ListItemText primary="Projects" />
               </ListItem>
-            )
+              <ListItem
+                button
+                onClick={() =>
+                  handleNavigation("/BusinessName/Settings/Members")
+                }
+              >
+                <ListItemText primary="Members" />
+              </ListItem>
+              <ListItem
+                button
+                onClick={() =>
+                  handleNavigation("/BusinessName/Settings/Billing")
+                }
+              >
+                <ListItemText primary="Billing" />
+              </ListItem>
+              <ListItem button onClick={handleSettingsClick}>
+                <ListItemText primary="Settings" />
+                {settingsOpen ? <ExpandLess /> : <ExpandMore />}
+              </ListItem>
+              <Collapse in={settingsOpen} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                  {["General", "Account Settings", "On-Prem Executor"].map(
+                    (text) => (
+                      <ListItem button key={text} sx={{ pl: 4 }}>
+                        <ListItemText primary={text} />
+                      </ListItem>
+                    )
+                  )}
+                </List>
+              </Collapse>
+            </List>
+          ) : (
+            <List>
+              <ListItem button onClick={() => handleNavigation("/Dashboard")} style={{...(window.location.pathname === `/Dashboard` ? activeStyle : {})}}>
+                <ListItemText primary="Dashboard" />
+              </ListItem>
+              <ListItem
+                button
+                onClick={() => handleNavigation("/Workflow_Dashboard")}
+              >
+                <ListItemText primary="Workflows" />
+              </ListItem>
+              {[
+                "Executions",
+                "Ad hoc Execution",
+                "Schedules",
+                "Reports",
+                "Vault",
+                "Devices",
+              ].map((text) => (
+                <ListItem button key={text}>
+                  <ListItemText primary={text} />
+                </ListItem>
+              ))}
+              {/* Settings */}
+              <ListItem button onClick={handleSettingsClick}>
+                <ListItemText primary="Settings" />
+                {settingsOpen ? <ExpandLess /> : <ExpandMore />}
+              </ListItem>
+              <Collapse in={settingsOpen} timeout="auto" unmountOnExit>
+                <List component="div" disablePadding>
+                  {["General", "Account Settings", "On-Prem Executor"].map(
+                    (text) => (
+                      <ListItem
+                        button
+                        key={text}
+                        sx={{ pl: 4 }}
+                      >
+                        <ListItemText sx={{paddingLeft: "10px"}} primary={text} />
+                      </ListItem>
+                    )
+                  )}
+                </List>
+              </Collapse>
+            </List>
           )}
-        </List>
-      </Collapse>
-    </List>
-  )}
-          
         </Box>
         <Divider />
         <Box sx={{ p: 2 }}>
