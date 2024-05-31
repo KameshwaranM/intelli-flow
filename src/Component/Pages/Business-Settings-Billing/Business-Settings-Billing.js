@@ -9,7 +9,7 @@ const BusinessSettingsBilling = () => {
       <Sidebar />
       <div className="content-containers">
         <div className="Billing page Billing-head">
-          <h1 style={{ fontWeight: 450 }}>Billing</h1>
+        <h2 className="intelli-flow-right-side-headline">Billing</h2>
           <div className="container mt-5">
             <div className="row mb-3">
               <div className="col-md-4 mb-3">

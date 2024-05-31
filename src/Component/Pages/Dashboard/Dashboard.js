@@ -11,7 +11,7 @@ import {
   CardActions,
 } from "@mui/material";
 import Sidebar from "../../Sidebar/Sidebar";
-import "./Dashboard.css"
+import "./Dashboard.css";
 
 const Dashboard = () => {
   return (
@@ -20,21 +20,29 @@ const Dashboard = () => {
       <Box component="main" className="main-content">
         <Container maxWidth="xl">
           <Box className="dashboard-header">
-            <Typography variant="h4">Dashboard</Typography>
+            <h2 className="intelli-flow-right-side-headline">Dashboard</h2>
           </Box>
           <Grid container spacing={2} className="grid-container">
             <Grid item xs={12}>
               <Card className="welcome-card">
                 <CardContent>
-                  <Typography variant="h6">Welcome to Intelli Flow!</Typography>
-                  <Typography variant="body1">
-                    Execute your first Automation in 5 easy steps.
-                  </Typography>
-                  <CardActions className="card-actions">
-                    <Button variant="contained" color="primary">
-                      Get Started
-                    </Button>
-                  </CardActions>
+                  <div className="dashboard-welcome-intelli-flow-card-content-cont">
+                    <div>
+                      <Typography variant="h6">
+                        Welcome to Intelli Flow!
+                      </Typography>
+                      <Typography variant="body1">
+                        Execute your first Automation in 5 easy steps.
+                      </Typography>
+                    </div>
+                    <div>
+                      <CardActions className="card-actions">
+                        <Button variant="contained" color="primary">
+                          Get Started
+                        </Button>
+                      </CardActions>
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             </Grid>
@@ -66,7 +74,6 @@ const Dashboard = () => {
         </Container>
       </Box>
     </Box>
-
   );
 };
 

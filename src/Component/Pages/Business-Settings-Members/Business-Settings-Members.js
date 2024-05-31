@@ -124,7 +124,7 @@ const BusinessSettingsMember = () => {
     <div className="BS-members">
       <Sidebar />
       <div className="BS-members-container">
-        <h2>Members</h2>
+      <h2 className="intelli-flow-right-side-headline">Members</h2>
         {/* <div className="Member-toolbar">
         <button onClick={openModal} className="Member-plus-button">
           +

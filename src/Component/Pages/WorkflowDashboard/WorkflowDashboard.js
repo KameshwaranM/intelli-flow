@@ -133,7 +133,7 @@ const WorkflowDashboard = () => {
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Container maxWidth="xl">
           <Box className="workflowHeader">
-            <Typography variant="h4">Workflows</Typography>
+          <h2 className="intelli-flow-right-side-headline">Workflows</h2>
           </Box>
           <Box className="workflowActions">
             <IconButton

@@ -20,6 +20,7 @@
     cursor: pointer;
     padding: 10px;
     border: 0.5px solid #dedede;
+    border-radius: 3px;
 }
 
 .business-name-p {
@@ -63,9 +64,9 @@
 }
 
 .business-popper-content {
-    margin-top: 8px;
+    margin-top: 13px;
     padding: 16px;
-    width: 300px;
+    width: 332px;
     border: 1px solid black;
 }
 
@@ -93,18 +94,41 @@
 }
 
 .css-bshv44-MuiButtonBase-root-MuiListItem-root {
-    padding-top: 6px !important;
-    padding-bottom: 6px !important;
-    padding-left: 32px !important;
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+    padding-left: 20px !important;
+    margin: 0px 7px;
+    width: 95%;
+}
+
+.css-bshv44-MuiButtonBase-root-MuiListItem-root:hover {
+    border-radius: 20px
 }
 
 .css-ltlrkn-MuiButtonBase-root-MuiListItem-root {
-    padding-top: 6px !important;
-    padding-bottom: 6px !important;
-    padding-left: 25px !important;
+    padding-top: 3px !important;
+    padding-bottom: 3px !important;
+    padding-left: 14px !important;
+    margin: 0px 7px !important;
+    width: 95% !important;
+}
+
+.css-ltlrkn-MuiButtonBase-root-MuiListItem-root:hover  {
+    border-radius: 20px
 }
 
 .active {
     background-color: blue;
-  }
-  
+}
+
+.sidebar-business-card-project {
+    padding: 10px;
+    background-color: #c4c4c4;
+    border-radius: 3px;
+    margin-top: 8px;
+}
+
+.sidebar-icons{
+    font-size: 18px !important;
+    margin-right: 13px;
+}

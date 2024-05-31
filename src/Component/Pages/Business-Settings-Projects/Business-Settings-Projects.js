@@ -39,7 +39,7 @@ const BusinessSettingsProjects = () => {
     <div className="bsProject">
       <Sidebar />
       <div className="bsProject-container">
-        <h2>Projects</h2>
+      <h2 className="intelli-flow-right-side-headline">Projects</h2>
         <div className="bsSearch">
           <FaPlusCircle className="bsProjPlusIcon" />
           <form action="" className="bsProjSearchBar">

@@ -8,7 +8,7 @@ const BusinessSettingsAccount = () => {
     <div className="bsAccount">
       <Sidebar />
       <div className="bsAccount-container">
-        <h2>Account</h2>
+        <h2 className="intelli-flow-right-side-headline">Account</h2>
         <div className="bsCard-top">
           <p>Name</p>
           <h6>Business Name</h6>

@@ -9,10 +9,13 @@ import {
   Alert,
   Drawer,
   List,
+  IconButton,
+  Avatar,
   ListItem,
   ListItemText,
 } from "@mui/material";
 import LogoImage from "../../Assets/Intellil-Flow-Logo.png";
+import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import "./FirstLogin.css";
 import "../OnBoarding/Pages/Login/login.css";
 
@@ -80,19 +83,19 @@ const FirstLogin = () => {
           <img
             src={LogoImage}
             alt="Logo"
-            style={{ width: 180, marginBottom: 20 }}
+            style={{ width: 150, marginBottom: 20 }}
           />
-          <List
+          <Box
             className="drawerList"
-            sx={{ marginTop: "525px", width: "100%" }}
+            sx={{ marginTop: "560px" }}
           >
-            <ListItem button>
-              <ListItemText primary="Help" />
-            </ListItem>
-            <ListItem button>
-              <ListItemText primary="Profile" />
-            </ListItem>
-          </List>
+            <IconButton>
+              <HelpOutlineIcon />
+            </IconButton>
+            <div style={{marginTop:"10px"}}>
+            <Avatar alt="Ramanan AR" src="/static/images/avatar/1.jpg" />
+            </div>
+          </Box>
         </Box>
       </Drawer>
       <div className="first-time-login-card-bg">

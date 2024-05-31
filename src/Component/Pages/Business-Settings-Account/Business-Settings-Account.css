@@ -17,7 +17,7 @@
     width: 100vw;
 }
 
-.bsAccount-container>h2 {
+.intelli-flow-right-side-headline {
     font-weight: 600;
     font-size: 20px;
     margin-top: 18px;
@@ -32,6 +32,7 @@
     padding: 1rem;
     background-color: #fff;
     margin: 20px 0;
+    color: black;
 }
 
 .bsCard-top>h6 {

@@ -11,10 +11,9 @@
   }
   
   .BS-members-container{
-    font-size: 18px;
-    padding: 0.8rem;
     width: 100%;
-  
+    padding-left: 20px;
+    padding-right: 20px;
   }
    
   .Member-toolbar {

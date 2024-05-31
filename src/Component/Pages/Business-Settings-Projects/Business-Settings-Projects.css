@@ -15,9 +15,9 @@ body {
 }
 
 .bsProject-container {
-    font-size: 18px;
-    padding: 0.8rem;
     width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .bsSearch {
@@ -48,7 +48,7 @@ body {
 
 .bsSearch input[type='text'] {
     width: 250px;
-    padding: 10px 35px;
+    padding: 7px 35px;
 }
 
 .bsSearch input::placeholder {

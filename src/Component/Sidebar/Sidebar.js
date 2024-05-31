@@ -26,10 +26,13 @@ import ExpandMore from "@mui/icons-material/ExpandMore";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import SettingsIcon from "@mui/icons-material/Settings";
-import AddIcon from "@mui/icons-material/Add";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
 import LogoImage from "../../Assets/Intellil-Flow-Logo.png";
 import { ThemeContext } from "../Theams/Theam";
 import "./Sidebar.css";
+
+import DashboardIcon from '@mui/icons-material/Dashboard';
+import AccountTreeIcon from '@mui/icons-material/AccountTree';
 
 const Sidebar = () => {
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -181,14 +184,22 @@ const Sidebar = () => {
             </List>
           ) : (
             <List>
-              <ListItem button onClick={() => handleNavigation("/Dashboard")} style={{...(window.location.pathname === `/Dashboard` ? activeStyle : {})}}>
-                <ListItemText primary="Dashboard" />
+              <ListItem
+                button
+                onClick={() => handleNavigation("/Dashboard")}
+                style={{
+                  ...(window.location.pathname === `/Dashboard`
+                    ? activeStyle
+                    : {}),
+                }}
+              >
+                <DashboardIcon className="sidebar-icons"/><ListItemText primary="Dashboard" />
               </ListItem>
               <ListItem
                 button
                 onClick={() => handleNavigation("/Workflow_Dashboard")}
               >
-                <ListItemText primary="Workflows" />
+                <AccountTreeIcon className="sidebar-icons"/><ListItemText primary="Workflows" />
               </ListItem>
               {[
                 "Executions",
@@ -211,12 +222,11 @@ const Sidebar = () => {
                 <List component="div" disablePadding>
                   {["General", "Account Settings", "On-Prem Executor"].map(
                     (text) => (
-                      <ListItem
-                        button
-                        key={text}
-                        sx={{ pl: 4 }}
-                      >
-                        <ListItemText sx={{paddingLeft: "10px"}} primary={text} />
+                      <ListItem button key={text} sx={{ pl: 4 }}>
+                        <ListItemText
+                          sx={{ paddingLeft: "10px" }}
+                          primary={text}
+                        />
                       </ListItem>
                     )
                   )}
@@ -304,21 +314,14 @@ const Sidebar = () => {
                 <IconButton size="small" onClick={handleBusinessSetClicked}>
                   <SettingsIcon />
                 </IconButton>
-                <IconButton size="small">
-                  <AddIcon />
+                <IconButton sx={{ transform: "scale(1.5)" }}>
+                  <AddCircleIcon sx={{ width: "18px" }} />
                 </IconButton>
               </Box>
             </Box>
-            <Box mt={2}>
-              <TextField
-                variant="outlined"
-                fullWidth
-                defaultValue="Project Name"
-                InputProps={{
-                  style: { padding: "0px 5px" },
-                }}
-              />
-            </Box>
+            <div className="sidebar-business-card-project">
+              <lable>Project Name</lable>
+            </div>
             <Box className="business-browse">
               <Button variant="contained" color="primary" size="small">
                 Browse all
