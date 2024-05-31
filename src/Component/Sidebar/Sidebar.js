@@ -27,7 +27,7 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import SettingsIcon from "@mui/icons-material/Settings";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import LogoImage from "../../Assets/Intellil-Flow-Logo.png";
-import { ThemeContext } from "../Theams/Theam";
+import { ThemeContext } from "../Theme/Theme";
 import "./Sidebar.css";
 
 import DashboardIcon from '@mui/icons-material/Dashboard';
@@ -59,9 +59,28 @@ const Sidebar = () => {
   };
 
   const handleBusinessSetClicked = () => {
-    setBusinessSetClicked(!businessSetClicked);
-    if (!businessSetClicked) navigate("/BusinessName/Settings/Account");
-  };
+    setBusinessSetClicked(true)
+    if(!businessSetClicked)
+      navigate('/BusinessName/Settings/Account')
+  } 
+ 
+useEffect(() => {
+  if (location.pathname === "/BusinessName/Settings/Account" || location.pathname === "/BusinessName/Settings/Project" || location.pathname === "/BusinessName/Settings/Members" || location.pathname === "/BusinessName/Settings/Billing" || location.pathname === "/BusinessName/Settings/Billing/Upgrade" || location.pathname === "/BusinessName/Settings/Billing/Upgrade/Checkout") {
+    setBusinessSetClicked(true);
+  } else {
+    setBusinessSetClicked(false);
+  }
+}, [location.pathname]);
+
+  const handleNavigation = (path) => {
+    
+    if (path === "/BusinessName/Settings/Account" || path === "/BusinessName/Settings/Project" || path === "/BusinessName/Settings/Members" || path === "/BusinessName/Settings/Billing") {
+      setBusinessSetClicked(true);
+    } else {
+      setBusinessSetClicked(false);
+    }
+    navigate(path);
+  };
 
   const handleOpenCreateWorkflow = () => {
     navigate("/Create_Workflow")
@@ -70,34 +89,7 @@ const Sidebar = () => {
   const handleopenProject = () => {
     window.location.href = "/BusinessName/Settings/Project"
   }
-  useEffect(() => {
-    if (
-      location.pathname === "/BusinessName/Settings/Account" ||
-      location.pathname === "/BusinessName/Settings/Project" ||
-      location.pathname === "/BusinessName/Settings/Members" ||
-      location.pathname === "/BusinessName/Settings/Billing" ||
-      location.pathname === "/BusinessName/Settings/Billing/Upgrade" ||
-      location.pathname === "/BusinessName/Settings/Billing/Upgrade/Checkout"
-    ) {
-      setBusinessSetClicked(true);
-    } else {
-      setBusinessSetClicked(false);
-    }
-  }, [location.pathname]);
-
-  const handleNavigation = (path) => {
-    if (
-      path === "/BusinessName/Settings/Account" ||
-      path === "/BusinessName/Settings/Project" ||
-      path === "/BusinessName/Settings/Members" ||
-      path === "/BusinessName/Settings/Billing"
-    ) {
-      setBusinessSetClicked(false);
-    } else {
-      setBusinessSetClicked(false);
-    }
-    navigate(path);
-  };
+  
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);

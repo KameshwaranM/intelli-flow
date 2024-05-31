@@ -24,7 +24,7 @@ import LogoImage from "../../Assets/Intellil-Flow-Logo.png";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import "./FirstLogin.css";
 import "../OnBoarding/Pages/Login/login.css";
-import { ThemeContext } from "../Theams/Theam";
+import { ThemeContext } from "../Theme/Theme";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 
