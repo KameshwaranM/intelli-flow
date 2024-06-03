@@ -8,11 +8,8 @@ import {
   Snackbar,
   Alert,
   Drawer,
-  List,
   IconButton,
   Avatar,
-  ListItem,
-  ListItemText,
   Popper,
   Paper,
   FormControlLabel,
@@ -109,14 +106,14 @@ const FirstLogin = () => {
           />
           <Box
             className="drawerList"
-            sx={{ marginTop: "560px" }}
+            sx={{ marginTop: "560px" , textAlign:"center" }}
           >
             <IconButton>
               <HelpOutlineIcon />
             </IconButton>
-            <div style={{marginTop:"10px"}}>
+            <div style={{marginTop:"10px", textAlign:"-webkit-center"}}>
             <Box
-                  className="profile-avatar-container"
+                  className="profile-avatar-containers"
                   onClick={handleProfileMenuOpen}
                 >
             <Avatar alt="Ramanan AR" src="/static/images/avatar/1.jpg" />

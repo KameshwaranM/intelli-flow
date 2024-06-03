@@ -23,3 +23,7 @@
     align-items: normal !important;
     padding: 8px !important;
 }
+
+.profile-avatar-containers{
+    cursor: pointer;
+}
