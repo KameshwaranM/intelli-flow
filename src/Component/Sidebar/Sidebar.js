@@ -27,7 +27,7 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import SettingsIcon from "@mui/icons-material/Settings";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import LogoImage from "../../Assets/Intellil-Flow-Logo.png";
-import { ThemeContext } from "../Theme/Theme";
+import { ThemeContext } from "../Theams/Theme";
 import "./Sidebar.css";
 
 import DashboardIcon from '@mui/icons-material/Dashboard';

@@ -1,5 +1,5 @@
 import Rout from "./All-Routes/Route";
-import { ThemeContextProvider } from "./Component/Theams/Theam";
+import { ThemeContextProvider } from "./Component/Theme/Theme";
 
 function App() {
   return (

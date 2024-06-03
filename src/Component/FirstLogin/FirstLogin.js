@@ -85,10 +85,10 @@ const FirstLogin = () => {
       <Drawer
         variant="permanent"
         sx={{
-          width: 197,
+          width: 240,
           flexShrink: 0,
           [`& .MuiDrawer-paper`]: {
-            width: 200,
+            width: 240,
             boxSizing: "border-box",
             height: "100vh",
             backgroundColor: "#f7f7f766",
@@ -105,7 +105,7 @@ const FirstLogin = () => {
           <img
             src={LogoImage}
             alt="Logo"
-            style={{ width: 150, marginBottom: 20 }}
+            style={{ width: 190, marginBottom: 20, marginTop:4 }}
           />
           <Box
             className="drawerList"
