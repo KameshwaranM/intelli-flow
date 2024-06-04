@@ -1,5 +1,4 @@
-import React, { useContext, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Container,
   Box,
@@ -24,6 +23,10 @@ import "../OnBoarding/Pages/Login/login.css";
 import { ThemeContext } from "../Theme/Theme";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
+import { URL_Create_Project } from "../API/ProjectAPI";
+import axios from 'axios';
+import { ToastContainer, toast , Bounce } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const FirstLogin = () => {
   const [projectName, setProjectName] = useState("");
@@ -32,34 +35,63 @@ const FirstLogin = () => {
   const { darkMode, toggleDarkMode } = useContext(ThemeContext);
   const [open, setOpen] = useState(false);
   const [error, setError] = useState(false);
-  const navigate = useNavigate();
 
-  const handleCreate = (e) => {
-    e.preventDefault();
-    const nameRegex = /^[a-zA-Z0-9]+$/;
-    const descriptionRegex = /^[a-zA-Z0-9 ]+$/;
+  const [sessionkey , setSessionKey] = useState(null);
 
-    if (!nameRegex.test(projectName) || !descriptionRegex.test(description)) {
-      setError(true);
-      setOpen(true);
-      setTimeout(() => {
-        navigate("/Dashboard");
-      }, 3000);
-    } else {
-      setError(false);
-      setOpen(true);
-      setTimeout(() => {
-        navigate("/Dashboard");
-      }, 3000);
+  useEffect(() => {
+    const sessionkey = localStorage.getItem("sessionKey")
+    setSessionKey(sessionkey)
+  }
+)
+
+const handleCreateProject = async (e) => {
+  e.preventDefault();
+  try {
+    const response = await axios.post(URL_Create_Project, {
+      projectname: projectName,
+      description: description
+    }, {
+      headers: {
+        'SESSIONKEY': sessionkey
+      }
+    });
+    console.log("response", response);
+    setError("Project Created Successfully");
+    toast.success('Project Created Successfully', {
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      transition: Bounce,
+    });
+    localStorage.setItem("projectname",projectName);
+  } catch (error) {
+    console.error('Error fetching data:', error);
+
+    let errorMessage = 'An unexpected error occurred.';
+    if (error.response && error.response.data && error.response.data.message) {
+      errorMessage = error.response.data.message;
     }
-  };
 
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpen(false);
-  };
+    setError(errorMessage);
+    toast.error(errorMessage, {
+      position: "bottom-right",
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+      theme: "colored",
+      transition: Bounce,
+    });
+  }
+};
+
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
@@ -164,7 +196,6 @@ const FirstLogin = () => {
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-            alignItems: "center",
             minHeight: "100vh",
           }}
         >
@@ -182,12 +213,12 @@ const FirstLogin = () => {
               backgroundColor: "white",
               color:"black"
             }}
-            onSubmit={handleCreate}
+            onSubmit={handleCreateProject}
           >
-            <Typography variant="h5" align="center" gutterBottom>
+            <Typography variant="h5" gutterBottom>
               Welcome to Intelli Flow Cloud
             </Typography>
-            <Typography align="center" gutterBottom>
+            <Typography gutterBottom>
               Start by naming your project - each account may contain multiple
               projects. You can use projects to organize your Tasks and
               Workflows.
@@ -241,22 +272,9 @@ const FirstLogin = () => {
               </Box>
             </div>
           </Box>
-          <Snackbar
-            open={open}
-            autoHideDuration={6000}
-            onClose={handleClose}
-            anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
-          >
-            <Alert
-              onClose={handleClose}
-              severity={error ? "error" : "success"}
-              sx={{ width: "100%" }}
-            >
-              {error
-                ? "Error creating project"
-                : "Project created successfully."}
-            </Alert>
-          </Snackbar>
+          <div>
+        <ToastContainer />
+      </div>
         </Container>
       </div>
     </Box>

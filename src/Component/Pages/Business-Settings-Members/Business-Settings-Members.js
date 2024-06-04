@@ -25,12 +25,11 @@ import {
   InputAdornment,
   Select,
   LinearProgress,
-  TablePagination,
+  TablePagination
 } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SearchIcon from "@mui/icons-material/Search";
-import CircleIcon from "@mui/icons-material/Circle";
 import "./Business-Settings-Members.css";
 import Sidebar from "../../Sidebar/Sidebar";
 
@@ -39,6 +38,7 @@ const BusinessSettingsMember = () => {
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedMember, setSelectedMember] = useState(null);
+
   const [members, setMembers] = useState([
     {
       name: "Anand Parthiban",
@@ -47,6 +47,7 @@ const BusinessSettingsMember = () => {
       lastLogin: "May 09th, 2024",
     },
   ]);
+
   const [searchTerm, setSearchTerm] = useState("");
   const [newMemberName, setNewMemberName] = useState("");
   const [newMemberEmail, SetNewMemberEmail] = useState("");
@@ -62,13 +63,13 @@ const BusinessSettingsMember = () => {
   const handleDeleteOpen = () => setOpenDeleteDialog(true);
   const handleDeleteClose = () => setOpenDeleteDialog(false);
 
-  const handleMenuOpen = (event, workflow) => {
+  const handleMenuOpen = (event, project) => {
     setAnchorEl(event.currentTarget);
-    setSelectedMember(workflow);
+    setSelectedMember(project);
   };
   const handleMenuClose = () => setAnchorEl(null);
 
-  const handleCreateWorkflow = () => {
+  const handleCreateProject = () => {
     if (newMemberName && newMemberEmail) {
       setMembers([
         ...members,
@@ -81,20 +82,20 @@ const BusinessSettingsMember = () => {
       ]);
       setNewMemberName("");
       SetNewMemberEmail("");
-      setSnackbarMessage("Workflow created successfully");
+      setSnackbarMessage("Member id created successfully");
       setSnackbarSeverity("success");
       setSnackbarOpen(true);
       handleCreateClose();
     } else {
-      setSnackbarMessage("Please provide a valid name and description");
+      setSnackbarMessage("Please provide a valid Name and Email");
       setSnackbarSeverity("error");
       setSnackbarOpen(true);
     }
   };
 
-  const handleDeleteWorkflow = () => {
+  const handleDeleteProject = () => {
     setMembers(members.filter((member) => member !== selectedMember));
-    setSnackbarMessage("Workflow deleted successfully");
+    setSnackbarMessage("Project deleted successfully");
     setSnackbarSeverity("success");
     setSnackbarOpen(true);
     handleDeleteClose();
@@ -123,6 +124,7 @@ const BusinessSettingsMember = () => {
     page * rowsPerPage + rowsPerPage
   );
 
+
   return (
     <Box className="workflowContainer membersContainer">
       <Sidebar />
@@ -134,9 +136,9 @@ const BusinessSettingsMember = () => {
           <Box className="workflowActions">
             <IconButton
               onClick={handleCreateOpen}
-              sx={{ transform: "scale(1.5)" }}
+              sx={{ transform: "scale(1.5)"}}
             >
-              <AddCircleIcon sx={{ width: "25px" }} />
+              <AddCircleIcon sx={{width:"25px"}} />
             </IconButton>
             <TextField
               variant="outlined"
@@ -152,12 +154,6 @@ const BusinessSettingsMember = () => {
               }}
               className="searchInput"
             />
-            {/* <Select defaultValue="All" className="tagSelect">
-              <MenuItem value="All">All Tags</MenuItem>
-            </Select> */}
-            {/* <Select defaultValue="Created" className="statusSelect">
-              <MenuItem value="Created">Created</MenuItem>
-            </Select> */}
           </Box>
           <TableContainer component={Paper} className="workflowTableContainer">
             <Table>
@@ -183,65 +179,25 @@ const BusinessSettingsMember = () => {
                   </TableCell>
                   <TableCell
                     align="center"
-                    sx={{
-                      fontSize: "15px",
-                      fontWeight: "600",
-                      padding: "10px",
-                    }}
+                    sx={{ fontSize: "15px", fontWeight: "600" , padding:"10px" }}
                   >
                     Last Login
                   </TableCell>
-                  {/* <TableCell
-                    align="center"
-                    sx={{ fontSize: "15px", fontWeight: "600" }}
-                  >
-                    Activity
-                  </TableCell> */}
                   <TableCell
                     align="center"
                     sx={{ fontSize: "15px", fontWeight: "600" }}
                   ></TableCell>
                 </TableRow>
               </TableHead>
+
               <TableBody>
-                {paginatedMembers.map((member, index) => (
-                  <TableRow
-                    key={index}
-                    className="workflowTableRow membersTableRow"
-                  >
-                    <TableCell sx={{ padding: "7px" }} align="center">
-                      {member.name}
-                    </TableCell>
-                    <TableCell sx={{ padding: "7px" }} align="center">
-                      {member.email}
-                    </TableCell>
-                    <TableCell sx={{ padding: "7px" }} align="center">
-                      {member.role}
-                    </TableCell>
-                    <TableCell sx={{ padding: "7px" }} align="center">
-                      {member.lastLogin}
-                    </TableCell>
-                    {/* <TableCell sx={{padding:"7px"}} align="center">
-                      <CircleIcon
-                        style={{
-                          color: workflow.deployed ? "green" : "red",
-                          transform: "scale(0.8)",
-                        }}
-                      />
-                    </TableCell> */}
-                    {/* <TableCell sx={{padding:"7px"}} align="center">
-                      <Box sx={{ display: "flex", alignItems: "center" }}>
-                        <LinearProgress
-                          variant="buffer"
-                          value={workflow.activity}
-                          sx={{ flexGrow: 1, mr: 1 }}
-                          color="success"
-                          valueBuffer={100 - workflow.activity}
-                          className="activityProgress"
-                        />
-                      </Box>
-                    </TableCell> */}
-                    <TableCell sx={{ padding: "7px" }} align="center">
+              {paginatedMembers.map((member, index) => (
+                  <TableRow key={index} className="workflowTableRow membersTableRow" >
+                    <TableCell sx={{padding:"7px"}} align="center">{member.name}</TableCell>
+                    <TableCell sx={{padding:"7px"}} align="center">{member.email}</TableCell>
+                    <TableCell sx={{padding:"7px"}} align="center">{member.role}</TableCell>
+                    <TableCell sx={{padding:"7px"}} align="center">{member.lastLogin}</TableCell>
+                    <TableCell sx={{padding:"7px"}} align="center">
                       <IconButton
                         onClick={(event) => handleMenuOpen(event, member)}
                       >
@@ -270,19 +226,20 @@ const BusinessSettingsMember = () => {
               onPageChange={handleChangePage}
               onRowsPerPageChange={handleChangeRowsPerPage}
               sx={{
-                "& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows":
-                  {
-                    marginBottom: 0,
-                  },
+                '& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows': {
+                  marginBottom: 0, 
+                },
               }}
             />
+
           </TableContainer>
         </Container>
       </Box>
+      
       <Dialog open={openCreateDialog} onClose={handleCreateClose}>
-        <form onSubmit={handleCreateWorkflow}>
+        <form onSubmit={handleCreateProject}>
           <Box className="createDialog" sx={{ p: 2 }}>
-            <Typography variant="h5" gutterBottom>
+            <Typography variant="h5"  gutterBottom>
               Invite New Member
             </Typography>
             <DialogContent>
@@ -318,20 +275,16 @@ const BusinessSettingsMember = () => {
               </select>
             </DialogContent>
             <DialogActions>
-              <Button
-                onClick={handleCreateClose}
-                variant="contained"
-                color="error"
-              >
+              <Button onClick={handleCreateClose} variant="contained" color="error">
                 Cancel
               </Button>
               <Button type="submit" variant="contained" color="success">
                 Invite
               </Button>
-            </DialogActions>
-          </Box>
-        </form>
-      </Dialog>
+             </DialogActions>
+            </Box>
+          </form>
+         </Dialog>
 
       <Dialog open={openDeleteDialog} onClose={handleDeleteClose}>
         <DialogTitle>Delete Workflow</DialogTitle>
@@ -341,7 +294,7 @@ const BusinessSettingsMember = () => {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleDeleteWorkflow} color="primary">
+          <Button onClick={handleDeleteProject} color="primary">
             Yes
           </Button>
           <Button onClick={handleDeleteClose} color="secondary">

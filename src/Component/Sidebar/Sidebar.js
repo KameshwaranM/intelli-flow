@@ -17,7 +17,7 @@ import {
   ClickAwayListener,
   Switch,
   FormControlLabel,
-  Button,
+  Button, 
 } from "@mui/material";
 import HelpOutlineIcon from "@mui/icons-material/HelpOutline";
 import ExpandLess from "@mui/icons-material/ExpandLess";
@@ -48,11 +48,24 @@ const Sidebar = () => {
   const { darkMode, toggleDarkMode } = useContext(ThemeContext);
   const [businessSetClicked, setBusinessSetClicked] = useState(false);
   const location = useLocation();
+  const [businessname , setBusinessName] = useState(null);
+  const [projectname , setProjectName] = useState(null);
 
   const activeStyle = {
     backgroundColor: "#1976d2",
     color: "#fff",
   };
+
+  useEffect(() => {
+    const BusinessName = localStorage.getItem("businessname")
+    setBusinessName(BusinessName)
+  }
+)
+useEffect(() => {
+  const ProjectName = localStorage.getItem("projectname")
+  setProjectName(ProjectName)
+}
+)
 
   const handleSettingsClick = () => {
     setSettingsOpen(!settingsOpen);
@@ -83,7 +96,7 @@ useEffect(() => {
   };
 
   const handleOpenCreateWorkflow = () => {
-    navigate("/Create_Workflow")
+    navigate("/Create_Project")
   }
   
   const handleopenProject = () => {
@@ -131,8 +144,8 @@ useEffect(() => {
             <img src={LogoImage} alt="Logo" style={{ width: 190 }} />
           </Box>
           <Box className="business-name" onClick={handlePopperOpen}>
-            <Typography className="business-name-p">Business Name</Typography>
-            <Typography>Project Name</Typography>
+            <Typography className="business-name-p">{businessname}</Typography>
+            <Typography>{projectname}</Typography>
           </Box>
         </Box>
         <Divider />
@@ -378,7 +391,7 @@ useEffect(() => {
         <ClickAwayListener onClickAway={handlePopperClose}>
           <Paper className="business-popper-content">
             <Box className="business-header">
-              <Typography variant="h6">Business Name</Typography>
+              <Typography variant="h6">{businessname}</Typography>
               <Typography className="business-badge" variant="body2">
                 FREE
               </Typography>
@@ -392,7 +405,7 @@ useEffect(() => {
               </Box>
             </Box>
             <div className="sidebar-business-card-project">
-              <lable>Project Name</lable>
+              <lable>{projectname}</lable>
             </div>
             <Box className="business-browse">
               <Button onClick={handleopenProject} variant="contained" color="primary" size="small">

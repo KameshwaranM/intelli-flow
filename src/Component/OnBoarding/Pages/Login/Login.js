@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import "../Login/login.css";
-import autointlogo from '../../../../Assets/Intellil-Flow-Logo.png';
+import autointlogo from "../../../../Assets/Intellil-Flow-Logo.png";
 
-import axios from "axios"; 
+import axios from "axios";
 import { ImSpinner } from "react-icons/im";
 // import { Alert } from "@mui/material";
 import { URL_Login } from "../../API-URL";
@@ -17,40 +17,48 @@ const Login = () => {
   const handleLogin = async (event) => {
     event.preventDefault();
     setLoading(true);
-
+  
     try {
-      const API = URL_Login; 
+      const API = URL_Login;
       const response = await axios.post(API, {
         email: email,
-        password: password
+        password: password,
       });
-
+  
       if (response.status === 200) {
-        console.log("Data sent successfully:", response.data);
-        setLoginSuccess(true);
-        window.location.href = "/Create_Workflow";
-        setTimeout(() => {
-          setLoginSuccess(false);
-        }, 3000);
-      } else if (response.status === 302) {
-        console.log("Redirecting...", response.headers.location);
-        window.location.href = response.headers.location;
+        console.log("Login successful:", response.data);
+  
+        const userData = response.data.data;
+        const { firsttimelogin, businessname , sessionkey, role, email: userEmail } = userData;
+  
+        localStorage.setItem('sessionKey', sessionkey);
+        localStorage.setItem('userRole', role);
+        localStorage.setItem('userEmail', userEmail);
+        localStorage.setItem('businessname', businessname);
+  
+        if (firsttimelogin === "y") {
+          console.log("First time login. Redirecting to Create Workflow...");
+          window.location.href = "/Create_Project";
+        } else if (firsttimelogin === "n") {
+          console.log("Returning user. Redirecting to Dashboard...");
+          window.location.href = "/Dashboard";
+        } else {
+          console.log("Unexpected response:", response.data);
+          setSigninError("Unexpected login status. Please try again.");
+          setTimeout(() => {
+            setSigninError("");
+          }, 3000);
+        }
       } else {
-        console.log("Failed to send data.");
+        console.log("Unexpected response type:", response.data);
+        setSigninError("Unexpected response type. Please try again.");
         setTimeout(() => {
           setSigninError("");
         }, 3000);
       }
     } catch (error) {
-      console.log("Error:", error);
-      console.log("Response data message:", error.response.data.message);
-      setSigninError(error.response.data.message);
-
-      if (error.response.data.url) {
-        console.log("Redirecting to:", error.response.data.url);
-        window.location.href = error.response.data.url;
-      }
-
+      console.error("Login error:", error);
+      setSigninError("Login failed. Please check your email and password and try again.");
       setTimeout(() => {
         setSigninError("");
       }, 3000);
@@ -58,12 +66,17 @@ const Login = () => {
       setLoading(false);
     }
   };
+  
 
   return (
     <div className="login">
       <div className="header">
         <div className="login-auto-intelli-image">
-          <img className="login-autointelli-image" src={autointlogo} alt="Autointelli-logo" />
+          <img
+            className="login-autointelli-image"
+            src={autointlogo}
+            alt="Autointelli-logo"
+          />
           {/* <div className="alert-mess">
             {signinError && <Alert severity="error">{signinError}</Alert>}
             {loginSuccess && (
@@ -74,19 +87,17 @@ const Login = () => {
       </div>
       <div className="contents">
         <div className="login-container">
-        {/* <div className="alert-mess">
+          {/* <div className="alert-mess">
             {signinError && <p severity="error">{signinError}</p>}
             {loginSuccess && (
               <p severity="success">Login successful!</p>
             )}
           </div> */}
           <div className="Login-card">
-          <div className="alert-mess">
-            {signinError && <p severity="error">{signinError}</p>}
-            {loginSuccess && (
-              <p severity="success">Login successful!</p>
-            )}
-          </div>
+            <div className="alert-mess">
+              {signinError && <p severity="error">{signinError}</p>}
+              {loginSuccess && <p severity="success">Login successful!</p>}
+            </div>
             <div className="div1">
               <h3>Login</h3>
               <a href="/SignUp">Don't have an account?</a>
@@ -110,7 +121,9 @@ const Login = () => {
                   onChange={(e) => setPassword(e.target.value)}
                 />
                 <div className="div2">
-                  <div className="check">{/* Add any additional checkboxes or inputs here */}</div>
+                  <div className="check">
+                    {/* Add any additional checkboxes or inputs here */}
+                  </div>
                   <a href="/ForgotPassword">Forgot Password?</a>
                 </div>
                 <button type="submit">
