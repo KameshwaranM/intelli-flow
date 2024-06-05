@@ -15,8 +15,21 @@ body {
     background-color: #f7f7f766;
 }
 
-.projectsTableRow{
+.projectsTableRow {
     height: 50px !important;
+}
+
+.css-10x7uq8-MuiTableCell-root {
+    color: black !important;
+}
+
+.css-1q6at85-MuiInputBase-root-MuiOutlinedInput-root {
+    background-color: white;
+}
+
+.css-1rn6w7t-MuiInputBase-root-MuiOutlinedInput-root {
+    background-color: white;
+    color: black !important;
 }
 
 .bsProject-container {
@@ -80,4 +93,23 @@ body {
     border-radius: 5px;
     background-color: #fff !important;
     font-size: 16px;
+}
+
+.ProjectsNameTableButton {
+    background-color: transparent;
+    border: none;
+}
+
+.ProjectsNameTableButton:hover {
+    color: blue;
+    text-decoration: underline;
+}
+
+.css-1sgvb5t-MuiTablePagination-root:last-child {
+    background-color: white;
+    color: black;
+}
+
+.css-b57xgn-MuiButtonBase-root-MuiIconButton-root.Mui-disabled{
+    color:  black !important;
 }

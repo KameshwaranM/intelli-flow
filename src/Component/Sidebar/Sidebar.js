@@ -350,7 +350,7 @@ useEffect(() => {
                 >
                   <Paper sx={{ mt: 1, p: 2 }}>
                     <Box className="popper-content">
-                      <LightModeIcon />
+                      <LightModeIcon className="popper-content-dark-light-icon" />
                       <FormControlLabel
                         control={
                           <Switch
@@ -359,7 +359,7 @@ useEffect(() => {
                           />
                         }
                       />
-                      <DarkModeIcon />
+                      <DarkModeIcon className="popper-content-dark-light-icon" />
                     </Box>
                     <Divider />
                     {[
@@ -386,7 +386,7 @@ useEffect(() => {
         open={popperOpen}
         anchorEl={popperAnchorEl}
         placement="right"
-        style={{ zIndex: 1201 }}
+        style={{ zIndex: 1201 }}  
       >
         <ClickAwayListener onClickAway={handlePopperClose}>
           <Paper className="business-popper-content">

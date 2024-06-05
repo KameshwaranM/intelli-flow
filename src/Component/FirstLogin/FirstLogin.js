@@ -4,7 +4,6 @@ import {
   Box,
   Typography,
   Button,
-  Snackbar,
   Alert,
   Drawer,
   IconButton,
@@ -69,6 +68,10 @@ const handleCreateProject = async (e) => {
       transition: Bounce,
     });
     localStorage.setItem("projectname",projectName);
+    setTimeout(() => {
+      window.location.href = "/Dashboard";
+    }, 3000);
+
   } catch (error) {
     console.error('Error fetching data:', error);
 

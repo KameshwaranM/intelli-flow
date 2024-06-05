@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import {
   Box,
   Container,
-  Typography,
   TextField,
   IconButton,
   Paper,
@@ -50,7 +49,7 @@ const BusinessSettingsProjects = () => {
         if (response.data && response.data.projects) {
           setProjects(response.data.projects);
         } else {
-          setProjects([]); // Set to empty array if no projects found
+          setProjects([]);
         }
       } catch (error) {
         setError(error);
@@ -58,10 +57,6 @@ const BusinessSettingsProjects = () => {
     };
 
     fetchData();
-
-    return () => {
-      // Cleanup if needed
-    };
   }, []);
 
   const filteredProjects = Array.isArray(projects)
@@ -74,6 +69,13 @@ const BusinessSettingsProjects = () => {
     page * rowsPerPage,
     page * rowsPerPage + rowsPerPage
   );
+
+  const handleClickProjectName = (name) => {
+    localStorage.setItem("projectname", name);
+    window.location.href = "/Dashboard";
+  };
+
+  console.log("Error-->",error)
 
   return (
     <Box className="workflowContainer projectsContainer">
@@ -133,7 +135,7 @@ const BusinessSettingsProjects = () => {
                   </TableCell>
                 </TableRow>
               </TableHead>
-              <TableBody>
+              <TableBody sx={{backgroundColor:"white"}}>
                 {paginatedProjects && paginatedProjects.length > 0 ? (
                   paginatedProjects.map((projects, index) => (
                     <TableRow
@@ -141,7 +143,7 @@ const BusinessSettingsProjects = () => {
                       className="workflowTableRow projectsTableRow"
                     >
                       <TableCell sx={{ padding: "7px" }} align="center">
-                        {projects.name}
+                        <button className="ProjectsNameTableButton" onClick={() => handleClickProjectName(projects.name)}>{projects.name}</button>
                       </TableCell>
                       <TableCell sx={{ padding: "7px" }} align="center">
                         {projects.created}
