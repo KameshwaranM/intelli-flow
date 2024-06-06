@@ -17,10 +17,10 @@ import {
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import SearchIcon from "@mui/icons-material/Search";
 import "./Business-Settings-Projects.css";
-import Sidebar from "../../Sidebar/Sidebar";
 import { Link } from "react-router-dom/dist";
 import axios from "axios";
 import { URL_Get_Project_Name } from "../../API/ProjectAPI";
+import BusinessSettingsSidebar from "../../Sidebar/BusinessSettingsSidebar";
 
 const BusinessSettingsProjects = () => {
   const [projects, setProjects] = useState([]);
@@ -79,7 +79,7 @@ const BusinessSettingsProjects = () => {
 
   return (
     <Box className="workflowContainer projectsContainer">
-      <Sidebar />
+      <BusinessSettingsSidebar />
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Container maxWidth="xl">
         <Box className="workflowHeader">

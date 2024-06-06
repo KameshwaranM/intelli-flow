@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Business-Settings-Billing-Upgrade.css";
 import { useNavigate } from "react-router-dom";
-import Sidebar from "../../Sidebar/Sidebar";
+import BusinessSettingsSidebar from "../../Sidebar/BusinessSettingsSidebar";
 
 const BusinessSettingsBillingUpgrade = () => {
   const [planSelected, setPlanSelected] = useState("");
@@ -18,7 +18,7 @@ const BusinessSettingsBillingUpgrade = () => {
   };
   return (
     <div className="bsBillingUpgarde">
-      <Sidebar />
+      <BusinessSettingsSidebar />
       <div className="bsBillingUpgarde-container">
         {planSelected === "" && (
           <>

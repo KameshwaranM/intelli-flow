@@ -1,12 +1,12 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./BusinessSettingBilling.css";
-import Sidebar from "../../Sidebar/Sidebar";
+import BusinessSettingsSidebar from "../../Sidebar/BusinessSettingsSidebar";
 
 const BusinessSettingsBilling = () => {
   return (
     <div className="d-flex BS-Billing">
-      <Sidebar />
+      <BusinessSettingsSidebar />
       <div className="content-containers">
         <div className="Billing page Billing-head">
         <h2 className="intelli-flow-right-side-headline">Billing</h2>

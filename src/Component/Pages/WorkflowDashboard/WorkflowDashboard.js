@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Container,
@@ -20,12 +20,10 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Snackbar,
-  Alert,
   InputAdornment,
   Select,
   LinearProgress,
-  TablePagination
+  TablePagination,
 } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -33,33 +31,39 @@ import SearchIcon from "@mui/icons-material/Search";
 import CircleIcon from "@mui/icons-material/Circle";
 import "./WorkflowDashboard.css";
 import Sidebar from "../../Sidebar/Sidebar";
+import {
+  URL_Create_Workflow,
+  URL_Get_Workflow_Name,
+} from "../../API/ProjectAPI";
+import axios from "axios";
+import { ToastContainer, toast, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const WorkflowDashboard = () => {
   const [openCreateDialog, setOpenCreateDialog] = useState(false);
   const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedWorkflow, setSelectedWorkflow] = useState(null);
-  const [workflows, setWorkflows] = useState([
-    {
-      name: "Workflow1",
-      created: "2024/05/09 02:57:00 PM",
-      lastRun: "2024/05/09 03:15:00 PM",
-      nextRun: "2024/05/09 03:30:00 PM",
-      deployed: true,
-      activity: 40,
-    },
-  ]);
+  const [workflows, setWorkflows] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [newWorkflowName, setNewWorkflowName] = useState("");
   const [newWorkflowDescription, setNewWorkflowDescription] = useState("");
-  const [snackbarOpen, setSnackbarOpen] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState("");
-  const [snackbarSeverity, setSnackbarSeverity] = useState("success");
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(7);
+  const [error, setError] = useState("");
+  const [sessionKey, setSessionKey] = useState(null);
+
+  useEffect(() => {
+    const sessionKey = localStorage.getItem("sessionKey");
+    setSessionKey(sessionKey);
+  }, []);
 
   const handleCreateOpen = () => setOpenCreateDialog(true);
-  const handleCreateClose = () => setOpenCreateDialog(false);
+  const handleCreateClose = () => {
+    setOpenCreateDialog(false);
+    setNewWorkflowName("");
+    setNewWorkflowDescription("");
+  };
   const handleDeleteOpen = () => setOpenDeleteDialog(true);
   const handleDeleteClose = () => setOpenDeleteDialog(false);
 
@@ -69,48 +73,114 @@ const WorkflowDashboard = () => {
   };
   const handleMenuClose = () => setAnchorEl(null);
 
-  const handleCreateWorkflow = () => {
-    if (newWorkflowName && newWorkflowDescription) {
-      setWorkflows([
-        ...workflows,
+  const handleCreateWorkflow = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        URL_Create_Workflow,
         {
-          name: newWorkflowName,
-          created: new Date().toISOString(),
-          lastRun: "N/A",
-          nextRun: "N/A",
-          deployed: false,
-          activity: 0,
+          projectname: localStorage.getItem("projectname"),
+          workflowname: newWorkflowName,
+          description: newWorkflowDescription,
         },
-      ]);
-      setNewWorkflowName("");
-      setNewWorkflowDescription("");
-      setSnackbarMessage("Workflow created successfully");
-      setSnackbarSeverity("success");
-      setSnackbarOpen(true);
+        {
+          headers: {
+            SESSIONKEY: sessionKey,
+          },
+        }
+      );
+      setError("Workflow Created Successfully");
+      toast.success("Workflow Created Successfully", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+      });
       handleCreateClose();
-    } else {
-      setSnackbarMessage("Please provide a valid name and description");
-      setSnackbarSeverity("error");
-      setSnackbarOpen(true);
+      setWorkflows([...workflows, response.data.workflow]);
+    } catch (error) {
+      console.error("Error creating workflow:", error);
+      let errorMessage = "An unexpected error occurred.";
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        errorMessage = error.response.data.message;
+      }
+      setError(errorMessage);
+      toast.error(errorMessage, {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+      });
     }
   };
 
+  useEffect(() => {
+    const fetchWorkflows = async () => {
+      try {
+        const response = await fetch(URL_Get_Workflow_Name, {
+          method: "GET",
+          headers: {
+            SESSIONKEY: localStorage.getItem("sessionKey"),
+          },
+        });
+  
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+  
+        const data = await response.json();
+  
+        if (data.type === "error") {
+          throw new Error(data.message);
+        }
+  
+        // Ensure the data is an array
+        if (Array.isArray(data.data)) {
+          setWorkflows(data.data);
+        } else {
+          throw new Error("Invalid data format");
+        }
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+  
+    // Fetch workflows initially
+    fetchWorkflows();
+  
+    // Set up an interval to fetch workflows every 2 seconds
+    const intervalId = setInterval(fetchWorkflows, 2000);
+  
+    // Clean up the interval on component unmount
+    return () => clearInterval(intervalId);
+  }, []);
+
   const handleDeleteWorkflow = () => {
     setWorkflows(workflows.filter((workflow) => workflow !== selectedWorkflow));
-    setSnackbarMessage("Workflow deleted successfully");
-    setSnackbarSeverity("success");
-    setSnackbarOpen(true);
     handleDeleteClose();
     handleMenuClose();
   };
 
-  const filteredWorkflows = workflows.filter((workflow) =>
-    workflow.name.toLowerCase().includes(searchTerm.toLowerCase())
+  const filteredWorkflows = workflows.filter(
+    (workflow) =>
+      workflow && // Ensure workflow is defined
+      workflow.workflowname &&
+      workflow.workflowname.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  const handleOpenEditor = () => {
-    window.location.href = "/Workflow_Editor";
-  };
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -126,6 +196,9 @@ const WorkflowDashboard = () => {
     page * rowsPerPage + rowsPerPage
   );
 
+  const handleOpenEditor = () => {
+    window.location.href = "/Workflow_Editor";
+  };
 
   return (
     <Box className="workflowContainer">
@@ -133,14 +206,14 @@ const WorkflowDashboard = () => {
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Container maxWidth="xl">
           <Box className="workflowHeader">
-          <h2 className="intelli-flow-right-side-headline">Workflows</h2>
+            <h2 className="intelli-flow-right-side-headline">Workflows</h2>
           </Box>
           <Box className="workflowActions">
             <IconButton
               onClick={handleCreateOpen}
-              sx={{ transform: "scale(1.5)"}}
+              sx={{ transform: "scale(1.5)" }}
             >
-              <AddCircleIcon sx={{width:"25px"}} />
+              <AddCircleIcon sx={{ width: "25px" }} />
             </IconButton>
             <TextField
               variant="outlined"
@@ -187,7 +260,11 @@ const WorkflowDashboard = () => {
                   </TableCell>
                   <TableCell
                     align="center"
-                    sx={{ fontSize: "15px", fontWeight: "600" , padding:"10px" }}
+                    sx={{
+                      fontSize: "15px",
+                      fontWeight: "600",
+                      padding: "10px",
+                    }}
                   >
                     Deployed
                   </TableCell>
@@ -204,49 +281,68 @@ const WorkflowDashboard = () => {
                 </TableRow>
               </TableHead>
               <TableBody>
-              {paginatedWorkflows.map((workflow, index) => (
-                  <TableRow key={index} className="workflowTableRow">
-                    <TableCell sx={{padding:"7px"}} align="center">{workflow.name}</TableCell>
-                    <TableCell sx={{padding:"7px"}} align="center">{workflow.lastRun}</TableCell>
-                    <TableCell sx={{padding:"7px"}} align="center">{workflow.nextRun}</TableCell>
-                    <TableCell sx={{padding:"7px"}} align="center">
-                      <CircleIcon
-                        style={{
-                          color: workflow.deployed ? "green" : "red",
-                          transform: "scale(0.8)",
-                        }}
-                      />
-                    </TableCell>
-                    <TableCell sx={{padding:"7px"}} align="center">
-                      <Box sx={{ display: "flex", alignItems: "center" }}>
-                        <LinearProgress
-                          variant="buffer"
-                          value={workflow.activity}
-                          sx={{ flexGrow: 1, mr: 1 }}
-                          color="success"
-                          valueBuffer={100 - workflow.activity}
-                          className="activityProgress"
-                        />
-                      </Box>
-                    </TableCell>
-                    <TableCell sx={{padding:"7px"}} align="center">
-                      <IconButton
-                        onClick={(event) => handleMenuOpen(event, workflow)}
+                {paginatedWorkflows && paginatedWorkflows.length > 0 ? (
+                  paginatedWorkflows.map((workflow) => (
+                    workflow && ( // Ensure workflow is defined
+                      <TableRow
+                        key={workflow.createdbyuserid}
+                        className="workflowTableRow"
                       >
-                        <MoreVertIcon />
-                      </IconButton>
-                      <Menu
-                        anchorEl={anchorEl}
-                        open={Boolean(anchorEl)}
-                        onClose={handleMenuClose}
-                      >
-                        <MenuItem onClick={handleOpenEditor}>Edit</MenuItem>
-                        <MenuItem onClick={handleDeleteOpen}>Delete</MenuItem>
-                        <MenuItem onClick={() => alert("Run")}>Run</MenuItem>
-                      </Menu>
+                        <TableCell sx={{ padding: "7px" }} align="center">
+                          {workflow.workflowname}
+                        </TableCell>
+                        <TableCell sx={{ padding: "7px" }} align="center">
+                          {workflow.createddate}
+                        </TableCell>
+                        <TableCell sx={{ padding: "7px" }} align="center">
+                          {workflow.description || "N/A"}
+                        </TableCell>
+                        <TableCell sx={{ padding: "7px" }} align="center">
+                          <CircleIcon
+                            style={{
+                              color: workflow.deployed ? "green" : "red",
+                              transform: "scale(0.8)",
+                            }}
+                          />
+                        </TableCell>
+                        <TableCell sx={{ padding: "7px" }} align="center">
+                          <Box sx={{ display: "flex", alignItems: "center" }}>
+                            <LinearProgress
+                              variant="buffer"
+                              value={workflow.activity}
+                              sx={{ flexGrow: 1, mr: 1 }}
+                              color="success"
+                              valueBuffer={100 - workflow.activity}
+                              className="activityProgress"
+                            />
+                          </Box>
+                        </TableCell>
+                        <TableCell sx={{ padding: "7px" }} align="center">
+                          <IconButton
+                            onClick={(event) => handleMenuOpen(event, workflow)}
+                          >
+                            <MoreVertIcon />
+                          </IconButton>
+                          <Menu
+                            anchorEl={anchorEl}
+                            open={Boolean(anchorEl)}
+                            onClose={handleMenuClose}
+                          >
+                            <MenuItem onClick={handleOpenEditor}>Edit</MenuItem>
+                            <MenuItem onClick={handleDeleteOpen}>Delete</MenuItem>
+                            <MenuItem onClick={() => alert("Run")}>Run</MenuItem>
+                          </Menu>
+                        </TableCell>
+                      </TableRow>
+                    )
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell sx={{ color: "red" }} colSpan={6} align="center">
+                      No data found
                     </TableCell>
                   </TableRow>
-                ))}
+                )}
               </TableBody>
             </Table>
             <TablePagination
@@ -258,24 +354,22 @@ const WorkflowDashboard = () => {
               onPageChange={handleChangePage}
               onRowsPerPageChange={handleChangeRowsPerPage}
             />
-
           </TableContainer>
         </Container>
       </Box>
 
       <Dialog open={openCreateDialog} onClose={handleCreateClose}>
-        <form onClick={handleCreateWorkflow}>
+        <form onSubmit={handleCreateWorkflow}>
           <Box className="createDialog" sx={{ p: 2 }}>
-            <Typography variant="h5" align="center" gutterBottom>
-              Create New Workflow
-            </Typography>
-            <Typography align="center" gutterBottom>
-              Start by naming your project - each account may contain multiple
-              projects. You can use projects to organize your Tasks and
-              Workflows.
-            </Typography>
-            <DialogTitle>Create New Workflow</DialogTitle>
             <DialogContent>
+              <Typography variant="h5" gutterBottom>
+                Create New Workflow
+              </Typography>
+              <Typography sx={{ marginBottom: "15px" }} gutterBottom>
+                Start by naming your project - each account may contain multiple
+                projects. You can use projects to organize your Tasks and
+                Workflows.
+              </Typography>
               <label>Name</label>
               <input
                 className="first-time-login-card-input"
@@ -294,10 +388,16 @@ const WorkflowDashboard = () => {
               />
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleCreateClose} variant="contained" color="error">
+              <Button
+                onClick={handleCreateClose}
+                variant="contained"
+                color="error"
+              >
                 Cancel
               </Button>
-              <Button type="submit" variant="contained" color="success">Create</Button>
+              <Button type="submit" variant="contained" color="success">
+                Create
+              </Button>
             </DialogActions>
           </Box>
         </form>
@@ -319,19 +419,9 @@ const WorkflowDashboard = () => {
           </Button>
         </DialogActions>
       </Dialog>
-      <Snackbar
-        open={snackbarOpen}
-        autoHideDuration={6000}
-        onClose={() => setSnackbarOpen(false)}
-      >
-        <Alert
-          onClose={() => setSnackbarOpen(false)}
-          severity={snackbarSeverity}
-        >
-          {snackbarMessage}
-        </Alert>
-      </Snackbar>
+      <ToastContainer />
     </Box>
   );
 };
+
 export default WorkflowDashboard;

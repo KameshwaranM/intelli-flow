@@ -29,17 +29,9 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import LogoImage from "../../Assets/Intellil-Flow-Logo.png";
 import { ThemeContext } from "../Theme/Theme";
 import "./Sidebar.css";
-import DashboardIcon from '@mui/icons-material/Dashboard';
-import AccountTreeIcon from '@mui/icons-material/AccountTree';
-import FitbitIcon from '@mui/icons-material/Fitbit';
-import AutoGraphIcon from '@mui/icons-material/AutoGraph';
-import ScheduleIcon from '@mui/icons-material/Schedule';
-import SummarizeIcon from '@mui/icons-material/Summarize';
-import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
-import PhonelinkIcon from '@mui/icons-material/Phonelink';
-import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
 
-const Sidebar = () => {
+
+const BusinessSettingsSidebar = () => {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [popperAnchorEl, setPopperAnchorEl] = useState(null);
@@ -69,7 +61,7 @@ useEffect(() => {
   };
 
   const handleBusinessSetClicked = () => {
-      navigate('/BusinessName/Settings/Account')
+    navigate('/Dashboard')
   } 
  
   const handleNavigation = (path) => {
@@ -111,13 +103,13 @@ useEffect(() => {
         variant="permanent"
         className="drawer-container"
         sx={{
-          [`& .MuiDrawer-paper`]: {
-            width: 240,
-            boxSizing: "border-box",
-            display: "flex",
-            flexDirection: "column",
-          },
-        }}
+            [`& .MuiDrawer-paper`]: {
+              width: 240,
+              boxSizing: "border-box",
+              display: "flex",
+              flexDirection: "column",
+            },
+          }}
       >
         <Box sx={{ p: 1, display: "flex", flexDirection: "column", gap: 1 }}>
           <Box className="logo-container">
@@ -133,80 +125,50 @@ useEffect(() => {
             <List>
               <ListItem
                 button
-                onClick={() => handleNavigation("/Dashboard")}
+                onClick={() =>
+                  handleNavigation("/BusinessName/Settings/Account")
+                }
                 style={{
-                  ...(window.location.pathname === "/Dashboard" ? activeStyle : {}),
+                  ...(window.location.pathname === "/BusinessName/Settings/Account" ? activeStyle : {}),
                 }}
               >
-                <DashboardIcon className="sidebar-icons"/><ListItemText primary="Dashboard" />
+                <ListItemText primary="Account" />
               </ListItem>
               <ListItem
                 button
-                onClick={() => handleNavigation("/Workflow_Dashboard")}
+                onClick={() =>
+                  handleNavigation("/BusinessName/Settings/Project")
+                }
                 style={{
-                  ...(window.location.pathname === "/Workflow_Dashboard" ? activeStyle : {}),
+                  ...(window.location.pathname === "/BusinessName/Settings/Project" ? activeStyle : {}),
                 }}
               >
-                <AccountTreeIcon className="sidebar-icons"/><ListItemText primary="Workflows" />
+                <ListItemText primary="Projects" />
               </ListItem>
               <ListItem
                 button
-                onClick={() => handleNavigation("/Executions")}
+                onClick={() =>
+                  handleNavigation("/BusinessName/Settings/Members")
+                }
                 style={{
-                  ...(window.location.pathname === "/Executions" ? activeStyle : {}),
+                  ...(window.location.pathname === "/BusinessName/Settings/Members" ? activeStyle : {}),
                 }}
               >
-                <FitbitIcon className="sidebar-icons"/><ListItemText primary="Executions" />
+                <ListItemText primary="Members" />
               </ListItem>
               <ListItem
                 button
-                onClick={() => handleNavigation("/Ad_hoc_Execution")}
+                onClick={() =>
+                  handleNavigation("/BusinessName/Settings/Billing")
+                }
                 style={{
-                  ...(window.location.pathname === "/Ad_hoc_Execution" ? activeStyle : {}),
+                  ...(window.location.pathname === "/BusinessName/Settings/Billing" ? activeStyle : {}),
                 }}
               >
-                <AutoGraphIcon className="sidebar-icons"/><ListItemText primary="Ad hoc Execution" />
+                <ListItemText primary="Billing" />
               </ListItem>
-              <ListItem
-                button
-                onClick={() => handleNavigation("/Schedules")}
-                style={{
-                  ...(window.location.pathname === "/Schedules" ? activeStyle : {}),
-                }}
-              >
-                <ScheduleIcon className="sidebar-icons"/><ListItemText primary="Schedules" />
-              </ListItem>
-              <ListItem
-                button
-                onClick={() => handleNavigation("/Reports")}
-                style={{
-                  ...(window.location.pathname === "/Reports" ? activeStyle : {}),
-                }}
-              >
-                <SummarizeIcon className="sidebar-icons"/><ListItemText primary="Reports" />
-              </ListItem>
-              <ListItem
-                button
-                onClick={() => handleNavigation("/Vault")}
-                style={{
-                  ...(window.location.pathname === "/Vault" ? activeStyle : {}),
-                }}
-              >
-                <AccountBalanceWalletIcon className="sidebar-icons"/><ListItemText primary="Vault" />
-              </ListItem>
-              <ListItem
-                button
-                onClick={() => handleNavigation("/Devices")}
-                style={{
-                  ...(window.location.pathname === "/Devices" ? activeStyle : {}),
-                }}
-              >
-                <PhonelinkIcon className="sidebar-icons"/><ListItemText primary="Devices" />
-              </ListItem>
-              
-              {/* Settings */}
               <ListItem button onClick={handleSettingsClick}>
-                <SettingsApplicationsIcon className="sidebar-icons" /><ListItemText primary="Settings" />
+                <ListItemText primary="Settings" />
                 {settingsOpen ? <ExpandLess /> : <ExpandMore />}
               </ListItem>
               <Collapse in={settingsOpen} timeout="auto" unmountOnExit>
@@ -214,10 +176,7 @@ useEffect(() => {
                   {["General", "Account Settings", "On-Prem Executor"].map(
                     (text) => (
                       <ListItem button key={text} sx={{ pl: 4 }}>
-                        <ListItemText
-                          sx={{ paddingLeft: "10px" }}
-                          primary={text}
-                        />
+                        <ListItemText primary={text} />
                       </ListItem>
                     )
                   )}
@@ -310,7 +269,7 @@ useEffect(() => {
               </Box>
             </Box>
             <div className="sidebar-business-card-project">
-              <label>{projectname}</label>
+              <lable>{projectname}</lable>
             </div>
             <Box className="business-browse">
               <Button onClick={handleopenProject} variant="contained" color="primary" size="small">
@@ -324,4 +283,4 @@ useEffect(() => {
   );
 };
 
-export default Sidebar;
+export default BusinessSettingsSidebar;

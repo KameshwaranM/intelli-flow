@@ -31,7 +31,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SearchIcon from "@mui/icons-material/Search";
 import "./Business-Settings-Members.css";
-import Sidebar from "../../Sidebar/Sidebar";
+import BusinessSettingsSidebar from "../../Sidebar/BusinessSettingsSidebar";
 
 const BusinessSettingsMember = () => {
   const [openCreateDialog, setOpenCreateDialog] = useState(false);
@@ -127,7 +127,7 @@ const BusinessSettingsMember = () => {
 
   return (
     <Box className="workflowContainer membersContainer">
-      <Sidebar />
+      <BusinessSettingsSidebar />
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
         <Container maxWidth="xl">
           <Box className="workflowHeader">

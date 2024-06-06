@@ -43,10 +43,14 @@
     display: flex;
     align-items: center;
 }
+.profile-container {
+    border: 1PX solid gray;
+    padding: 10px;
+}
 
 .profile-avatar-container {
     display: flex;
-    gap: 16px;
+    gap: 10px;
     cursor: pointer;
 }
 
@@ -154,4 +158,14 @@
 
 .popper-content-dark-light-icon{
     color: rgb(200, 199, 199) !important;
+}
+
+.css-17o22dy-MuiAvatar-root{
+    font-size: 1rem !important;
+    width: 33px !important;
+    height: 33px !important;
+}
+
+.profile-info .css-10hburv-MuiTypography-root{
+    font-size: 0.8rem !important;
 }

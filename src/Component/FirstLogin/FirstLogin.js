@@ -4,7 +4,6 @@ import {
   Box,
   Typography,
   Button,
-  Alert,
   Drawer,
   IconButton,
   Avatar,
@@ -23,78 +22,84 @@ import { ThemeContext } from "../Theme/Theme";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import { URL_Create_Project } from "../API/ProjectAPI";
-import axios from 'axios';
-import { ToastContainer, toast , Bounce } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import axios from "axios";
+import { ToastContainer, toast, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const FirstLogin = () => {
   const [projectName, setProjectName] = useState("");
   const [description, setDescription] = useState("");
   const [anchorEl, setAnchorEl] = useState(null);
   const { darkMode, toggleDarkMode } = useContext(ThemeContext);
-  const [open, setOpen] = useState(false);
   const [error, setError] = useState(false);
 
-  const [sessionkey , setSessionKey] = useState(null);
+  const [sessionkey, setSessionKey] = useState(null);
 
   useEffect(() => {
-    const sessionkey = localStorage.getItem("sessionKey")
-    setSessionKey(sessionkey)
-  }
-)
+    const sessionkey = localStorage.getItem("sessionKey");
+    setSessionKey(sessionkey);
+  });
 
-const handleCreateProject = async (e) => {
-  e.preventDefault();
-  try {
-    const response = await axios.post(URL_Create_Project, {
-      projectname: projectName,
-      description: description
-    }, {
-      headers: {
-        'SESSIONKEY': sessionkey
+  const handleCreateProject = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        URL_Create_Project,
+        {
+          projectname: projectName,
+          description: description,
+        },
+        {
+          headers: {
+            SESSIONKEY: sessionkey,
+          },
+        }
+      );
+      console.log("response", response);
+      setError("Project Created Successfully");
+      toast.success("Project Created Successfully", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+      });
+      localStorage.setItem("projectname", projectName);
+      setTimeout(() => {
+        window.location.href = "/Dashboard";
+      }, 3000);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+
+      let errorMessage = "An unexpected error occurred.";
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        errorMessage = error.response.data.message;
       }
-    });
-    console.log("response", response);
-    setError("Project Created Successfully");
-    toast.success('Project Created Successfully', {
-      position: "bottom-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      transition: Bounce,
-    });
-    localStorage.setItem("projectname",projectName);
-    setTimeout(() => {
-      window.location.href = "/Dashboard";
-    }, 3000);
 
-  } catch (error) {
-    console.error('Error fetching data:', error);
-
-    let errorMessage = 'An unexpected error occurred.';
-    if (error.response && error.response.data && error.response.data.message) {
-      errorMessage = error.response.data.message;
+      setError(errorMessage);
+      toast.error(errorMessage, {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+      });
     }
+  };
 
-    setError(errorMessage);
-    toast.error(errorMessage, {
-      position: "bottom-right",
-      autoClose: 3000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-      theme: "colored",
-      transition: Bounce,
-    });
-  }
-};
-
+  console.log("Error", error);
 
   const handleProfileMenuOpen = (event) => {
     setAnchorEl(anchorEl ? null : event.currentTarget);
@@ -105,7 +110,7 @@ const handleCreateProject = async (e) => {
   };
 
   const opens = Boolean(anchorEl);
-  const id = open ? "simple-popper" : undefined;
+  const id = opens ? "simple-popper" : undefined;
 
   return (
     <Box
@@ -137,58 +142,55 @@ const handleCreateProject = async (e) => {
           <img
             src={LogoImage}
             alt="Logo"
-            style={{ width: 190, marginBottom: 20, marginTop:4 }}
+            style={{ width: 190, marginBottom: 20, marginTop: 4 }}
           />
           <Box
             className="drawerList"
-            sx={{ marginTop: "560px" , textAlign:"center" }}
+            sx={{ marginTop: "560px", textAlign: "center" }}
           >
             <IconButton>
               <HelpOutlineIcon />
             </IconButton>
-            <div style={{marginTop:"10px", textAlign:"-webkit-center"}}>
-            <Box
-                  className="profile-avatar-containers"
-                  onClick={handleProfileMenuOpen}
-                >
-            <Avatar alt="Ramanan AR" src="/static/images/avatar/1.jpg" />
-            </Box>
+            <div style={{ marginTop: "10px", textAlign: "-webkit-center" }}>
+              <Box
+                className="profile-avatar-containers"
+                onClick={handleProfileMenuOpen}
+              >
+                <Avatar alt="Ramanan AR" src="/static/images/avatar/1.jpg" />
+              </Box>
             </div>
             <Popper
-                  id={id}
-                  open={opens}
-                  anchorEl={anchorEl}
-                  placement="right-end"
-                  style={{ zIndex: 1201 }}
-                >
-                  <Paper sx={{ mt: 1, p: 2 }}>
-                    <Box className="popper-content">
-                      <LightModeIcon />
-                      <FormControlLabel
-                        control={
-                          <Switch
-                            checked={darkMode}
-                            onChange={toggleDarkMode}
-                          />
-                        }
-                      />
-                      <DarkModeIcon />
-                    </Box>
-                    <Divider />
-                    {[
-                      "Profile",
-                      "API Keys",
-                      "Preferences",
-                      "Feature previews",
-                      "Security",
-                      "Sign out",
-                    ].map((text) => (
-                      <MenuItem key={text} onClick={handleProfileMenuClose}>
-                        {text}
-                      </MenuItem>
-                    ))}
-                  </Paper>
-                </Popper>
+              id={id}
+              open={opens}
+              anchorEl={anchorEl}
+              placement="right-end"
+              style={{ zIndex: 1201 }}
+            >
+              <Paper sx={{ mt: 1, p: 2 }}>
+                <Box className="popper-content">
+                  <LightModeIcon />
+                  <FormControlLabel
+                    control={
+                      <Switch checked={darkMode} onChange={toggleDarkMode} />
+                    }
+                  />
+                  <DarkModeIcon />
+                </Box>
+                <Divider />
+                {[
+                  "Profile",
+                  "API Keys",
+                  "Preferences",
+                  "Feature previews",
+                  "Security",
+                  "Sign out",
+                ].map((text) => (
+                  <MenuItem key={text} onClick={handleProfileMenuClose}>
+                    {text}
+                  </MenuItem>
+                ))}
+              </Paper>
+            </Popper>
           </Box>
         </Box>
       </Drawer>
@@ -214,7 +216,7 @@ const handleCreateProject = async (e) => {
               boxShadow: 3,
               borderRadius: 2,
               backgroundColor: "white",
-              color:"black"
+              color: "black",
             }}
             onSubmit={handleCreateProject}
           >
@@ -276,8 +278,8 @@ const handleCreateProject = async (e) => {
             </div>
           </Box>
           <div>
-        <ToastContainer />
-      </div>
+            <ToastContainer />
+          </div>
         </Container>
       </div>
     </Box>

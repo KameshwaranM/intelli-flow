@@ -64,9 +64,12 @@
 
 .css-11u53oe-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input{
     padding: 10.5px 10px !important;
+    background-color: white !important;
 }
 .css-v3zyv7-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input {
     padding: 10.5px 10px !important;
+    background-color: white !important;
+    color: black !important;
 }
 
 .css-15wwp11-MuiTableHead-root{
