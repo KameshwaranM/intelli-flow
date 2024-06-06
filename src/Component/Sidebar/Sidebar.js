@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   Drawer,
   List,
