@@ -1,7 +1,7 @@
 import React from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./BusinessSettingBilling.css";
-import BusinessSettingsSidebar from "../../Sidebar/BusinessSettingsSidebar";
+import BusinessSettingsSidebar from "../../../Sidebar/BusinessSettingsSidebar";
 
 const BusinessSettingsBilling = () => {
   return (

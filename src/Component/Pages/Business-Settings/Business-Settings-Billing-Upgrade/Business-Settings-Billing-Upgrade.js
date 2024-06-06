@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./Business-Settings-Billing-Upgrade.css";
 import { useNavigate } from "react-router-dom";
-import BusinessSettingsSidebar from "../../Sidebar/BusinessSettingsSidebar";
+import BusinessSettingsSidebar from "../../../Sidebar/BusinessSettingsSidebar";
 
 const BusinessSettingsBillingUpgrade = () => {
   const [planSelected, setPlanSelected] = useState("");

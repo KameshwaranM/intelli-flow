@@ -31,7 +31,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SearchIcon from "@mui/icons-material/Search";
 import "./Business-Settings-Members.css";
-import BusinessSettingsSidebar from "../../Sidebar/BusinessSettingsSidebar";
+import BusinessSettingsSidebar from "../../../Sidebar/BusinessSettingsSidebar";
 
 const BusinessSettingsMember = () => {
   const [openCreateDialog, setOpenCreateDialog] = useState(false);

@@ -19,8 +19,8 @@ import SearchIcon from "@mui/icons-material/Search";
 import "./Business-Settings-Projects.css";
 import { Link } from "react-router-dom/dist";
 import axios from "axios";
-import { URL_Get_Project_Name } from "../../API/ProjectAPI";
-import BusinessSettingsSidebar from "../../Sidebar/BusinessSettingsSidebar";
+import { URL_Get_Project_Name } from "../../../API/ProjectAPI";
+import BusinessSettingsSidebar from "../../../Sidebar/BusinessSettingsSidebar";
 
 const BusinessSettingsProjects = () => {
   const [projects, setProjects] = useState([]);

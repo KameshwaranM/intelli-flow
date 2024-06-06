@@ -1,7 +1,7 @@
 import React from "react";
 import "./Business-Settings-Account.css";
 import { IoInformationCircle } from "react-icons/io5";
-import BusinessSettingsSidebar from "../../Sidebar/BusinessSettingsSidebar";
+import BusinessSettingsSidebar from "../../../Sidebar/BusinessSettingsSidebar"
 
 const BusinessSettingsAccount = () => {
   return (
