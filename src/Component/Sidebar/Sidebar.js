@@ -47,6 +47,13 @@ const Sidebar = () => {
   const { darkMode, toggleDarkMode } = useContext(ThemeContext);
   const [businessname , setBusinessName] = useState(null);
   const [projectname , setProjectName] = useState(null);
+  const [ username , setUserName] = useState(null);
+
+useEffect(() => {
+  const UserName = localStorage.getItem("userEmail")
+  setUserName(UserName)
+}
+)
 
   const activeStyle = {
     backgroundColor: "#1976d2",
@@ -243,7 +250,7 @@ useEffect(() => {
                   <Avatar alt="Ramanan AR" src="/static/images/avatar/1.jpg" />
                   <Box className="profile-info">
                     <Typography variant="body2">Ramanan AR</Typography>
-                    <Typography variant="body2">ramanan@gmail.com</Typography>
+                    <Typography variant="body2">{username}</Typography>
                   </Box>
                 </Box>
                 <Popper

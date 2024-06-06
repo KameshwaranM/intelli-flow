@@ -44,9 +44,14 @@
     display: flex;
     align-items: center;
 }
+
 .profile-container {
-    border: 1PX solid gray;
+    border: 1PX solid #e7e7e7;
     padding: 10px;
+    overflow: hidden;
+    border-radius: 5px;
+    background-color: #f8f8f8;
+    color: black;
 }
 
 .profile-avatar-container {
@@ -122,7 +127,7 @@
     border-radius: 20px !important;
 }
 
-.css-ltlrkn-MuiButtonBase-root-MuiListItem-root:hover  {
+.css-ltlrkn-MuiButtonBase-root-MuiListItem-root:hover {
     border-radius: 20px
 }
 
@@ -130,10 +135,11 @@
     background-color: blue;
 }
 
-.css-vqj3ch-MuiListItemText-root{
+.css-vqj3ch-MuiListItemText-root {
     padding-left: 20px !important;
 }
-.css-10hburv-MuiTypography-root{
+
+.css-10hburv-MuiTypography-root {
     font-size: 14px !important;
 }
 
@@ -144,29 +150,35 @@
     margin-top: 8px;
 }
 
-.sidebar-icons{
+.sidebar-icons {
     font-size: 18px !important;
     margin-right: 13px;
 }
 
-.css-j204z7-MuiFormControlLabel-root{
+.css-j204z7-MuiFormControlLabel-root {
     margin: 0px !important;
 }
 
-.css-jzcd7z-MuiFormControlLabel-root{
+.css-jzcd7z-MuiFormControlLabel-root {
     margin: 0px !important;
 }
 
-.popper-content-dark-light-icon{
+.popper-content-dark-light-icon {
     color: rgb(200, 199, 199) !important;
 }
 
-.css-17o22dy-MuiAvatar-root{
+.css-17o22dy-MuiAvatar-root {
     font-size: 1rem !important;
     width: 33px !important;
     height: 33px !important;
 }
 
-.profile-info .css-10hburv-MuiTypography-root{
+.css-fqh1fk-MuiAvatar-root{
+    font-size: 1rem !important;
+    width: 33px !important;
+    height: 33px !important;
+}
+
+.profile-info .css-10hburv-MuiTypography-root {
     font-size: 0.8rem !important;
 }
