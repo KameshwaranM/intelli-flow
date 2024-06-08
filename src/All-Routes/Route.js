@@ -19,6 +19,7 @@ import BusinessSettingsProjects from "../Component/Pages/Business-Settings/Busin
 import BusinessSettingsMember from "../Component/Pages/Business-Settings/Business-Settings-Members/Business-Settings-Members";
 import BusinessSettingsBilling from "../Component/Pages/Business-Settings/Business-Settings-Billing/Business-Settings-Billing";
 import BusinessSettingsBillingUpgrade from "../Component/Pages/Business-Settings/Business-Settings-Billing-Upgrade/Business-Settings-Billing-Upgrade";
+import Executions from "../Component/Pages/Executions/Execution";
 
 
 function Rout() {
@@ -44,6 +45,9 @@ function Rout() {
           <Route path="/Sidebar" element={<Sidebar />} />
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Workflow_Dashboard" element={<WorkflowDashboard />} />
+          <Route path="/Workflow_Editor" element={<WorkFlowEditor />} />
+          <Route path="/Executions" element={<Executions />} />
+          {/* Workflow Editor */}
           <Route path="/Workflow_Editor" element={<WorkFlowEditor />} />
           {/* BusinessName Settings */}
           <Route path="/BusinessName/Settings/Account" element={<BusinessSettingsAccount />} />

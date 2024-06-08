@@ -247,7 +247,7 @@ useEffect(() => {
                   className="profile-avatar-container"
                   onClick={handleProfileMenuOpen}
                 >
-                  <Avatar alt="Ramanan AR" src="/static/images/avatar/1.jpg" />
+                  <Avatar alt="Kamesh" src="/static/images/avatar/1.jpg" />
                   <Box className="profile-info">
                     <Typography variant="body2">Ramanan AR</Typography>
                     <Typography variant="body2">{username}</Typography>
