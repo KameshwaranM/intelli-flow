@@ -177,7 +177,7 @@ const WorkflowDashboard = () => {
 
   const filteredWorkflows = workflows.filter(
     (workflow) =>
-      workflow && // Ensure workflow is defined
+      workflow &&
       workflow.workflowname &&
       workflow.workflowname.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -197,7 +197,7 @@ const WorkflowDashboard = () => {
   );
 
   const handleOpenEditor = () => {
-    window.location.href = "/Workflow_Editor";
+    window.location.href = "/UIComponent";
   };
 
   return (

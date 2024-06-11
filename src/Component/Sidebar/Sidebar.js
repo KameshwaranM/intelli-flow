@@ -151,7 +151,7 @@ useEffect(() => {
                 button
                 onClick={() => handleNavigation("/Workflow_Dashboard")}
                 style={{
-                  ...(window.location.pathname === "/Workflow_Dashboard" ? activeStyle : {}),
+                  ...(window.location.pathname === "/Workflow_Dashboard" || "/UIComponent" ? activeStyle : {}),
                 }}
               >
                 <AccountTreeIcon className="sidebar-icons"/><ListItemText primary="Workflows" />

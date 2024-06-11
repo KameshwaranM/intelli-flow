@@ -20,6 +20,7 @@ import BusinessSettingsMember from "../Component/Pages/Business-Settings/Busines
 import BusinessSettingsBilling from "../Component/Pages/Business-Settings/Business-Settings-Billing/Business-Settings-Billing";
 import BusinessSettingsBillingUpgrade from "../Component/Pages/Business-Settings/Business-Settings-Billing-Upgrade/Business-Settings-Billing-Upgrade";
 import Executions from "../Component/Pages/Executions/Execution";
+import UIComponent from "../Component/API";
 
 
 function Rout() {
@@ -55,6 +56,7 @@ function Rout() {
           <Route path="/BusinessName/Settings/Members" element={<BusinessSettingsMember/>} />
           <Route path="/BusinessName/Settings/Billing" element={<BusinessSettingsBilling />} />
           <Route path="/BusinessName/Settings/Billing/Upgrade" element={<BusinessSettingsBillingUpgrade />} />
+          <Route path="/UIComponent" element={<UIComponent />} />
         </Routes>
       </Router>
     </div>
