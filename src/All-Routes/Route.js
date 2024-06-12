@@ -21,6 +21,7 @@ import BusinessSettingsBilling from "../Component/Pages/Business-Settings/Busine
 import BusinessSettingsBillingUpgrade from "../Component/Pages/Business-Settings/Business-Settings-Billing-Upgrade/Business-Settings-Billing-Upgrade";
 import Executions from "../Component/Pages/Executions/Execution";
 import UIComponent from "../Component/API";
+import Vault from "../Component/Pages/Vault/Vault";
 
 
 function Rout() {
@@ -48,6 +49,7 @@ function Rout() {
           <Route path="/Workflow_Dashboard" element={<WorkflowDashboard />} />
           <Route path="/Workflow_Editor" element={<WorkFlowEditor />} />
           <Route path="/Executions" element={<Executions />} />
+          <Route path="/Vault" element={<Vault />} />
           {/* Workflow Editor */}
           <Route path="/Workflow_Editor" element={<WorkFlowEditor />} />
           {/* BusinessName Settings */}

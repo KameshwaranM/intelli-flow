@@ -147,8 +147,6 @@ const WorkflowDashboard = () => {
         if (data.type === "error") {
           throw new Error(data.message);
         }
-  
-        // Ensure the data is an array
         if (Array.isArray(data.data)) {
           setWorkflows(data.data);
         } else {
@@ -158,14 +156,8 @@ const WorkflowDashboard = () => {
         setError(error.message);
       }
     };
-  
-    // Fetch workflows initially
     fetchWorkflows();
-  
-    // Set up an interval to fetch workflows every 2 seconds
     const intervalId = setInterval(fetchWorkflows, 2000);
-  
-    // Clean up the interval on component unmount
     return () => clearInterval(intervalId);
   }, []);
 
@@ -197,8 +189,48 @@ const WorkflowDashboard = () => {
   );
 
   const handleOpenEditor = () => {
-    window.location.href = "/UIComponent";
-  };
+    if (selectedWorkflow) {
+        const workflowName = selectedWorkflow.workflowname;
+        const projectName = localStorage.getItem("projectname");
+        const key = localStorage.getItem("sessionKey");
+
+        // Create a form element
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = '/UIComponent'; // Modify the action URL if needed
+
+        // Add hidden input fields for the parameters
+        const workflowInput = document.createElement('input');
+        workflowInput.type = 'hidden';
+        workflowInput.name = 'workflow';
+        workflowInput.value = workflowName;
+        form.appendChild(workflowInput);
+
+        const projectInput = document.createElement('input');
+        projectInput.type = 'hidden';
+        projectInput.name = 'project';
+        projectInput.value = projectName;
+        form.appendChild(projectInput);
+
+        const keyInput = document.createElement('input');
+        keyInput.type = 'hidden';
+        keyInput.name = 'key';
+        keyInput.value = key;
+        form.appendChild(keyInput);
+
+        // Append the form to the document body and submit it
+        document.body.appendChild(form);
+        form.submit();
+    }
+};
+  
+  // const handleOpenEditor = () => {
+  //   if (selectedWorkflow) {
+  //     localStorage.setItem('WorkflowName', selectedWorkflow.workflowname);
+  //     const url = `http://localhost:3001?workflow=${encodeURIComponent(workflowName)}&project=${encodeURIComponent(projectName)}&key=${encodeURIComponent(key)}`;
+  //     window.location.href = "/UIComponent";
+  //   }
+  // };
 
   return (
     <Box className="workflowContainer">
