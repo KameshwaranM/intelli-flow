@@ -10,7 +10,7 @@ const AssignNode = ({ data, isConnectable }) => {
                 isConnectable={isConnectable}
             />
             <div>
-                <strong>NODE</strong>
+                <strong>{data.label}</strong>
             </div>
             <Handle
                 id="source"

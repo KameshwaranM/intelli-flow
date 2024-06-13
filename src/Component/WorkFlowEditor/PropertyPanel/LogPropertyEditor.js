@@ -3,16 +3,54 @@ const LogPropertyEditor = ({ codeData, updateData }) => {
     const localData = codeData.data;
 
     if (type === "log") {
-        const onMessageChange = (event) => {
-            localData.message = event.target.value;
-
+        const onValuenameChange = (event) => {
+            localData.name = event.target.value;
+           
             updateData(localData);
-        };
-
+            };
+          const onValuelastChange = (event) => {
+            
+              localData.type = event.target.value;
+        
+              updateData(localData);
+              };
+          const onValueDurationChange = (event) => {
+               
+                localData.command = event.target.value;
+                updateData(localData);
+                };
         return (
             <div>
-                <strong className="workflow-content-heading">Log:</strong><br />
-                <input name="log_message" type="text" defaultValue={localData.message} placeholder="Message" onChange={onMessageChange} />
+                 <form >
+            <label>
+              name:
+              <input
+                type="text"
+                name="name"
+                value={localData.name}
+                onChange={onValuenameChange}
+              />
+            </label>
+            <label>
+              type:
+              <input
+                type="text"
+                name="type"
+                value={localData.type}
+                onChange={onValuelastChange}
+              />
+            </label>
+            <label>
+              duration:
+              <input
+                type="text"
+                name="command"
+                value={localData.command}
+                onChange={onValueDurationChange}
+              />
+            </label>
+            
+          </form>
             </div>
         );
     }

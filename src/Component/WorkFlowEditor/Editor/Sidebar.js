@@ -1,21 +1,21 @@
 import React from "react";
-
+import TaskList from './Tasklist'
 import "./sidebar.css";
+import taskData from './data'
+// import { FaCirclePlay, FaCircleStop } from "react-icons/fa6";
+// import { BiSolidRectangle } from "react-icons/bi";
+// import { BsXDiamond } from "react-icons/bs";
+// import { IoTimer } from "react-icons/io5";
 
-import { FaCirclePlay, FaCircleStop } from "react-icons/fa6";
-import { BiSolidRectangle } from "react-icons/bi";
-import { BsXDiamond } from "react-icons/bs";
-import { IoTimer } from "react-icons/io5";
-
-const Sidebar = () => {
-  const onDragStart = (event, nodeType) => {
-    event.dataTransfer.setData("application/reactflow", nodeType);
-    event.dataTransfer.effectAllowed = "move";
-  };
+const SidebarAction = () => {
+  // const onDragStart = (event, nodeType) => {
+  //   event.dataTransfer.setData("application/reactflow", nodeType);
+  //   event.dataTransfer.effectAllowed = "move";
+  // };
 
   return (
     <aside>
-      <div
+      {/* <div
         className="node node-start"
         onDragStart={(event) => onDragStart(event, "start")}
         draggable
@@ -53,9 +53,12 @@ const Sidebar = () => {
       >
         <FaCircleStop className="workflow-node-icon" />
         End
+      </div> */}
+      <div>
+        <TaskList data={taskData}/>
       </div>
     </aside>
   );
 };
 
-export default Sidebar;
+export default SidebarAction;

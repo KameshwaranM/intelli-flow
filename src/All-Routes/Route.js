@@ -11,9 +11,8 @@ import Login from "../Component/OnBoarding/Pages/Login/Login";
 import SignUP from "../Component/OnBoarding/Pages/Sign-Up";
 import FirstLogin from "../Component/FirstLogin/FirstLogin";
 import Dashboard from "../Component/Pages/Dashboard/Dashboard";
-import Sidebar from "../Component/Sidebar/Sidebar";
 import WorkflowDashboard from "../Component/Pages/WorkflowDashboard/WorkflowDashboard";
-import WorkFlowEditor from "../Component/WorkFlowEditor";
+// import WorkFlowEditor from "../Component/WorkFlowEditor";
 import BusinessSettingsAccount from "../Component/Pages/Business-Settings/Business-Settings-Account/Business-Settings-Account";
 import BusinessSettingsProjects from "../Component/Pages/Business-Settings/Business-Settings-Projects/Business-Settings-Projects";
 import BusinessSettingsMember from "../Component/Pages/Business-Settings/Business-Settings-Members/Business-Settings-Members";
@@ -23,13 +22,13 @@ import Executions from "../Component/Pages/Executions/Execution";
 // import UIComponent from "../Component/API";
 import Vault from "../Component/Pages/Vault/Vault";
 import WorkFlowEditorTool from "../Component/Pages/WorkflowEditor/WorkflowEditorTool";
-import { IframeUrlProvider } from "../Component/IframeUrlContext/IframeUrlContext";
+import Workflowsapp from "../Component/WorkFlowEditor/App";
+import SIDEBARUIDEMO from "../Component/WorkFlowEditor/TOOL";
 
 
 function Rout() {
   return (
     <div>
-      <IframeUrlProvider>
       <Router>
         <Routes>
           <Route path="/" element={<Landing />} />
@@ -47,7 +46,6 @@ function Rout() {
 
           {/* Tool */}
           <Route path="/Create_Project" element={<FirstLogin />} />
-          <Route path="/Sidebar" element={<Sidebar />} />
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Workflow_Dashboard" element={<WorkflowDashboard />} />
           {/* <Route path="/Workflow_Editor" element={<WorkFlowEditor />} /> */}
@@ -55,6 +53,8 @@ function Rout() {
           <Route path="/Vault" element={<Vault />} />
           {/* Workflow Editor */}
           <Route path="/Workflow_Editor" element={<WorkFlowEditorTool />} />
+          <Route path="/Workflowsapp" element={<Workflowsapp />} />
+          <Route path="/SIDEBARUIDEMO" element={<SIDEBARUIDEMO />} />
           {/* BusinessName Settings */}
           <Route path="/BusinessName/Settings/Account" element={<BusinessSettingsAccount />} />
           <Route path="/BusinessName/Settings/Project" element={<BusinessSettingsProjects />} />
@@ -64,7 +64,6 @@ function Rout() {
           {/* <Route path="/UIComponent" element={<UIComponent />} /> */}
         </Routes>
       </Router>
-      </IframeUrlProvider>
     </div>
   );
 }

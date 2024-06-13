@@ -5,12 +5,14 @@ import ReactFlow, {
   isNode,
 } from "react-flow-renderer";
 
+
 import IfNode from "../ReactFlow/Nodes/IfNode";
 import StartNode from "../ReactFlow/Nodes/StartNode";
 import EndNode from "../ReactFlow/Nodes/EndNode";
 import AssignNode from "../ReactFlow/Nodes/AssignNode";
 import ConsoleCustomNode from "../ReactFlow/Nodes/ConsoleNode";
 import { Controls, Background } from "react-flow-renderer";
+
 
 const nodeTypes = {
   if: IfNode,
@@ -19,13 +21,15 @@ const nodeTypes = {
   assign: AssignNode,
   log: ConsoleCustomNode,
 };
-const connectionLineStyle = { stroke: "#fff" };
+const connectionLineStyle = { stroke: "#fff",animated:true };
 
 let id = 2;
 const getId = () => `node_${id++}`;
 
 const DiagramAdapter = ({
   nodes,
+  edges,
+  setEdges,
   setNodes,
   onAddNode,
   onActivateNode,
@@ -39,8 +43,12 @@ const DiagramAdapter = ({
 
     setReactFlowInstance(_reactFlowInstance);
 
+  const handleEdgeClick = (edge) => {
+      onElementsRemove([edge]);
+    };
+
   const onConnect = (params) => {
-    setNodes((els) => {
+    setEdges((els) => {
       
       const { source,target } = params;
 
@@ -55,10 +63,12 @@ const DiagramAdapter = ({
         } else if (params.sourceHandle === "false") {
           params.label = "FALSE";
         }
-        if (params.label===null){params.label = " ";}
-        
+        if (!params.label) {
+          params.label = ' ';
+        }
         params.style = { stroke: "#fff" };
         params.animated = true;
+        
         return addEdge(params, els);
       }
       else {
@@ -73,9 +83,9 @@ const DiagramAdapter = ({
   };
 
   const onElementsRemove = (elementsToRemove) => {
-    setNodes((els) => removeElements(elementsToRemove, els));
+    setNodes((nds) => removeElements(elementsToRemove, nds));
+    setEdges((eds) => removeElements(elementsToRemove, eds));
   };
-
   const onSelectionChange = (elements) => {
     if (elements) {
       const selectedNodes = elements.filter((els) => isNode(els));
@@ -94,6 +104,7 @@ const DiagramAdapter = ({
   };
 
   const onDrop = (event) => {
+    console.log(event)
     event.preventDefault();
 
     const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
@@ -102,17 +113,20 @@ const DiagramAdapter = ({
       x: event.clientX - reactFlowBounds.left,
       y: event.clientY - reactFlowBounds.top,
     });
+    const formInputs = event.dataTransfer.getData("formInputs");
+    const label = event.dataTransfer.getData("label");
+    console.log(label)
     const nodeId = getId();
 
     const newNode = {
       id: nodeId,
       type,
       position,
-      data: {},
+      data: {label:label},
     };
 
     setNodes(nodes.concat(newNode));
-    onAddNode(nodeId, type);
+    onAddNode(nodeId, type,formInputs);
   };
 
   return (
@@ -122,10 +136,11 @@ const DiagramAdapter = ({
     >
 
       <ReactFlow
-        elements={nodes}
-
+        elements={[...nodes, ...edges]}
         nodeTypes={nodeTypes}
         deleteKeyCode={46}
+        edges={edges}
+        
         onConnect={onConnect}
         onSelectionChange={onSelectionChange}
         onPaneClick={onPaneClick}

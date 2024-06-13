@@ -1,64 +1,34 @@
-import { React } from "react";
+import React from "react";
 
 const AssignPropertyEditor = ({ codeData, updateData }) => {
-  //console.log(codeData)
-    const type = codeData.type;
-    const localData = codeData.data;
-    // const [firstName, setFirstName] = useState("");
-    // const [lastName, setLastName] = useState("");
-    // const [email, setEmail] = useState("");
-    if (type === "assign") {
-
-      const onValuenameChange = (event) => {
-        localData.firstName = event.target.value;
-       
-        updateData(localData);
-        };
-      const onValuelastChange = (event) => {
-        
-          localData.lastName = event.target.value;
+  const type = codeData.type;
+  const localData = codeData.data;
+  const formInputs = JSON.parse(codeData.formInputs );
     
-          updateData(localData);
-          };
-      const onValueEmailChange = (event) => {
-           
-            localData.email = event.target.value;
-            updateData(localData);
-            };
+  const handleChange = (event,label) => {
+    
+    localData[label]=event.target.value;
+    updateData(localData);
+};
 
+    if (type === "assign" && formInputs) {
+      
         return (
-            <form >
-            <label>
-              First Name:
-              <input
-                type="text"
-                name="firstName"
-                value={localData.firstName}
-                onChange={onValuenameChange}
-              />
-            </label>
-            <label>
-              Last Name:
-              <input
-                type="text"
-                name="lastName"
-                value={localData.lastName}
-                onChange={onValuelastChange}
-              />
-            </label>
-            <label>
-              Email:
-              <input
-                type="text"
-                name="email"
-                value={localData.email}
-                onChange={onValueEmailChange}
-              />
-            </label>
-            
-          </form>
+            <form>
+                {formInputs.map((input, index) => (
+                    <label key={index} className="form-label">
+                        {input.label}:
+                        <input
+                            type={input.type}
+                            name={input.label}
+                            value={localData[input.label]}
+                            onChange={(event) => handleChange(event, input.label)}
+                        />
+                    </label>
+                ))}
+            </form>
         );
-    } 
+    }
 
     return null;
 };

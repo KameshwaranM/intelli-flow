@@ -1,17 +1,13 @@
-import React, { createContext, useContext, useState } from 'react';
+import SidebarMenu from "../Sidebar/Sidebar";
 
-// Create the context
-const IframeUrlContext = createContext();
-
-// Define the provider component
-export const IframeUrlProvider = ({ children }) => {
-  const [iframeUrl, setIframeUrl] = useState('http://localhost:3001');
+function SIDEBARUIDEMO() {
   return (
-    <IframeUrlContext.Provider value={{ iframeUrl, setIframeUrl }}>
-      {children}
-    </IframeUrlContext.Provider>
+    <>
+    <div>
+      <SidebarMenu />
+    </div>
+    </>
   );
-};
+}
 
-// Hook to use the context
-export const useIframeUrl = () => useContext(IframeUrlContext);
+export default SIDEBARUIDEMO;

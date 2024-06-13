@@ -39,7 +39,6 @@ import {
 import axios from "axios";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { useIframeUrl } from "../../IframeUrlContext/IframeUrlContext";
 
 const WorkflowDashboard = () => {
   const [openCreateDialog, setOpenCreateDialog] = useState(false);
@@ -190,7 +189,6 @@ const WorkflowDashboard = () => {
     page * rowsPerPage + rowsPerPage
   );
 
-  const { setIframeUrl } = useIframeUrl();
 
   const handleOpenEditor = async (event) => {
     event.preventDefault();
@@ -209,7 +207,6 @@ const WorkflowDashboard = () => {
         console.log("Data sent successfully:", res.data);
         console.log("Data sent successfully:", res.data.id);
         const iframeUrl = `http://localhost:3001?projectId=${res.data.id}`;
-        setIframeUrl(iframeUrl);
         window.location.href = '/Workflow_Editor'; 
       } else {
         console.log("Failed to send data. Status code:", res.status);

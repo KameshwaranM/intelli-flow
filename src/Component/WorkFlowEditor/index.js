@@ -1,11 +1,10 @@
-import Canvas from "./Editor/Canvas";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import Workflowsapp from './App';
 
-function WorkFlowEditor() {
-  return (
-    <div>
-      <Canvas></Canvas>
-    </div>
-  );
-}
-
-export default WorkFlowEditor;
+ReactDOM.render(
+  <React.StrictMode>
+    <Workflowsapp />
+  </React.StrictMode>,
+  document.getElementById('root')
+);

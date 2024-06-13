@@ -2,3 +2,40 @@ aside .node {
     margin-bottom: 5px;
     border-radius: 3px;
 }
+.sidebar {
+    width: 200px;
+    background-color:black;
+    justify-items: start;
+  }
+  
+  .menu {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+  }
+  
+  .menu a {
+    padding: 10px;
+    text-decoration: none;
+    color: white;
+  }
+  
+
+  .css-bshv44-MuiButtonBase-root-MuiListItem-root {
+    color: white !important;
+    border: 2px solid gray !important;
+    border-radius: 5px !important;
+  }
+
+  .css-1mhtu43-MuiListItem-root {
+    color: white;
+    border-bottom: 1px solid gray !important;
+  }
+  .css-1mhtu43-MuiListItem-root:hover {
+    background-color: rgb(237 235 235 / 50%);
+    border-radius: 15px;
+  }
+
+  .css-10hburv-MuiTypography-root {
+    font-size: 12px !important;
+  }

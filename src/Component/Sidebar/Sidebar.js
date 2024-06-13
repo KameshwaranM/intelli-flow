@@ -39,7 +39,7 @@ import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import PhonelinkIcon from '@mui/icons-material/Phonelink';
 import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
 
-const Sidebar = () => {
+const SidebarMenu = () => {
   const [settingsOpen, setSettingsOpen] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
   const [popperAnchorEl, setPopperAnchorEl] = useState(null);
@@ -81,7 +81,7 @@ useEffect(() => {
  
   const handleNavigation = (path) => {
     navigate(path);
-  };
+ };
 
   const handleOpenCreateWorkflow = () => {
     navigate("/Create_Project")
@@ -331,4 +331,4 @@ useEffect(() => {
   );
 };
 
-export default Sidebar;
+export default SidebarMenu;
