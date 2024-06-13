@@ -23,7 +23,7 @@ import Executions from "../Component/Pages/Executions/Execution";
 import Vault from "../Component/Pages/Vault/Vault";
 import WorkFlowEditorTool from "../Component/Pages/WorkflowEditor/WorkflowEditorTool";
 import Workflowsapp from "../Component/WorkFlowEditor/App";
-import SIDEBARUIDEMO from "../Component/WorkFlowEditor/TOOL";
+// import SIDEBARUIDEMO from "../Component/WorkFlowEditor/TOOL";
 
 
 function Rout() {
@@ -54,7 +54,7 @@ function Rout() {
           {/* Workflow Editor */}
           <Route path="/Workflow_Editor" element={<WorkFlowEditorTool />} />
           <Route path="/Workflowsapp" element={<Workflowsapp />} />
-          <Route path="/SIDEBARUIDEMO" element={<SIDEBARUIDEMO />} />
+          {/* <Route path="/SIDEBARUIDEMO" element={<SIDEBARUIDEMO />} /> */}
           {/* BusinessName Settings */}
           <Route path="/BusinessName/Settings/Account" element={<BusinessSettingsAccount />} />
           <Route path="/BusinessName/Settings/Project" element={<BusinessSettingsProjects />} />
