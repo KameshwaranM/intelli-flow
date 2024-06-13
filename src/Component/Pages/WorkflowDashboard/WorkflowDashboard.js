@@ -33,11 +33,13 @@ import "./WorkflowDashboard.css";
 import Sidebar from "../../Sidebar/Sidebar";
 import {
   URL_Create_Workflow,
+  URL_GET_Workflow_DATA,
   URL_Get_Workflow_Name,
 } from "../../API/ProjectAPI";
 import axios from "axios";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useIframeUrl } from "../../IframeUrlContext/IframeUrlContext";
 
 const WorkflowDashboard = () => {
   const [openCreateDialog, setOpenCreateDialog] = useState(false);
@@ -188,41 +190,37 @@ const WorkflowDashboard = () => {
     page * rowsPerPage + rowsPerPage
   );
 
-  const handleOpenEditor = () => {
-    if (selectedWorkflow) {
-        const workflowName = selectedWorkflow.workflowname;
-        const projectName = localStorage.getItem("projectname");
-        const key = localStorage.getItem("sessionKey");
+  const { setIframeUrl } = useIframeUrl();
 
-        // Create a form element
-        const form = document.createElement('form');
-        form.method = 'POST';
-        form.action = '/UIComponent'; // Modify the action URL if needed
-
-        // Add hidden input fields for the parameters
-        const workflowInput = document.createElement('input');
-        workflowInput.type = 'hidden';
-        workflowInput.name = 'workflow';
-        workflowInput.value = workflowName;
-        form.appendChild(workflowInput);
-
-        const projectInput = document.createElement('input');
-        projectInput.type = 'hidden';
-        projectInput.name = 'project';
-        projectInput.value = projectName;
-        form.appendChild(projectInput);
-
-        const keyInput = document.createElement('input');
-        keyInput.type = 'hidden';
-        keyInput.name = 'key';
-        keyInput.value = key;
-        form.appendChild(keyInput);
-
-        // Append the form to the document body and submit it
-        document.body.appendChild(form);
-        form.submit();
+  const handleOpenEditor = async (event) => {
+    event.preventDefault();
+    try {
+      const API = URL_GET_Workflow_DATA;
+      const res = await axios.post(API, {
+        projectname: localStorage.getItem("projectname"),
+        workflowname: selectedWorkflow.workflowname,
+      }, {
+        headers: {
+          SESSIONKEY: sessionKey,
+        },
+      });
+  
+      if (res.status === 200) {
+        console.log("Data sent successfully:", res.data);
+        console.log("Data sent successfully:", res.data.id);
+        const iframeUrl = `http://localhost:3001?projectId=${res.data.id}`;
+        setIframeUrl(iframeUrl);
+        window.location.href = '/Workflow_Editor'; 
+      } else {
+        console.log("Failed to send data. Status code:", res.status);
+      }
+    } catch (error) {
+      console.log("Error:", error);
+      const errorMessage = error.response?.data?.message || "No message available";
+      console.log("Response data message:", errorMessage);
     }
-};
+  };
+  
   
   // const handleOpenEditor = () => {
   //   if (selectedWorkflow) {

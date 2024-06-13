@@ -6,7 +6,6 @@
 
 .MainSub-MainTitle {
     font-size: 50px;
-    font-family: "Roboto", sans-serif;
     bottom: 50px;
     position: relative;
 }
@@ -44,7 +43,6 @@
     position: relative;
     top: 120px;
     right: 400px;
-    font-family: "Roboto", sans-serif;
 }
 
 .MainSub-RealTitle {
@@ -71,7 +69,6 @@
 .MainSub-contents {
     position: relative;
     bottom: 60px;
-    font-family: "Roboto", sans-serif;
     margin-left: 250px;
 }
 
@@ -102,7 +99,6 @@
     position: relative;
     top: 200px;
     right: 400px;
-    font-family: "Roboto", sans-serif;
 }
 
 .MainSub-RealTitle1 {
@@ -120,7 +116,6 @@
 .MainSub-contents2 {
     position: relative;
     top: 10px;
-    font-family: "Roboto", sans-serif;
     margin-left: 250px;
 }
 

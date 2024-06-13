@@ -1,18 +1,20 @@
+import React from 'react';
+import { useIframeUrl } from '../IframeUrlContext/IframeUrlContext'; // Adjust the path as needed
 import Sidebar from "../Sidebar/Sidebar";
 
 const UIComponent = () => {
-
+  const { iframeUrl } = useIframeUrl();
 
   return (
-    <div>
-      <Sidebar />
-      <div>
+    <div style={{ display: 'flex', height: '100vh' }}>
+      <Sidebar style={{ flex: '0 0 250px' }} />
+      <div style={{ flex: 1 }}>
         <iframe
-          src={`http://localhost:3001`}
+          src={iframeUrl}
           title="App 2"
-          style={{ width: '100%', height: '99vh', border: 'none' }}
+          style={{ width: '100%', height: '100%', border: 'none' }}
         />
-      </div>  
+      </div>
     </div>
   );
 };

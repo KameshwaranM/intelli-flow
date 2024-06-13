@@ -27,7 +27,6 @@
     letter-spacing: 2px;
     font-size: 19px;
     font-weight: 600;
-    font-family: "Roboto", sans-serif;
     /* border-radius: 5px; */
     /* cursor: pointer; */
 
@@ -83,7 +82,6 @@
 }
 
 .Footer-Copyrights {
-    font-family: "Roboto", sans-serif;
     font-weight: 400;
     font-size: 12px;
     margin-left: 10px;
@@ -162,14 +160,12 @@
 }
 
 .FooterProduct {
-    font-family: "Roboto", sans-serif;
     text-decoration: none;
 }
 
 .FooterLinks {
     line-height: 40px;
     list-style-type: none;
-    font-family: "Roboto", sans-serif;
     font-size: 14px;
 }
 
@@ -181,7 +177,6 @@
 }
 
 .FooterCompanyHeading {
-    font-family: "Roboto", sans-serif;
     text-decoration: none;
 
 }
@@ -189,7 +184,6 @@
 .FooterCompanyLinks {
     line-height: 40px;
     list-style-type: none;
-    font-family: "Roboto", sans-serif;
     font-size: 14px;
 }
 
@@ -200,14 +194,12 @@
 }
 
 .FooterSupportHeading {
-    font-family: "Roboto", sans-serif;
     text-decoration: none;
 }
 
 .FooterSupportLinks {
     line-height: 40px;
     list-style-type: none;
-    font-family: "Roboto", sans-serif;
     font-size: 14px;
 }
 
@@ -217,10 +209,6 @@
 
 }
 
-.FooterContactHeading {
-    font-family: "Roboto", sans-serif;
-
-}
 
 .FooterContactPhone {
     display: flex;
@@ -270,7 +258,6 @@
 }
 
 .Footer-TermService p {
-    font-family: "Roboto", sans-serif;
     font-size: 15px;
     font-weight: 300;
     margin-left: 15px;

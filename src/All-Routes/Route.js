@@ -20,13 +20,16 @@ import BusinessSettingsMember from "../Component/Pages/Business-Settings/Busines
 import BusinessSettingsBilling from "../Component/Pages/Business-Settings/Business-Settings-Billing/Business-Settings-Billing";
 import BusinessSettingsBillingUpgrade from "../Component/Pages/Business-Settings/Business-Settings-Billing-Upgrade/Business-Settings-Billing-Upgrade";
 import Executions from "../Component/Pages/Executions/Execution";
-import UIComponent from "../Component/API";
+// import UIComponent from "../Component/API";
 import Vault from "../Component/Pages/Vault/Vault";
+import WorkFlowEditorTool from "../Component/Pages/WorkflowEditor/WorkflowEditorTool";
+import { IframeUrlProvider } from "../Component/IframeUrlContext/IframeUrlContext";
 
 
 function Rout() {
   return (
     <div>
+      <IframeUrlProvider>
       <Router>
         <Routes>
           <Route path="/" element={<Landing />} />
@@ -47,20 +50,21 @@ function Rout() {
           <Route path="/Sidebar" element={<Sidebar />} />
           <Route path="/Dashboard" element={<Dashboard />} />
           <Route path="/Workflow_Dashboard" element={<WorkflowDashboard />} />
-          <Route path="/Workflow_Editor" element={<WorkFlowEditor />} />
+          {/* <Route path="/Workflow_Editor" element={<WorkFlowEditor />} /> */}
           <Route path="/Executions" element={<Executions />} />
           <Route path="/Vault" element={<Vault />} />
           {/* Workflow Editor */}
-          <Route path="/Workflow_Editor" element={<WorkFlowEditor />} />
+          <Route path="/Workflow_Editor" element={<WorkFlowEditorTool />} />
           {/* BusinessName Settings */}
           <Route path="/BusinessName/Settings/Account" element={<BusinessSettingsAccount />} />
           <Route path="/BusinessName/Settings/Project" element={<BusinessSettingsProjects />} />
           <Route path="/BusinessName/Settings/Members" element={<BusinessSettingsMember/>} />
           <Route path="/BusinessName/Settings/Billing" element={<BusinessSettingsBilling />} />
           <Route path="/BusinessName/Settings/Billing/Upgrade" element={<BusinessSettingsBillingUpgrade />} />
-          <Route path="/UIComponent" element={<UIComponent />} />
+          {/* <Route path="/UIComponent" element={<UIComponent />} /> */}
         </Routes>
       </Router>
+      </IframeUrlProvider>
     </div>
   );
 }

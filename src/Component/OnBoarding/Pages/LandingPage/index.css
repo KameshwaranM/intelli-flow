@@ -42,7 +42,6 @@ body {
 
 .LandingPage-title {
     font-size: 60px;
-    font-family: "Roboto", sans-serif;
     right: 150px;
     position: relative;
     top: 100px;
@@ -73,7 +72,6 @@ body {
     bottom: 15px;
     font-size: 50px;
     font-weight: 600;
-    font-family: "Roboto", sans-serif;
 }
 
 @keyframes animatebottom {
@@ -114,7 +112,6 @@ body {
 }
 
 .LandingPage-subTitle {
-    font-family: "Roboto", sans-serif;
     font-size: 15px;
     color: gray;
     margin-left: 100px;
@@ -183,7 +180,6 @@ body {
 
 .LandingPage-Detail {
     color: white;
-    font-family: "Roboto", sans-serif;
     font-weight: 400;
     font-size: 15px;
     line-height: 25px;
@@ -205,7 +201,6 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: "Roboto", sans-serif;
     font-weight: 400;
     font-size: 15px;
     line-height: 25px;
