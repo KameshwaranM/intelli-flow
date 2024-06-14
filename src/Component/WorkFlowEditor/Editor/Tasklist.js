@@ -41,7 +41,7 @@ const Sidebar = ({ data }) => {
 
             return (
               <div key={index} className="category">
-                <ListItem button onClick={() => handleSettingsClick(categoryName)}>
+                <ListItem className='category-sidebar-action' button onClick={() => handleSettingsClick(categoryName)}>
                   <ListItemText primary={categoryName} />
                   {isOptionsVisible ? <ExpandLess /> : <ExpandMore />}
                 </ListItem>
@@ -54,7 +54,7 @@ const Sidebar = ({ data }) => {
                         onDragStart={(event) => onDragStart(event, "assign", task.FormInputs, task.TaskName)}
                         sx={{ pl: 4 }}
                       >
-                        <ListItemText primary={task.TaskName} />
+                        <ListItemText className='category-sidebar-sub-name' primary={task.TaskName} />
                       </ListItem>
                     ))}
                   </List>

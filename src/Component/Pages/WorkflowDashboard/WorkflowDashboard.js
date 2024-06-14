@@ -39,6 +39,7 @@ import {
 import axios from "axios";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import Workflowsapp from "../../WorkFlowEditor/App";
 
 const WorkflowDashboard = () => {
   const [openCreateDialog, setOpenCreateDialog] = useState(false);
@@ -53,6 +54,7 @@ const WorkflowDashboard = () => {
   const [rowsPerPage, setRowsPerPage] = useState(7);
   const [error, setError] = useState("");
   const [sessionKey, setSessionKey] = useState(null);
+  const [showWorkflowsApp, setShowWorkflowsApp] = useState(false);
 
   useEffect(() => {
     const sessionKey = localStorage.getItem("sessionKey");
@@ -206,8 +208,10 @@ const WorkflowDashboard = () => {
       if (res.status === 200) {
         console.log("Data sent successfully:", res.data);
         console.log("Data sent successfully:", res.data.id);
-        const iframeUrl = `http://localhost:3001?projectId=${res.data.id}`;
+        // const iframeUrl = `http://localhost:3001?projectId=${res.data.id}`;
         window.location.href = '/Workflow_Editor'; 
+        // setShowWorkflowsApp(true);
+        
       } else {
         console.log("Failed to send data. Status code:", res.status);
       }
@@ -231,6 +235,11 @@ const WorkflowDashboard = () => {
     <Box className="workflowContainer">
       <Sidebar />
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+      {/* {showWorkflowsApp ? (
+          <React.StrictMode>
+            <Workflowsapp />
+          </React.StrictMode>
+        ) : ( */}
         <Container maxWidth="xl">
           <Box className="workflowHeader">
             <h2 className="intelli-flow-right-side-headline">Workflows</h2>
@@ -383,6 +392,7 @@ const WorkflowDashboard = () => {
             />
           </TableContainer>
         </Container>
+        {/* )} */}
       </Box>
 
       <Dialog open={openCreateDialog} onClose={handleCreateClose}>

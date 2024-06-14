@@ -54,19 +54,19 @@
     display: flex;
     background-color:black;
     position:relative;
-    justify-content: space-between; /* Adjust as needed: space-around, space-evenly, etc. */
-    gap: 10px; /* Optional: adds space between columns */
+    justify-content: space-between;
+    gap: 10px; 
     width: 84%;
     float: right;
     height: 100vh;
     
   }
   .form-label {
-    color: white; /* Change this to your desired color */
+    color: white; 
 }
   .headers {
     
-    padding: 10px; /* Optional: adds padding inside columns */
+    padding: 10px;
     /* Optional: background color for visibility */
    /* Optional: border for visibility */
    width: 100%;

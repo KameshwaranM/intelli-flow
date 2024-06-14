@@ -21,7 +21,7 @@ aside .node {
   }
   
 
-  .css-bshv44-MuiButtonBase-root-MuiListItem-root {
+  .category-sidebar-action {
     color: white !important;
     border: 2px solid gray !important;
     border-radius: 5px !important;
@@ -36,6 +36,6 @@ aside .node {
     border-radius: 15px;
   }
 
-  .css-10hburv-MuiTypography-root {
+  .category-sidebar-sub-name span {
     font-size: 12px !important;
   }

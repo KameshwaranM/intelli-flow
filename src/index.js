@@ -3,15 +3,13 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-import Workflowsapp from './Component/WorkFlowEditor/App';
 
 
-// Synchronous rendering
+// Render the main App component into the 'root' element
 ReactDOM.render(
   <React.StrictMode>
     <App />
-    <Workflowsapp />
-  </React.StrictMode>, 
+  </React.StrictMode>,
   document.getElementById('root')
 );
 

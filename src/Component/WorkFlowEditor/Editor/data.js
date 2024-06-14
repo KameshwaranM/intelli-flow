@@ -68,6 +68,48 @@ const taskData = [
             ]
           }
       ]
+    },
+    {
+      "Kamesh": [
+        {
+          "TaskID": "AITSK003",
+          "TaskName": "S3 File Download",
+          "FormInputs": [
+            {
+              "label": "Bucket Name",
+              "type": "text"
+            },
+            {
+              "label": "File Name",
+              "type": "text"
+            },
+            {
+              "label": "Local Path",
+              "type": "text"
+            }
+          ]
+        },
+        {
+          "TaskID": "AITSK004",
+          "TaskName": "Start EC2 Instance",
+          "FormInputs": [
+            {
+              "label": "Instance ID",
+              "type": "text"
+            }
+          ]
+        },
+        {
+            "TaskID": "AITSK004",
+            "TaskName": "Start EC2 Test",
+            "FormInputs": [
+              {
+                "label": "Instance ID",
+                "type": "text"
+              }
+            ]
+          }
+      ]
     }
   ];
   
