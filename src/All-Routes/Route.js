@@ -62,6 +62,7 @@ function Rout() {
           <Route path="/BusinessName/Settings/Billing" element={<BusinessSettingsBilling />} />
           <Route path="/BusinessName/Settings/Billing/Upgrade" element={<BusinessSettingsBillingUpgrade />} />
           {/* <Route path="/UIComponent" element={<UIComponent />} /> */}
+          {/* Profile Info */}
         </Routes>
       </Router>
     </div>
