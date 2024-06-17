@@ -75,3 +75,12 @@
 .css-15wwp11-MuiTableHead-root{
     background-color: #a4a4a4;
 }
+
+.css-apqrd9-MuiTableBody-root {
+    background-color: white;
+    color: black !important;
+}
+
+.css-1drgtl0-MuiButtonBase-root-MuiIconButton-root {
+    color: rgb(117, 117, 117) !important;
+}

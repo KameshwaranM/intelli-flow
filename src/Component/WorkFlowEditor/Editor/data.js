@@ -1,5 +1,33 @@
 const taskData = [
-    {
+  {
+    "Genaral": [
+      {
+        "TaskID": "AITSK006",
+        "TaskName": "If Condition",
+        "FormInputs": [
+          {
+            "label": "True Condition",
+            "type": "text"
+          },
+          {
+            "label": "False Condition",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "TaskID": "AITSK007",
+        "TaskName": "Timer",
+        "FormInputs": [
+          {
+            "label": "Set Timer",
+            "type": "number"
+          }
+        ]
+      }
+    ]
+  },  
+  {
       "WINDOWS": [
         {
           "TaskID": "AITSK001",
@@ -58,7 +86,7 @@ const taskData = [
           ]
         },
         {
-            "TaskID": "AITSK004",
+            "TaskID": "AITSK005",
             "TaskName": "Start EC2 Test",
             "FormInputs": [
               {
@@ -72,7 +100,7 @@ const taskData = [
     {
       "Kamesh": [
         {
-          "TaskID": "AITSK003",
+          "TaskID": "AITSK006",
           "TaskName": "S3 File Download",
           "FormInputs": [
             {

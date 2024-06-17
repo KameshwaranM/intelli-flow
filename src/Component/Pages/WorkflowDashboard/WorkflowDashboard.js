@@ -39,7 +39,6 @@ import {
 import axios from "axios";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Workflowsapp from "../../WorkFlowEditor/App";
 
 const WorkflowDashboard = () => {
   const [openCreateDialog, setOpenCreateDialog] = useState(false);
@@ -142,27 +141,35 @@ const WorkflowDashboard = () => {
         });
   
         if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+        console.log("response", response);
+          return;
         }
   
         const data = await response.json();
   
         if (data.type === "error") {
-          throw new Error(data.message);
+          console.error(`Server error: ${data.message}`);
+          setError(data.message);
+          return; 
         }
+  
         if (Array.isArray(data.data)) {
           setWorkflows(data.data);
         } else {
-          throw new Error("Invalid data format");
+          console.error("Invalid data format");
+          setError("Invalid data format");
         }
       } catch (error) {
-        setError(error.message);
+        console.error("Fetch error:", error);
+        setError("Failed to fetch workflows. Please try again later.");
       }
     };
+  
     fetchWorkflows();
     const intervalId = setInterval(fetchWorkflows, 2000);
     return () => clearInterval(intervalId);
   }, []);
+  
 
   const handleDeleteWorkflow = () => {
     setWorkflows(workflows.filter((workflow) => workflow !== selectedWorkflow));
@@ -208,8 +215,11 @@ const WorkflowDashboard = () => {
       if (res.status === 200) {
         console.log("Data sent successfully:", res.data);
         console.log("Data sent successfully:", res.data.id);
+        localStorage.setItem('restoredata', res.data.data );
+        console.log("Data sent successfully:", res.data.data);
+        window.location.href = `/Workflow_Editor?Id=${res.data.id}`;
         // const iframeUrl = `http://localhost:3001?projectId=${res.data.id}`;
-        window.location.href = '/Workflow_Editor'; 
+        // window.location.href = '/Workflow_Editor'; 
         // setShowWorkflowsApp(true);
         
       } else {
@@ -223,14 +233,6 @@ const WorkflowDashboard = () => {
   };
   
   
-  // const handleOpenEditor = () => {
-  //   if (selectedWorkflow) {
-  //     localStorage.setItem('WorkflowName', selectedWorkflow.workflowname);
-  //     const url = `http://localhost:3001?workflow=${encodeURIComponent(workflowName)}&project=${encodeURIComponent(projectName)}&key=${encodeURIComponent(key)}`;
-  //     window.location.href = "/UIComponent";
-  //   }
-  // };
-
   return (
     <Box className="workflowContainer">
       <Sidebar />
@@ -331,12 +333,12 @@ const WorkflowDashboard = () => {
                           {workflow.createddate}
                         </TableCell>
                         <TableCell sx={{ padding: "7px" }} align="center">
-                          {workflow.description || "N/A"}
+                          {workflow.nextrun || "N/A"}
                         </TableCell>
                         <TableCell sx={{ padding: "7px" }} align="center">
                           <CircleIcon
                             style={{
-                              color: workflow.deployed ? "green" : "red",
+                              color: workflow.status,
                               transform: "scale(0.8)",
                             }}
                           />
