@@ -25,6 +25,7 @@ import {
 } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import Sidebar from "../../Sidebar/Sidebar";
 
 const Vault = () => {
   const [data, setData] = useState([]);
@@ -102,252 +103,259 @@ const Vault = () => {
   );
 
   return (
-    <Box sx={{ padding: 2 }}>
-      <Box
-        sx={{
-          display: "flex",
-          gap: 2,
-          marginBottom: 2,
-          justifyContent: "space-between",
-        }}
-      >
-        <TextField
-          label="Search"
-          value={searchQuery}
-          onChange={handleSearchChange}
-          halfWidth
-        />
-        <Button variant="contained" onClick={handleClickOpen}>
-          Add
-        </Button>
-      </Box>
-      <TableContainer component={Paper}>
-        <Table>
-          <TableHead>
-            <TableRow>
-              <TableCell>CRED Name</TableCell>
-              <TableCell>CRED Type</TableCell>
-              <TableCell>Username</TableCell>
-              <TableCell>Actions</TableCell>
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {filteredData.map((row, index) => (
-              <TableRow key={index}>
-                <TableCell>{row.credName}</TableCell>
-                <TableCell>{row.credType}</TableCell>
-                <TableCell>{row.username}</TableCell>
-                <TableCell>
-                  <IconButton color="primary" aria-label="edit">
-                    <EditIcon />
-                  </IconButton>
-                  <IconButton color="secondary" aria-label="delete">
-                    <DeleteIcon />
-                  </IconButton>
-                </TableCell>
-              </TableRow>
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
-      <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
-        <DialogTitle>Add New Credential</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            Please enter the details for the new credential.
-          </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            label="Cred Name"
-            fullWidth
-            value={newEntry.credName}
-            onChange={(e) =>
-              setNewEntry({ ...newEntry, credName: e.target.value })
-            }
-          />
-          <FormControl fullWidth margin="dense">
-            <InputLabel>Cred Type</InputLabel>
-            <Select
-              value={newEntry.credType}
-              onChange={handleCredTypeChange}
-              label="Cred Type"
+    <Box sx={{display: 'flex'}}>
+        <Sidebar/>
+        <Box sx={{ padding: 2, width: "100vw" }}>
+            <Box className="vaultHeader">
+                <h2 className="intelli-flow-right-side-headline">Vault</h2>
+            </Box>
+            <Box
+                sx={{
+                display: "flex",
+                gap: 2,
+                marginBottom: 2,
+                justifyContent: "space-between",
+                }}
             >
-              <MenuItem value="SSH">SSH</MenuItem>
-              <MenuItem value="WINRM">WINRM</MenuItem>
-              <MenuItem value="SSH Key">SSH Key</MenuItem>
-              <MenuItem value="HTTP">HTTP</MenuItem>
-              <MenuItem value="HTTPS">HTTPS</MenuItem>
-              <MenuItem value="SNMP">SNMP</MenuItem>
-              <MenuItem value="PAM">PAM</MenuItem>
-            </Select>
-          </FormControl>
-          {["SSH", "WINRM", "HTTP", "HTTPS", "PAM"].includes(
-            newEntry.credType
-          ) && (
-            <>
-              <TextField
-                margin="dense"
-                label="Username"
-                fullWidth
-                value={newEntry.username}
-                onChange={(e) =>
-                  setNewEntry({ ...newEntry, username: e.target.value })
-                }
-              />
-              <TextField
-                margin="dense"
-                label="Password"
-                fullWidth
-                type="password"
-                value={newEntry.password}
-                onChange={(e) =>
-                  setNewEntry({ ...newEntry, password: e.target.value })
-                }
-              />
-            </>
-          )}
-          {newEntry.credType === "SSH Key" && (
-            <>
-              <TextField
-                margin="dense"
-                label="SSH Key"
-                fullWidth
-                multiline
-                rows={4}
-                value={newEntry.sshKey}
-                onChange={(e) =>
-                  setNewEntry({ ...newEntry, sshKey: e.target.value })
-                }
-              />
-              <TextField
-                margin="dense"
-                label="Username"
-                fullWidth
-                value={newEntry.username}
-                onChange={(e) =>
-                  setNewEntry({ ...newEntry, username: e.target.value })
-                }
-              />
-              <TextField
-                margin="dense"
-                label="Passphrase"
-                fullWidth
-                type="password"
-                value={newEntry.passphrase}
-                onChange={(e) =>
-                  setNewEntry({ ...newEntry, passphrase: e.target.value })
-                }
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={newEntry.sudoYn}
-                    onChange={(e) =>
-                      setNewEntry({ ...newEntry, sudoYn: e.target.checked })
-                    }
-                  />
-                }
-                label="Sudo Y/N"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={newEntry.enable}
-                    onChange={(e) =>
-                      setNewEntry({ ...newEntry, enable: e.target.checked })
-                    }
-                  />
-                }
-                label="Enable"
-              />
-            </>
-          )}
-          {newEntry.credType === "SSH" && (
-            <>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={newEntry.sudoYn}
-                    onChange={(e) =>
-                      setNewEntry({ ...newEntry, sudoYn: e.target.checked })
-                    }
-                  />
-                }
-                label="Sudo Y/N"
-              />
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={newEntry.enable}
-                    onChange={(e) =>
-                      setNewEntry({ ...newEntry, enable: e.target.checked })
-                    }
-                  />
-                }
-                label="Enable"
-              />
-            </>
-          )}
-          {newEntry.credType === "SNMP" && (
-            <>
-              <FormControl fullWidth margin="dense">
-                <InputLabel>Version</InputLabel>
-                <Select
-                  value={newEntry.version}
-                  onChange={handleVersionChange}
-                  label="Version"
-                >
-                  <MenuItem value="v2">v2</MenuItem>
-                  <MenuItem value="v3">v3</MenuItem>
-                </Select>
-              </FormControl>
-              {newEntry.version === "v2" && (
                 <TextField
-                  margin="dense"
-                  label="Community String"
-                  fullWidth
-                  value={newEntry.communityString}
-                  onChange={(e) =>
-                    setNewEntry({
-                      ...newEntry,
-                      communityString: e.target.value,
-                    })
-                  }
+                label="Search"
+                value={searchQuery}
+                onChange={handleSearchChange}
+                halfWidth
                 />
-              )}
-              {newEntry.version === "v3" && (
-                <>
-                  <TextField
+                <Button variant="contained" onClick={handleClickOpen}>
+                Add
+                </Button>
+            </Box>
+            <TableContainer component={Paper}>
+                <Table>
+                <TableHead>
+                    <TableRow>
+                    <TableCell>CRED Name</TableCell>
+                    <TableCell>CRED Type</TableCell>
+                    <TableCell>Username</TableCell>
+                    <TableCell>Actions</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                    {filteredData.map((row, index) => (
+                    <TableRow key={index}>
+                        <TableCell>{row.credName}</TableCell>
+                        <TableCell>{row.credType}</TableCell>
+                        <TableCell>{row.username}</TableCell>
+                        <TableCell>
+                        <IconButton color="primary" aria-label="edit">
+                            <EditIcon />
+                        </IconButton>
+                        <IconButton color="secondary" aria-label="delete">
+                            <DeleteIcon />
+                        </IconButton>
+                        </TableCell>
+                    </TableRow>
+                    ))}
+                </TableBody>
+                </Table>
+            </TableContainer>
+            <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
+                <DialogTitle>Add New Credential</DialogTitle>
+                <DialogContent>
+                <DialogContentText>
+                    Please enter the details for the new credential.
+                </DialogContentText>
+                <TextField
+                    autoFocus
                     margin="dense"
-                    label="Username"
+                    label="Cred Name"
                     fullWidth
-                    value={newEntry.username}
+                    value={newEntry.credName}
                     onChange={(e) =>
-                      setNewEntry({ ...newEntry, username: e.target.value })
+                    setNewEntry({ ...newEntry, credName: e.target.value })
                     }
-                  />
-                  <TextField
-                    margin="dense"
-                    label="Password"
-                    fullWidth
-                    type="password"
-                    value={newEntry.password}
-                    onChange={(e) =>
-                      setNewEntry({ ...newEntry, password: e.target.value })
-                    }
-                  />
-                </>
-              )}
-            </>
-          )}
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleAdd}>Add</Button>
-        </DialogActions>
-      </Dialog>
+                />
+                <FormControl fullWidth margin="dense">
+                    <InputLabel>Cred Type</InputLabel>
+                    <Select
+                    value={newEntry.credType}
+                    onChange={handleCredTypeChange}
+                    label="Cred Type"
+                    >
+                    <MenuItem value="SSH">SSH</MenuItem>
+                    <MenuItem value="WINRM">WINRM</MenuItem>
+                    <MenuItem value="SSH Key">SSH Key</MenuItem>
+                    <MenuItem value="HTTP">HTTP</MenuItem>
+                    <MenuItem value="HTTPS">HTTPS</MenuItem>
+                    <MenuItem value="SNMP">SNMP</MenuItem>
+                    <MenuItem value="PAM">PAM</MenuItem>
+                    </Select>
+                </FormControl>
+                {["SSH", "WINRM", "HTTP", "HTTPS", "PAM"].includes(
+                    newEntry.credType
+                ) && (
+                    <>
+                    <TextField
+                        margin="dense"
+                        label="Username"
+                        fullWidth
+                        value={newEntry.username}
+                        onChange={(e) =>
+                        setNewEntry({ ...newEntry, username: e.target.value })
+                        }
+                    />
+                    <TextField
+                        margin="dense"
+                        label="Password"
+                        fullWidth
+                        type="password"
+                        value={newEntry.password}
+                        onChange={(e) =>
+                        setNewEntry({ ...newEntry, password: e.target.value })
+                        }
+                    />
+                    </>
+                )}
+                {newEntry.credType === "SSH Key" && (
+                    <>
+                    <TextField
+                        margin="dense"
+                        label="SSH Key"
+                        fullWidth
+                        multiline
+                        rows={4}
+                        value={newEntry.sshKey}
+                        onChange={(e) =>
+                        setNewEntry({ ...newEntry, sshKey: e.target.value })
+                        }
+                    />
+                    <TextField
+                        margin="dense"
+                        label="Username"
+                        fullWidth
+                        value={newEntry.username}
+                        onChange={(e) =>
+                        setNewEntry({ ...newEntry, username: e.target.value })
+                        }
+                    />
+                    <TextField
+                        margin="dense"
+                        label="Passphrase"
+                        fullWidth
+                        type="password"
+                        value={newEntry.passphrase}
+                        onChange={(e) =>
+                        setNewEntry({ ...newEntry, passphrase: e.target.value })
+                        }
+                    />
+                    <FormControlLabel
+                        control={
+                        <Checkbox
+                            checked={newEntry.sudoYn}
+                            onChange={(e) =>
+                            setNewEntry({ ...newEntry, sudoYn: e.target.checked })
+                            }
+                        />
+                        }
+                        label="Sudo Y/N"
+                    />
+                    <FormControlLabel
+                        control={
+                        <Checkbox
+                            checked={newEntry.enable}
+                            onChange={(e) =>
+                            setNewEntry({ ...newEntry, enable: e.target.checked })
+                            }
+                        />
+                        }
+                        label="Enable"
+                    />
+                    </>
+                )}
+                {newEntry.credType === "SSH" && (
+                    <>
+                    <FormControlLabel
+                        control={
+                        <Checkbox
+                            checked={newEntry.sudoYn}
+                            onChange={(e) =>
+                            setNewEntry({ ...newEntry, sudoYn: e.target.checked })
+                            }
+                        />
+                        }
+                        label="Sudo Y/N"
+                    />
+                    <FormControlLabel
+                        control={
+                        <Checkbox
+                            checked={newEntry.enable}
+                            onChange={(e) =>
+                            setNewEntry({ ...newEntry, enable: e.target.checked })
+                            }
+                        />
+                        }
+                        label="Enable"
+                    />
+                    </>
+                )}
+                {newEntry.credType === "SNMP" && (
+                    <>
+                    <FormControl fullWidth margin="dense">
+                        <InputLabel>Version</InputLabel>
+                        <Select
+                        value={newEntry.version}
+                        onChange={handleVersionChange}
+                        label="Version"
+                        >
+                        <MenuItem value="v2">v2</MenuItem>
+                        <MenuItem value="v3">v3</MenuItem>
+                        </Select>
+                    </FormControl>
+                    {newEntry.version === "v2" && (
+                        <TextField
+                        margin="dense"
+                        label="Community String"
+                        fullWidth
+                        value={newEntry.communityString}
+                        onChange={(e) =>
+                            setNewEntry({
+                            ...newEntry,
+                            communityString: e.target.value,
+                            })
+                        }
+                        />
+                    )}
+                    {newEntry.version === "v3" && (
+                        <>
+                        <TextField
+                            margin="dense"
+                            label="Username"
+                            fullWidth
+                            value={newEntry.username}
+                            onChange={(e) =>
+                            setNewEntry({ ...newEntry, username: e.target.value })
+                            }
+                        />
+                        <TextField
+                            margin="dense"
+                            label="Password"
+                            fullWidth
+                            type="password"
+                            value={newEntry.password}
+                            onChange={(e) =>
+                            setNewEntry({ ...newEntry, password: e.target.value })
+                            }
+                        />
+                        </>
+                    )}
+                    </>
+                )}
+                </DialogContent>
+                <DialogActions>
+                <Button onClick={handleClose}>Cancel</Button>
+                <Button onClick={handleAdd}>Add</Button>
+                </DialogActions>
+            </Dialog>
+        </Box>
     </Box>
+    
   );
 };
 

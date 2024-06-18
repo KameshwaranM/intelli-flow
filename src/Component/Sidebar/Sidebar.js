@@ -218,16 +218,24 @@ useEffect(() => {
               </ListItem>
               <Collapse in={settingsOpen} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-                  {["General", "Account Settings", "On-Prem Executor"].map(
-                    (text) => (
-                      <ListItem button key={text} sx={{ pl: 4 }}>
+                      <ListItem button key="General" onClick={() => handleNavigation("/General")} sx={{ pl: 4 , ...(window.location.pathname === "/General" ? activeStyle : {})}}>
                         <ListItemText
                           sx={{ paddingLeft: "10px" }}
-                          primary={text}
+                          primary="General"
                         />
                       </ListItem>
-                    )
-                  )}
+                      <ListItem button key="Account Settings" onClick={() => handleNavigation("/Account_Settings")} sx={{ pl: 4 , ...(window.location.pathname === "/Account_Settings" ? activeStyle : {})}}>
+                        <ListItemText
+                          sx={{ paddingLeft: "10px" }}
+                          primary="Account Settings"
+                        />
+                      </ListItem>
+                      <ListItem button key="On-Prem Executor" onClick={() => handleNavigation("/On_Prem_Executor")} sx={{ pl: 4 , ...(window.location.pathname === "/On_Prem_Executor" ? activeStyle : {})}}>
+                        <ListItemText
+                          sx={{ paddingLeft: "10px" }}
+                          primary="On-Prem Executor"
+                        />
+                      </ListItem>
                 </List>
               </Collapse>
             </List>

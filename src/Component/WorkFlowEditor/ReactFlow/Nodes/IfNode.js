@@ -10,8 +10,7 @@ const IfCustomNode = ({ data, isConnectable }) => {
                 isConnectable={isConnectable}
             />
             <div>
-                <strong>IF</strong>
-                <h5>hello</h5>
+                <strong>IF Condition</strong>
             </div>
             <Handle
                 id="true"
