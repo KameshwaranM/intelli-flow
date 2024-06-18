@@ -256,10 +256,10 @@ const Canvas = () => {
         <div className="column-property">
           
           <div style={{ display:"flex" , justifyContent:"space-between" }}>
-            <button className="btn btn-primary code-disply-save-btn" onClick={onSave}>
+            <button className="workflow-canvas-save-btn" onClick={onSave}>
               Save
             </button>
-            <button className="btn btn-primary code-disply-save-btn" onClick={DeployData}>
+            <button className="workflow-canvas-save-btn" onClick={DeployData}>
               Save & Deploy
             </button>
             <br></br>

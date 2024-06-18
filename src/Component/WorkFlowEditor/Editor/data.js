@@ -1,32 +1,32 @@
 const taskData = [
-  {
-    "Genaral": [
-      {
-        "TaskID": "AITSK006",
-        "TaskName": "If Condition",
-        "FormInputs": [
-          {
-            "label": "True Condition",
-            "type": "text"
-          },
-          {
-            "label": "False Condition",
-            "type": "text"
-          }
-        ]
-      },
-      {
-        "TaskID": "AITSK007",
-        "TaskName": "Timer",
-        "FormInputs": [
-          {
-            "label": "Set Timer",
-            "type": "number"
-          }
-        ]
-      }
-    ]
-  },  
+  // {
+  //   "Genaral": [
+  //     {
+  //       "TaskID": "AITSK006",
+  //       "TaskName": "If Condition",
+  //       "FormInputs": [
+  //         {
+  //           "label": "True Condition",
+  //           "type": "text"
+  //         },
+  //         {
+  //           "label": "False Condition",
+  //           "type": "text"
+  //         }
+  //       ]
+  //     },
+  //     {
+  //       "TaskID": "AITSK007",
+  //       "TaskName": "Timer",
+  //       "FormInputs": [
+  //         {
+  //           "label": "Set Timer",
+  //           "type": "number"
+  //         }
+  //       ]
+  //     }
+  //   ]
+  // },  
   {
       "WINDOWS": [
         {
