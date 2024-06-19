@@ -30,7 +30,7 @@ import {
 } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import SearchIcon from "@mui/icons-material/Search";
-import "../Vault/Vault.css"
+import "./Vault.css";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Sidebar from "../../Sidebar/Sidebar";
@@ -79,7 +79,8 @@ const Vault = () => {
     setOpenCreateDialog(false);
   };
 
-  const handleAdd = () => {
+  const handleAdd = (e) => {
+    e.preventDefault();
     setData([...data, { ...newEntry, actions: "Actions" }]);
     setNewEntry({
       credName: "",
@@ -120,7 +121,7 @@ const Vault = () => {
   //       }
   
   //       if (Array.isArray(data.data)) {
-  //         setWorkflows(data.data);
+  //         setData(data.data);
   //       } else {
   //         console.error("Invalid data format");
   //         setError("Invalid data format");
@@ -221,25 +222,25 @@ const Vault = () => {
               <TableHead>
                 <TableRow>
                   <TableCell
-                    align="center"
+                    align="left"
                     sx={{ fontSize: "15px", fontWeight: "600" }}
                   >
                     CRED Name
                   </TableCell>
                   <TableCell
-                    align="center"
+                    align="left"
                     sx={{ fontSize: "15px", fontWeight: "600" }}
                   >
                     CRED Type
                   </TableCell>
                   <TableCell
-                    align="center"
+                    align="left"
                     sx={{ fontSize: "15px", fontWeight: "600" }}
                   >
                     Username
                   </TableCell>
                   <TableCell
-                    align="center"
+                    align="left"
                     sx={{ fontSize: "15px", fontWeight: "600" }}
                   >
                     Actions
@@ -250,15 +251,15 @@ const Vault = () => {
                 {paginatedVault && paginatedVault.length > 0 ? (
                   filteredData.map((row, index) => (
                     <TableRow key={index}>
-                        <TableCell sx={{ padding: "7px" }} align="center">{row.credName}</TableCell>
-                        <TableCell sx={{ padding: "7px" }} align="center">{row.credType}</TableCell>
-                        <TableCell sx={{ padding: "7px" }} align="center">{row.username}</TableCell>
-                        <TableCell sx={{ padding: "7px" }} align="center">
-                          <IconButton color="primary" aria-label="edit">
-                              <EditIcon />
+                        <TableCell sx={{ padding: "7px 10px" }} align="left">{row.credName}</TableCell>
+                        <TableCell sx={{ padding: "7px 10px" }} align="left">{row.credType}</TableCell>
+                        <TableCell sx={{ padding: "7px 10px" }} align="left">{row.username}</TableCell>
+                        <TableCell sx={{ padding: "7px 10px" }} align="left">
+                          <IconButton  color="info" aria-label="edit">
+                              <EditIcon sx={{fontSize:"16px"}} />
                           </IconButton>
-                          <IconButton color="secondary" aria-label="delete">
-                              <DeleteIcon />
+                          <IconButton  aria-label="delete">
+                              <DeleteIcon sx={{fontSize:"16px" , color :"red"}} />
                           </IconButton>
                         </TableCell>
                     </TableRow>
@@ -290,95 +291,90 @@ const Vault = () => {
           </TableContainer>
         </Container>
       </Box>
-      <Dialog open={openCreateDialog} onClose={handleCreateClose} maxWidth="md" fullWidth>
-                <DialogTitle>Add New Credential</DialogTitle>
-                <DialogContent>
-                <DialogContentText>
-                    Please enter the details for the new credential.
-                </DialogContentText>
-                <TextField
-                    autoFocus
-                    margin="dense"
-                    label="Cred Name"
-                    fullWidth
-                    value={newEntry.credName}
-                    onChange={(e) =>
-                    setNewEntry({ ...newEntry, credName: e.target.value })
-                    }
-                />
-                <FormControl fullWidth margin="dense">
-                    <InputLabel>Cred Type</InputLabel>
-                    <Select
-                    value={newEntry.credType}
-                    onChange={handleCredTypeChange}
-                    label="Cred Type"
-                    >
-                    <MenuItem value="SSH">SSH</MenuItem>
-                    <MenuItem value="WINRM">WINRM</MenuItem>
-                    <MenuItem value="SSH Key">SSH Key</MenuItem>
-                    <MenuItem value="HTTP">HTTP</MenuItem>
-                    <MenuItem value="HTTPS">HTTPS</MenuItem>
-                    <MenuItem value="SNMP">SNMP</MenuItem>
-                    <MenuItem value="PAM">PAM</MenuItem>
-                    </Select>
-                </FormControl>
-                {["SSH", "WINRM", "HTTP", "HTTPS", "PAM"].includes(
+
+      <Dialog open={openCreateDialog} onClose={handleCreateClose}>
+        <form onSubmit={handleAdd}>
+          <Box>
+            <DialogContent>
+              <Typography variant="h5" gutterBottom>
+                Add New Credential
+              </Typography>
+              <Typography sx={{ marginBottom: "15px" }} gutterBottom>
+                Please enter the details for the new credential.
+              </Typography>
+              <label>Cred Name</label>
+              <input
+                className="first-time-login-card-input"
+                type="text"
+                required
+                value={newEntry.credName}
+                onChange={(e) => setNewEntry({ ...newEntry, credName: e.target.value })}
+              />
+              <label>Cred Type</label>
+              <select name="" 
+                id="credType"
+                className="first-time-login-card-input"
+                value={newEntry.credType}
+                onChange={handleCredTypeChange}
+              >
+                <option value="" disabled hidden>Select a type</option>
+                <option value="SSH">SSH</option>
+                <option value="WINRM">WINRM</option>
+                <option value="SSH Key">SSH Key</option>
+                <option value="HTTP">HTTP</option>
+                <option value="HTTPS">HTTPS</option>
+                <option value="SNMP">SNMP</option>
+                <option value="PAM">PAM</option>
+              </select>
+
+              {["SSH", "WINRM", "HTTP", "HTTPS", "PAM"].includes(
                     newEntry.credType
                 ) && (
                     <>
-                    <TextField
-                        margin="dense"
-                        label="Username"
-                        fullWidth
+                      <label>Username</label>
+                      <input
+                        className="first-time-login-card-input"
+                        type="text"
+                        required
                         value={newEntry.username}
-                        onChange={(e) =>
-                        setNewEntry({ ...newEntry, username: e.target.value })
-                        }
-                    />
-                    <TextField
-                        margin="dense"
-                        label="Password"
-                        fullWidth
+                        onChange={(e) => setNewEntry({ ...newEntry, username: e.target.value })}
+                      />
+                      <label>Password</label>
+                      <input
+                        className="first-time-login-card-input"
                         type="password"
+                        required
                         value={newEntry.password}
-                        onChange={(e) =>
-                        setNewEntry({ ...newEntry, password: e.target.value })
-                        }
-                    />
+                        onChange={(e) => setNewEntry({ ...newEntry, password: e.target.value })}
+                      />
                     </>
                 )}
                 {newEntry.credType === "SSH Key" && (
                     <>
-                    <TextField
-                        margin="dense"
-                        label="SSH Key"
-                        fullWidth
-                        multiline
-                        rows={4}
+                      <label>SSH Key</label>
+                      <textarea name="SSH Key" id=""
+                        className="first-time-login-card-input"
+                        required
                         value={newEntry.sshKey}
-                        onChange={(e) =>
-                        setNewEntry({ ...newEntry, sshKey: e.target.value })
-                        }
-                    />
-                    <TextField
-                        margin="dense"
-                        label="Username"
-                        fullWidth
+                        onChange={(e) => setNewEntry({ ...newEntry, sshKey: e.target.value })}
+                      >
+                      </textarea>
+                      <label>Username</label>
+                      <input
+                        className="first-time-login-card-input"
+                        type="text"
+                        required
                         value={newEntry.username}
-                        onChange={(e) =>
-                        setNewEntry({ ...newEntry, username: e.target.value })
-                        }
-                    />
-                    <TextField
-                        margin="dense"
-                        label="Passphrase"
-                        fullWidth
+                        onChange={(e) => setNewEntry({ ...newEntry, username: e.target.value })}
+                      />
+                      <label>Passphrase</label>
+                      <input
+                        className="first-time-login-card-input"
                         type="password"
-                        value={newEntry.passphrase}
-                        onChange={(e) =>
-                        setNewEntry({ ...newEntry, passphrase: e.target.value })
-                        }
-                    />
+                        required
+                        value={newEntry.password}
+                        onChange={(e) => setNewEntry({ ...newEntry, password: e.target.value })}
+                      />
                     <FormControlLabel
                         control={
                         <Checkbox
@@ -431,61 +427,71 @@ const Vault = () => {
                 )}
                 {newEntry.credType === "SNMP" && (
                     <>
-                    <FormControl fullWidth margin="dense">
-                        <InputLabel>Version</InputLabel>
-                        <Select
+                      <label>Version</label>
+                      <select name="" 
+                        id="credType"
+                        className="first-time-login-card-input"
                         value={newEntry.version}
                         onChange={handleVersionChange}
-                        label="Version"
-                        >
-                        <MenuItem value="v2">v2</MenuItem>
-                        <MenuItem value="v3">v3</MenuItem>
-                        </Select>
-                    </FormControl>
-                    {newEntry.version === "v2" && (
-                        <TextField
-                        margin="dense"
-                        label="Community String"
-                        fullWidth
-                        value={newEntry.communityString}
-                        onChange={(e) =>
-                            setNewEntry({
-                            ...newEntry,
-                            communityString: e.target.value,
-                            })
-                        }
-                        />
-                    )}
-                    {newEntry.version === "v3" && (
+                      >
+                        <option value="v2">v2</option>
+                        <option value="v3">v3</option>
+                      </select>
+                      {newEntry.version === "v2" && (
                         <>
-                        <TextField
-                            margin="dense"
-                            label="Username"
-                            fullWidth
-                            value={newEntry.username}
-                            onChange={(e) =>
-                            setNewEntry({ ...newEntry, username: e.target.value })
-                            }
-                        />
-                        <TextField
-                            margin="dense"
-                            label="Password"
-                            fullWidth
-                            type="password"
-                            value={newEntry.password}
-                            onChange={(e) =>
-                            setNewEntry({ ...newEntry, password: e.target.value })
-                            }
-                        />
+                          <label>Community String</label>
+                          <input
+                            className="first-time-login-card-input"
+                            type="text"
+                            required
+                            value={newEntry.communityString}
+                            onChange={(e) => setNewEntry({ ...newEntry, communityString: e.target.value })}
+                          />
                         </>
+                      )}
+                    {newEntry.version === "v3" && (
+                      <>
+                        <label>Username</label>
+                        <input
+                          className="first-time-login-card-input"
+                          type="text"
+                          required
+                          value={newEntry.username}
+                          onChange={(e) => setNewEntry({ ...newEntry, username: e.target.value })}
+                        />
+                        <label>Password</label>
+                        <input
+                          className="first-time-login-card-input"
+                          type="password"
+                          required
+                          value={newEntry.password}
+                          onChange={(e) => setNewEntry({ ...newEntry, password: e.target.value })}
+                        />
+                      </>
                     )}
                     </>
                 )}
-                </DialogContent>
-                <DialogActions>
-                <Button onClick={handleClose}>Cancel</Button>
-                <Button onClick={handleAdd}>Add</Button>
-                </DialogActions>
+            </DialogContent>
+            
+            <DialogActions>
+              <Button
+                onClick={handleCreateClose}
+                variant="contained"
+                color="error"
+              >
+                Cancel
+              </Button>
+              <Button 
+                onClick={handleCreateClose}
+                type="submit"
+                variant="contained" 
+                color="success"
+              >
+                Add
+              </Button>
+            </DialogActions>
+          </Box>
+        </form>
       </Dialog>     
       <ToastContainer />
     </Box>

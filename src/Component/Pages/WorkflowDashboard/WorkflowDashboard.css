@@ -84,3 +84,7 @@
 .css-1drgtl0-MuiButtonBase-root-MuiIconButton-root {
     color: rgb(117, 117, 117) !important;
 }
+
+.css-17rqsp7-MuiTableCell-root {
+    padding: 10px !important;
+}

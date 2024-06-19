@@ -280,19 +280,19 @@ const WorkflowDashboard = () => {
                 <TableRow>
                   <TableCell
                     align="left"
-                    sx={{ fontSize: "15px", fontWeight: "600" }}
+                    sx={{ fontSize: "15px", fontWeight: "600" , padding: "10px" }}
                   >
                     Name
                   </TableCell>
                   <TableCell
                     align="left"
-                    sx={{ fontSize: "15px", fontWeight: "600" }}
+                    sx={{ fontSize: "15px", fontWeight: "600" , padding: "10px" }}
                   >
                     Last Run
                   </TableCell>
                   <TableCell
                     align="left"
-                    sx={{ fontSize: "15px", fontWeight: "600" }}
+                    sx={{ fontSize: "15px", fontWeight: "600" , padding: "10px" }}
                   >
                     Next Run
                   </TableCell>
@@ -301,20 +301,20 @@ const WorkflowDashboard = () => {
                     sx={{
                       fontSize: "15px",
                       fontWeight: "600",
-                      padding: "10px",
+                      padding: "10px"
                     }}
                   >
                     Deployed
                   </TableCell>
                   <TableCell
                     align="left"
-                    sx={{ fontSize: "15px", fontWeight: "600" }}
+                    sx={{ fontSize: "15px", fontWeight: "600", padding: "10px" }}
                   >
                     Activity
                   </TableCell>
                   <TableCell
                     align="left"
-                    sx={{ fontSize: "15px", fontWeight: "600" }}
+                    sx={{ fontSize: "15px", fontWeight: "600"  }}
                   ></TableCell>
                 </TableRow>
               </TableHead>
@@ -326,16 +326,16 @@ const WorkflowDashboard = () => {
                         key={workflow.createdbyuserid}
                         className="workflowTableRow"
                       >
-                        <TableCell sx={{ padding: "7px" }} align="left">
+                        <TableCell sx={{ padding: "7px 10px" }} align="left">
                           {workflow.workflowname}
                         </TableCell>
-                        <TableCell sx={{ padding: "7px" }} align="left">
+                        <TableCell sx={{ padding: "7px 10px" }} align="left">
                           {workflow.createddate}
                         </TableCell>
-                        <TableCell sx={{ padding: "7px" }} align="left">
+                        <TableCell sx={{ padding: "7px 10px" }} align="left">
                           {workflow.nextrun || "N/A"}
                         </TableCell>
-                        <TableCell sx={{ padding: "7px" }} align="left">
+                        <TableCell sx={{ padding: "7px 10px" }} align="left">
                           <CircleIcon
                             style={{
                               color: workflow.status,
@@ -343,7 +343,7 @@ const WorkflowDashboard = () => {
                             }}
                           />
                         </TableCell>
-                        <TableCell sx={{ padding: "7px" }} align="left">
+                        <TableCell sx={{ padding: "7px 10px" }} align="left">
                           <Box sx={{ display: "flex", alignItems: "left" }}>
                             <LinearProgress
                               variant="buffer"

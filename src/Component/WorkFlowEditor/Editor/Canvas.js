@@ -137,23 +137,23 @@ const Canvas = () => {
   };
   console.log("API",error);
 
-  const restoreData = () => {
-    const savedData = localStorage.getItem('final');
-    if (savedData) {
-      try {
-        const parsedData = JSON.parse(savedData);
-        //console.log(parsedData);
-        const { nodes, edges, codeData } = parsedData;
-        console.log(codeData);
-        setNodes(nodes);
-        setCodeData(codeData);
-        setEdges(edges);
+  // const restoreData = () => {
+  //   const savedData = localStorage.getItem('final');
+  //   if (savedData) {
+  //     try {
+  //       const parsedData = JSON.parse(savedData);
+  //       console.log(parsedData);
+  //       const { nodes, edges, codeData } = parsedData;
+  //       console.log(codeData);
+  //       setNodes(nodes);
+  //       setCodeData(codeData);
+  //       setEdges(edges);
 
-      } catch (error) {
-        console.error("Failed to parse JSON data:", error);
-      }
-    }
-  };
+  //     } catch (error) {
+  //       console.error("Failed to parse JSON data:", error);
+  //     }
+  //   }
+  // };
 
   const DeployData  = async (e) => {
     e.preventDefault();
