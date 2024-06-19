@@ -241,25 +241,25 @@ const Executions = () => {
               <TableHead>
                 <TableRow>
                   <TableCell
-                    align="center"
-                    sx={{ fontSize: "15px", fontWeight: "600" }}
+                    align="left"
+                    sx={{ fontSize: "15px", fontWeight: "600", padding: "10px" }}
                   >
                     Name
                   </TableCell>
                   <TableCell
-                    align="center"
-                    sx={{ fontSize: "15px", fontWeight: "600" }}
+                    align="left"
+                    sx={{ fontSize: "15px", fontWeight: "600", padding: "10px" }}
                   >
                     Start Date
                   </TableCell>
                   <TableCell
-                    align="center"
-                    sx={{ fontSize: "15px", fontWeight: "600" }}
+                    align="left"
+                    sx={{ fontSize: "15px", fontWeight: "600", padding: "10px" }}
                   >
                     End Date
                   </TableCell>
                   <TableCell
-                    align="center"
+                    align="left"
                     sx={{
                       fontSize: "15px",
                       fontWeight: "600",
@@ -269,14 +269,14 @@ const Executions = () => {
                     Status
                   </TableCell>
                   <TableCell
-                    align="center"
-                    sx={{ fontSize: "15px", fontWeight: "600" }}
+                    align="left"
+                    sx={{ fontSize: "15px", fontWeight: "600", padding: "10px" }}
                   >
                     Activity
                   </TableCell>
                   <TableCell
-                    align="center"
-                    sx={{ fontSize: "15px", fontWeight: "600" }}
+                    align="left"
+                    sx={{ fontSize: "15px", fontWeight: "600", padding: "10px" }}
                   ></TableCell>
                 </TableRow>
               </TableHead>
@@ -288,16 +288,16 @@ const Executions = () => {
                         key={workflow.createdbyuserid}
                         className="workflowTableRow"
                       >
-                        <TableCell sx={{ padding: "7px" }} align="center">
+                        <TableCell sx={{ padding: "7px 10px" }} align="left">
                           {workflow.workflowname}
                         </TableCell>
-                        <TableCell sx={{ padding: "7px" }} align="center">
+                        <TableCell sx={{ padding: "7px 10px" }} align="left">
                           {workflow.createddate}
                         </TableCell>
-                        <TableCell sx={{ padding: "7px" }} align="center">
+                        <TableCell sx={{ padding: "7px 10px" }} align="left">
                           {workflow.description || "N/A"}
                         </TableCell>
-                        <TableCell sx={{ padding: "7px" }} align="center">
+                        <TableCell sx={{ padding: "7px 10px" }} align="left">
                           <CircleIcon
                             style={{
                               color: workflow.deployed ? "green" : "red",
@@ -305,8 +305,8 @@ const Executions = () => {
                             }}
                           />
                         </TableCell>
-                        <TableCell sx={{ padding: "7px" }} align="center">
-                          <Box sx={{ display: "flex", alignItems: "center" }}>
+                        <TableCell sx={{ padding: "7px 10px" }} align="left">
+                          <Box sx={{ display: "flex", alignItems: "left" }}>
                             <LinearProgress
                               variant="buffer"
                               value={workflow.activity}
@@ -317,7 +317,7 @@ const Executions = () => {
                             />
                           </Box>
                         </TableCell>
-                        <TableCell sx={{ padding: "7px" }} align="center">
+                        <TableCell sx={{ padding: "7px 10px" }} align="left">
                           <IconButton
                             onClick={(event) => handleMenuOpen(event, workflow)}
                           >
@@ -353,6 +353,12 @@ const Executions = () => {
               page={page}
               onPageChange={handleChangePage}
               onRowsPerPageChange={handleChangeRowsPerPage}
+              sx={{
+                "& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows":
+                  {
+                    marginBottom: 0,
+                  },
+              }}
             />
           </TableContainer>
         </Container>

@@ -223,25 +223,25 @@ const Vault = () => {
                 <TableRow>
                   <TableCell
                     align="left"
-                    sx={{ fontSize: "15px", fontWeight: "600" }}
+                    sx={{ fontSize: "15px", fontWeight: "600" , padding: "10px" }}
                   >
                     CRED Name
                   </TableCell>
                   <TableCell
                     align="left"
-                    sx={{ fontSize: "15px", fontWeight: "600" }}
+                    sx={{ fontSize: "15px", fontWeight: "600" , padding: "10px" }}
                   >
                     CRED Type
                   </TableCell>
                   <TableCell
                     align="left"
-                    sx={{ fontSize: "15px", fontWeight: "600" }}
+                    sx={{ fontSize: "15px", fontWeight: "600" , padding: "10px" }}
                   >
                     Username
                   </TableCell>
                   <TableCell
                     align="left"
-                    sx={{ fontSize: "15px", fontWeight: "600" }}
+                    sx={{ fontSize: "15px", fontWeight: "600" , padding: "10px" }}
                   >
                     Actions
                   </TableCell>

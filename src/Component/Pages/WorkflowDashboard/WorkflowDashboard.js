@@ -391,6 +391,12 @@ const WorkflowDashboard = () => {
               page={page}
               onPageChange={handleChangePage}
               onRowsPerPageChange={handleChangeRowsPerPage}
+              sx={{
+                "& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows":
+                  {
+                    marginBottom: 0,
+                  },
+              }}
             />
           </TableContainer>
         </Container>
