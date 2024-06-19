@@ -28,6 +28,9 @@
 
 .workflow-content-heading {
     color: white;
+    font-weight: 600;
+    font-size: 20px;
+    margin-top: 18px;
 }
 
 .container .react-flow__edge-path {

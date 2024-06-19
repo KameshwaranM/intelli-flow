@@ -224,7 +224,7 @@ const Canvas = () => {
       );
     } else {
       return (
-        <em className="workflow-content-heading">
+        <em style={{color:"white"}}>
           Select an element from the canvas to update.
         </em>
       );
@@ -236,11 +236,11 @@ const Canvas = () => {
     <div >
       <div className="flex-container">
         <div className="column-actions">
-          <h4 className="workflow-content-heading">Actions</h4>
+          <h2 className="workflow-content-heading">Actions</h2>
           <SidebarAction />
         </div>
         <div className="column-canvas">
-          <h4 className="workflow-content-heading">Workflow Deisgner</h4>
+          <h2 className="workflow-content-heading">Workflow Deisgner</h2>
           <DiagramAdapter
             nodes={nodes}
             edges={edges}
@@ -264,8 +264,8 @@ const Canvas = () => {
             </button>
             <br></br>
             </div>
-          <h4 className="workflow-content-heading">Property</h4>
-          {renderPropertyEditor()}
+          <h2 className="workflow-content-heading">Property</h2>
+          <p>{renderPropertyEditor()}</p>
         </div>
       </div>
       <ToastContainer />

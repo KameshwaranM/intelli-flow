@@ -132,7 +132,7 @@ useEffect(() => {
           </Box>
           <Box className="business-name" onClick={handlePopperOpen}>
             <Typography className="business-name-p">{businessname}</Typography>
-            <Typography>{projectname}</Typography>
+            <Typography className="project-name-p">{projectname}</Typography>
           </Box>
         </Box>
         <Divider />

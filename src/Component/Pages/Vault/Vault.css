@@ -1,0 +1,22 @@
+.vaultContainer {
+    display: flex;
+}
+
+.vaultHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.vaultActions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-bottom: 16px;
+    gap: 16px;
+}
+
+.vaultTableContainer {
+    margin-top: 16px;
+}

@@ -1,35 +1,57 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
+  Box,
+  Container,
+  Typography,
+  Button,
+  TextField,
+  IconButton,
+  Menu,
+  MenuItem,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Paper,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
-  Paper,
-  Button,
-  TextField,
-  Box,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  MenuItem,
+  InputAdornment,
   Select,
+  TablePagination,
   FormControl,
   InputLabel,
   FormControlLabel,
   Checkbox,
-  IconButton,
 } from "@mui/material";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import SearchIcon from "@mui/icons-material/Search";
+import "../Vault/Vault.css"
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import Sidebar from "../../Sidebar/Sidebar";
+import {
+  URL_Create_Workflow,
+  URL_Get_Workflow_Name,
+} from "../../API/ProjectAPI";
+import axios from "axios";
+import { ToastContainer, toast, Bounce } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Vault = () => {
+  const [openCreateDialog, setOpenCreateDialog] = useState(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+  const [anchorEl, setAnchorEl] = useState(null);
   const [data, setData] = useState([]);
-  const [open, setOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(7);
+  const [error, setError] = useState("");
+  const [sessionKey, setSessionKey] = useState(null);
   const [newEntry, setNewEntry] = useState({
     credName: "",
     credType: "",
@@ -42,14 +64,19 @@ const Vault = () => {
     sudoYn: false,
     enable: false,
   });
-  const [searchQuery, setSearchQuery] = useState("");
 
-  const handleClickOpen = () => {
-    setOpen(true);
+  useEffect(() => {
+    const sessionKey = localStorage.getItem("sessionKey");
+    setSessionKey(sessionKey);
+  }, []);
+
+  const handleCreateOpen = () => setOpenCreateDialog(true);
+  const handleCreateClose = () => {
+    setOpenCreateDialog(false);
   };
 
   const handleClose = () => {
-    setOpen(false);
+    setOpenCreateDialog(false);
   };
 
   const handleAdd = () => {
@@ -69,9 +96,46 @@ const Vault = () => {
     handleClose();
   };
 
-  const handleSearchChange = (e) => {
-    setSearchQuery(e.target.value);
-  };
+  // useEffect(() => {
+  //   const fetchWorkflows = async () => {
+  //     try {
+  //       const response = await fetch("", {
+  //         method: "GET",
+  //         headers: {
+  //           SESSIONKEY: localStorage.getItem("sessionKey"),
+  //         },
+  //       });
+  
+  //       if (!response.ok) {
+  //       console.log("response", response);
+  //         return;
+  //       }
+  
+  //       const data = await response.json();
+  
+  //       if (data.type === "error") {
+  //         console.error(`Server error: ${data.message}`);
+  //         setError(data.message);
+  //         return; 
+  //       }
+  
+  //       if (Array.isArray(data.data)) {
+  //         setWorkflows(data.data);
+  //       } else {
+  //         console.error("Invalid data format");
+  //         setError("Invalid data format");
+  //       }
+  //     } catch (error) {
+  //       console.error("Fetch error:", error);
+  //       setError("Failed to fetch workflows. Please try again later.");
+  //     }
+  //   };
+  
+  //   fetchWorkflows();
+  //   const intervalId = setInterval(fetchWorkflows, 2000);
+  //   return () => clearInterval(intervalId);
+  // }, []);
+
 
   const handleCredTypeChange = (e) => {
     setNewEntry({
@@ -98,65 +162,135 @@ const Vault = () => {
 
   const filteredData = data.filter((row) =>
     Object.values(row).some((value) =>
-      value.toString().toLowerCase().includes(searchQuery.toLowerCase())
+      value.toString().toLowerCase().includes(searchTerm.toLowerCase())
     )
   );
 
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
+
+  const handleChangeRowsPerPage = (event) => {
+    setRowsPerPage(parseInt(event.target.value, 10));
+    setPage(0);
+  };
+
+  const paginatedVault = filteredData.slice(
+    page * rowsPerPage,
+    page * rowsPerPage + rowsPerPage
+  );
+
   return (
-    <Box sx={{display: 'flex'}}>
-        <Sidebar/>
-        <Box sx={{ padding: 2, width: "100vw" }}>
-            <Box className="vaultHeader">
-                <h2 className="intelli-flow-right-side-headline">Vault</h2>
-            </Box>
-            <Box
-                sx={{
-                display: "flex",
-                gap: 2,
-                marginBottom: 2,
-                justifyContent: "space-between",
-                }}
+    <Box className="vaultContainer">
+      <Sidebar />
+      <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
+        <Container maxWidth="xl">
+          <Box className="vaultHeader">
+            <h2 className="intelli-flow-right-side-headline">Vault</h2>
+          </Box>
+          <Box className="vaultActions">
+            <IconButton
+              onClick={handleCreateOpen}
+              sx={{ transform: "scale(1.5)" }}
             >
-                <TextField
-                label="Search"
-                value={searchQuery}
-                onChange={handleSearchChange}
-                halfWidth
-                />
-                <Button variant="contained" onClick={handleClickOpen}>
-                Add
-                </Button>
-            </Box>
-            <TableContainer component={Paper}>
-                <Table>
-                <TableHead>
-                    <TableRow>
-                    <TableCell>CRED Name</TableCell>
-                    <TableCell>CRED Type</TableCell>
-                    <TableCell>Username</TableCell>
-                    <TableCell>Actions</TableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {filteredData.map((row, index) => (
+              <AddCircleIcon sx={{ width: "25px" }} />
+            </IconButton>
+            <TextField
+              variant="outlined"
+              placeholder="Search Vault"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon />
+                  </InputAdornment>
+                ),
+              }}
+              className="searchInput"
+            />
+            <Select defaultValue="All" className="tagSelect">
+              <MenuItem value="All">All Tags</MenuItem>
+            </Select>
+            <Select defaultValue="Created" className="statusSelect">
+              <MenuItem value="Created">Created</MenuItem>
+            </Select>
+          </Box>
+          <TableContainer component={Paper} className="vaultTableContainer">
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell
+                    align="center"
+                    sx={{ fontSize: "15px", fontWeight: "600" }}
+                  >
+                    CRED Name
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={{ fontSize: "15px", fontWeight: "600" }}
+                  >
+                    CRED Type
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={{ fontSize: "15px", fontWeight: "600" }}
+                  >
+                    Username
+                  </TableCell>
+                  <TableCell
+                    align="center"
+                    sx={{ fontSize: "15px", fontWeight: "600" }}
+                  >
+                    Actions
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {paginatedVault && paginatedVault.length > 0 ? (
+                  filteredData.map((row, index) => (
                     <TableRow key={index}>
-                        <TableCell>{row.credName}</TableCell>
-                        <TableCell>{row.credType}</TableCell>
-                        <TableCell>{row.username}</TableCell>
-                        <TableCell>
-                        <IconButton color="primary" aria-label="edit">
-                            <EditIcon />
-                        </IconButton>
-                        <IconButton color="secondary" aria-label="delete">
-                            <DeleteIcon />
-                        </IconButton>
+                        <TableCell sx={{ padding: "7px" }} align="center">{row.credName}</TableCell>
+                        <TableCell sx={{ padding: "7px" }} align="center">{row.credType}</TableCell>
+                        <TableCell sx={{ padding: "7px" }} align="center">{row.username}</TableCell>
+                        <TableCell sx={{ padding: "7px" }} align="center">
+                          <IconButton color="primary" aria-label="edit">
+                              <EditIcon />
+                          </IconButton>
+                          <IconButton color="secondary" aria-label="delete">
+                              <DeleteIcon />
+                          </IconButton>
                         </TableCell>
                     </TableRow>
-                    ))}
-                </TableBody>
-                </Table>
-            </TableContainer>
-            <Dialog open={open} onClose={handleClose} maxWidth="md" fullWidth>
+                    ))
+                ) : (
+                  <TableRow>
+                    <TableCell sx={{ color: "red" }} colSpan={6} align="center">
+                      No data found
+                    </TableCell>
+                  </TableRow>
+                )}
+              </TableBody>
+            </Table>
+            <TablePagination
+              rowsPerPageOptions={[7, 14, 21]}
+              component="div"
+              count={filteredData.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+              onRowsPerPageChange={handleChangeRowsPerPage}
+              sx={{
+                "& .MuiTablePagination-selectLabel, & .MuiTablePagination-displayedRows":
+                  {
+                    marginBottom: 0,
+                  },
+              }}
+            />
+          </TableContainer>
+        </Container>
+      </Box>
+      <Dialog open={openCreateDialog} onClose={handleCreateClose} maxWidth="md" fullWidth>
                 <DialogTitle>Add New Credential</DialogTitle>
                 <DialogContent>
                 <DialogContentText>
@@ -352,10 +486,9 @@ const Vault = () => {
                 <Button onClick={handleClose}>Cancel</Button>
                 <Button onClick={handleAdd}>Add</Button>
                 </DialogActions>
-            </Dialog>
-        </Box>
+      </Dialog>     
+      <ToastContainer />
     </Box>
-    
   );
 };
 
