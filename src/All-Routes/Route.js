@@ -24,6 +24,9 @@ import Vault from "../Component/Pages/Vault/Vault";
 // import SIDEBARUIDEMO from "../Component/IframeUrlContext/IframeUrlContext";
 import WorkFlowEditorTool from "../Component/Pages/WorkflowEditor/WorkflowEditorTool";
 import AccountSettings from "../Component/Pages/Settings/Account-Settings";
+import UserProfile from "../Component/Pages/UserProfile/Profile";
+import ProfileEdit from "../Component/Pages/UserProfile/ProfileEdit";
+import ProfileResetPWD from "../Component/Pages/UserProfile/ResetPassword";
 // import Workflowsapp from "../Component/WorkFlowEditor/App";
 
 
@@ -66,6 +69,9 @@ function Rout() {
           <Route path="/BusinessName/Settings/Billing/Upgrade" element={<BusinessSettingsBillingUpgrade />} />
           {/* <Route path="/UIComponent" element={<UIComponent />} /> */}
           {/* Profile Info */}
+          <Route path="/Your_Profile" element={<UserProfile />} />
+          <Route path="/Profile_Your_Edit" element={<ProfileEdit />} />
+          <Route path="/Profile_Reset_PWD" element={<ProfileResetPWD />} />
         </Routes>
       </Router>
     </div>

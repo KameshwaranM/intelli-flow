@@ -1,0 +1,56 @@
+.reset-password-container {
+	max-width: 2000px;
+	margin-left: 239px;
+	padding: 20px;
+	border: 1px solid #ccc;
+	border-radius: 8px;
+	background-color: hsl(0, 0%, 98%);
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .reset-password-form {
+	display: flex;
+	flex-direction: column;
+  }
+  
+  
+  
+ .reset-btn {
+	background-color: #319cce;
+	color: #fff;
+	border: none;
+	padding: 10px;
+	font-size: 16px;
+	border-radius: 5px;
+	cursor: pointer;
+	transition: background-color 0.3s;
+  }
+  
+  .reset-btn:hover {
+	background-color: #4289ad;
+  }
+
+ 
+  /* Media Queries for Responsive Design */
+@media (min-width: 768px) {
+	.sidebar {
+	  width: 200px;
+	}
+  
+	.reset-password-container  {
+		display: flex;
+		flex-direction: column;
+	}
+  }
+  
+  @media (min-width: 1024px) {
+	.sidebar {
+	  width: 250px;
+	}
+  
+	.reset-password-container  {
+		display: flex;
+		flex-direction: column;
+	}
+  }
+  
