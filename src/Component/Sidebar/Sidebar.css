@@ -17,17 +17,21 @@
 
 .business-name {
     cursor: pointer;
-    padding: 10px;
+    padding: 5px 23px;
     border: 0.5px solid #dedede;
     border-radius: 3px;
     background-color: white;
     color: black;
-    height: 72px;
+    height: 55px;
 }
 
 .business-name-p {
-    font-size: 18px !important;
+    font-size: 16px !important;
     font-weight: 500 !important;
+}
+
+.project-name-p {
+    font-size: 14px !important;
 }
 
 .list-container {
