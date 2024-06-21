@@ -368,6 +368,7 @@ const WorkflowDashboard = () => {
                           >
                             <MenuItem onClick={handleOpenEditor}>Edit</MenuItem>
                             <MenuItem onClick={handleDeleteOpen}>Delete</MenuItem>
+                            <MenuItem onClick={handleOpenEditor}>Create Form</MenuItem>
                             <MenuItem onClick={() => alert("Run")}>Run</MenuItem>
                           </Menu>
                         </TableCell>

@@ -109,26 +109,26 @@
     padding-top: 3px !important;
     padding-bottom: 3px !important;
     padding-left: 20px !important;
-    margin: 0px 7px;
+    margin: 2px 7px;
     width: 95%;
-    border-radius: 20px !important;
+    border-radius: 5px !important;
 }
 
 .css-bshv44-MuiButtonBase-root-MuiListItem-root:hover {
-    border-radius: 20px
+    border-radius: 5px
 }
 
 .css-ltlrkn-MuiButtonBase-root-MuiListItem-root {
     padding-top: 3px !important;
     padding-bottom: 3px !important;
     padding-left: 14px !important;
-    margin: 0px 7px !important;
+    margin: 2px 7px !important;
     width: 95% !important;
-    border-radius: 20px !important;
+    border-radius: 5px !important;
 }
 
 .css-ltlrkn-MuiButtonBase-root-MuiListItem-root:hover {
-    border-radius: 20px
+    border-radius: 5px
 }
 
 .active {
@@ -151,7 +151,7 @@
 }
 
 .sidebar-icons {
-    font-size: 18px !important;
+    font-size: 16px !important;
     margin-right: 13px;
 }
 
@@ -181,4 +181,12 @@
 
 .profile-info .css-10hburv-MuiTypography-root {
     font-size: 0.8rem !important;
+}
+
+.css-h4y409-MuiList-root{
+    padding: 8px !important;
+}
+
+.css-705vv-MuiTableCell-root {
+    color: black !important;
 }

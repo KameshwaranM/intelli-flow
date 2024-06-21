@@ -56,8 +56,7 @@ useEffect(() => {
 )
 
   const activeStyle = {
-    backgroundColor: "#1976d2",
-    color: "#fff",
+    backgroundColor: "#D0D0D0",
   };
 
   useEffect(() => {

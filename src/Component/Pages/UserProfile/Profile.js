@@ -15,7 +15,6 @@ function UserProfile() {
     handle: "rho309-cuello-expanse",
     email: "kameshwaran1209@gmail.com",
     userId: "2b824005-54da-4911-a0cf-44f3bb9ce90c",
-    firstletter: 'K', // Assuming this is used for Avatar alt text
   };
 
   const [anchorEl, setAnchorEl] = useState(null);
@@ -73,9 +72,7 @@ function UserProfile() {
         <Box sx={{padding:"0px 20px"}}>
         <Paper elevation={6} sx={{ padding: 4, maxWidth: 1000, margin: 'auto', position: 'relative', marginTop: 3 }}>
           <Box sx={{ display: 'flex', alignItems: 'center', marginBottom: 2 , position:"absolute" }}>
-            <Avatar sx={{ width: 100, height: 100, marginRight: 2, position: 'relative' }}>
-              <img src="/static/images/avatar/1.jpg" alt={user.name} style={{ width: '100%' }} />
-            </Avatar>
+            <Avatar src="/static/images/avatar/1.jpg" alt={user.name} sx={{ width: 100, height: 100, marginRight: 2, position: 'relative' }} />
             <IconButton
                 className="edit-icon"
                 onClick={handleEditClick}
