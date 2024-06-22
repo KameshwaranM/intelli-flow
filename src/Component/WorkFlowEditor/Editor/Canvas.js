@@ -1,15 +1,12 @@
 import React, { useEffect, useState } from "react";
-// import { useEdgesState } from "reactflow";
 import "./nodes.css";
 import axios from "axios";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import Config from "../Config";
-
 import SidebarAction from "./Sidebar";
-
-
+import VariableDef from "./VariableDef";
 import DiagramAdapter from "./DiagramAdapter";
 
 const Canvas = () => {
@@ -18,33 +15,46 @@ const Canvas = () => {
   const [nodes, setNodes] = useState([]);
   const [edges, setEdges] = useState([]);
   const [codeData, setCodeData] = useState({});
-
   const [activeCodeData, setActiveCodeData] = useState({ id: null, type: "" });
+  const [activeSection, setActiveSection] = useState("variableDef");
 
   useEffect(() => {
-      const savedData = localStorage.getItem('restoredata');
-      console.log("hello");
-      if (savedData) {
-        try {
-          const parsedData = JSON.parse(savedData);
-          console.log(parsedData);
-          const { nodes, edges, codeData } = parsedData;
-          console.log(codeData);
-          setNodes(nodes);
-          setCodeData(codeData);
-          setEdges(edges);
-  
-        } catch (error) {
-          console.error("Failed to parse JSON data:", error);
-        }
+    const savedData = localStorage.getItem('restoredata');
+    if (savedData) {
+      try {
+        const parsedData = JSON.parse(savedData);
+        const { nodes, edges, codeData } = parsedData;
+        setNodes(nodes);
+        setCodeData(codeData);
+        setEdges(edges);
+      } catch (error) {
+        console.error("Failed to parse JSON data:", error);
       }
+    }
   }, []);
 
-  const onActivateNode = (activeNodeId) =>
-    setActiveCodeData(codeData[activeNodeId]);
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const ID = params.get('Id');
+    if (ID) {
+      setJwtId(ID);
+    } else {
+      console.warn("No 'Id' parameter found in URL");
+    }
+  }, []);
+
+  const onActivateNode = (activeNodeId) => {
+    if (codeData[activeNodeId]) {
+      setActiveCodeData(codeData[activeNodeId]);
+    } else {
+      setActiveCodeData({ id: null, type: "" });
+    }
+    setActiveSection("propertyEditor");
+  };
 
   const onDeactivateAll = () => {
     setActiveCodeData({ id: null, type: "" });
+    setActiveSection("variableDef");
   };
 
   const onUpdateCodeData = (data) => {
@@ -58,45 +68,30 @@ const Canvas = () => {
     setActiveCodeData((prevData) => ({
       ...prevData,
       data: data,
-}));
-};
-
-  const onAddNode = (newNodeId, newNodeType,formInputs) => {
-    
-    codeData[newNodeId] = {
-      id: newNodeId,
-      type: newNodeType,
-      data: {},
-      formInputs:formInputs
-    };
-
-    setCodeData(codeData);
+    }));
   };
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const ID = params.get('Id');
-    console.log("Extracted ID:", ID);
+  const onAddNode = (newNodeId, newNodeType, formInputs) => {
+    setCodeData((prevCodeData) => ({
+      ...prevCodeData,
+      [newNodeId]: {
+        id: newNodeId,
+        type: newNodeType,
+        data: {},
+        formInputs:formInputs
+      },
+    }));
+  };
 
-    if (ID) {
-      setJwtId(ID);
-    } else {
-      console.warn("No 'id' parameter found in URL");
-    }
-  }, []);
-
-  
   const onSave = async (e) => {
     e.preventDefault();
     try {
-      const dataToSave = {
-        nodes: nodes,
-        edges: edges,
-        codeData: codeData
-      };
+      
+      const dataToSave = { nodes, edges, codeData };
       const tempOutput = JSON.stringify(dataToSave);
-      console.log("json",tempOutput)
-      const APIURL = "http://127.0.0.1:8985/api/v1/workflowhistory/create"
+      localStorage.setItem("restoredata",tempOutput)
+      console.log(tempOutput)
+      const APIURL = "http://127.0.0.1:8985/api/v1/workflowhistory/create";
       const response = await axios.post(APIURL, {
         id: jwtid,
         script: tempOutput,
@@ -114,7 +109,7 @@ const Canvas = () => {
         theme: "colored",
         transition: Bounce,
       });
-      console.log("resp", response);
+      
     } catch (error) {
       console.error("Error creating workflow:", error);
       let errorMessage = "An unexpected error occurred.";
@@ -135,44 +130,45 @@ const Canvas = () => {
       });
     }
   };
-  console.log("API",error);
 
-  // const restoreData = () => {
-  //   const savedData = localStorage.getItem('final');
-  //   if (savedData) {
-  //     try {
-  //       const parsedData = JSON.parse(savedData);
-  //       console.log(parsedData);
-  //       const { nodes, edges, codeData } = parsedData;
-  //       console.log(codeData);
-  //       setNodes(nodes);
-  //       setCodeData(codeData);
-  //       setEdges(edges);
+  const removeFormInputsFromCodeData = (codeData) => {
+    const updatedCodeData = { ...codeData };
+    for (const nodeId in updatedCodeData) {
+      if (Object.hasOwnProperty.call(updatedCodeData, nodeId)) {
+        delete updatedCodeData[nodeId].formInputs;
+      }
+    }
+    return updatedCodeData;
+  };
 
-  //     } catch (error) {
-  //       console.error("Failed to parse JSON data:", error);
-  //     }
-  //   }
-  // };
+  const restoreData = () => {
+    const savedData = localStorage.getItem('final');
+    if (savedData) {
+      try {
+        const parsedData = JSON.parse(savedData);
+        const { nodes, edges, codeData } = parsedData;
+        setNodes(nodes);
+        setCodeData(codeData);
+        setEdges(edges);
+      } catch (error) {
+        console.error("Failed to parse JSON data:", error);
+      }
+    }
+  };
 
-  const DeployData  = async (e) => {
+  const DeployData = async (e) => {
     e.preventDefault();
     try {
-      const dataToSave = {
-        nodes: nodes,
-        edges: edges,
-        codeData: codeData
-      };
+      const dataToSave = { nodes, edges, codeData };
       const tempOutput = JSON.stringify(dataToSave);
-      console.log("json",tempOutput)
-      const APIURL = "http://127.0.0.1:8985/api/v1/workflowhistory/create"
+      const APIURL = "http://127.0.0.1:8985/api/v1/workflowhistory/create";
       const response = await axios.post(APIURL, {
         id: jwtid,
         script: tempOutput,
         versiontype: "deploy",
       });
 
-      toast.success("Workflow Created Successfully", {
+      toast.success("Workflow Deployed Successfully", {
         position: "bottom-right",
         autoClose: 3000,
         hideProgressBar: false,
@@ -185,7 +181,7 @@ const Canvas = () => {
       });
       console.log("resp", response);
     } catch (error) {
-      console.error("Error creating workflow:", error);
+      console.error("Error deploying workflow:", error);
       let errorMessage = "An unexpected error occurred.";
       if (error.response && error.response.data && error.response.data.message) {
         errorMessage = error.response.data.message;
@@ -205,16 +201,13 @@ const Canvas = () => {
     }
   };
 
-  // useEffect(() => {
-  //   restoreData();
-  // }, []);
+  const showVariableDef = () => {
+    setActiveSection("variableDef");
+  };
 
- 
   const renderPropertyEditor = () => {
-
     if (activeCodeData.id !== null && Config[activeCodeData.type]) {
-      const PropertyEditor =
-        Config[activeCodeData.type].propertyEditorComponent;
+      const PropertyEditor = Config[activeCodeData.type].propertyEditorComponent;
       return (
         <PropertyEditor
           key={activeCodeData.id}
@@ -224,7 +217,7 @@ const Canvas = () => {
       );
     } else {
       return (
-        <em style={{color:"white"}}>
+        <em className="workflow-content-heading">
           Select an element from the canvas to update.
         </em>
       );
@@ -232,15 +225,14 @@ const Canvas = () => {
   };
 
   return (
-
-    <div >
+    <div>
       <div className="flex-container">
         <div className="column-actions">
-          <h2 className="workflow-content-heading">Actions</h2>
+          <h4 className="workflow-content-heading">Actions</h4>
           <SidebarAction />
         </div>
         <div className="column-canvas">
-          <h2 className="workflow-content-heading">Workflow Deisgner</h2>
+          <h4 className="workflow-content-heading">Workflow Designer</h4>
           <DiagramAdapter
             nodes={nodes}
             edges={edges}
@@ -249,23 +241,30 @@ const Canvas = () => {
             onAddNode={onAddNode}
             onActivateNode={onActivateNode}
             onDeactivateAll={onDeactivateAll}
-
+            showVariableDef={showVariableDef}
           />
         </div>
-
         <div className="column-property">
-          
-          <div style={{ display:"flex" , justifyContent:"space-between" }}>
-            <button className="workflow-canvas-save-btn" onClick={onSave}>
+          <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <button className="btn btn-primary code-disply-save-btn" onClick={onSave}>
               Save
             </button>
-            <button className="workflow-canvas-save-btn" onClick={DeployData}>
+            <button className="btn btn-primary code-disply-save-btn" onClick={DeployData}>
               Save & Deploy
             </button>
-            <br></br>
-            </div>
-          <h2 className="workflow-content-heading">Property</h2>
-          <p>{renderPropertyEditor()}</p>
+          </div>
+          <br />
+          {activeSection === "variableDef" ? (
+            <>
+              <h4 className="workflow-content-heading">Variable Definition</h4>
+              <VariableDef />
+            </>
+          ) : (
+            <>
+              <h4 className="workflow-content-heading">Add Variable</h4>
+              {renderPropertyEditor()}
+            </>
+          )}
         </div>
       </div>
       <ToastContainer />

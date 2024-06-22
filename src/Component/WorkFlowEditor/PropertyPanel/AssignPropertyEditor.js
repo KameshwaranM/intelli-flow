@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-// import './assignproperty.css';
+import './assignproperty.css';
 
 const AssignPropertyEditor = ({ codeData, updateData }) => {
   const type = codeData.type;
-  const nodeId = codeData.id;
-  const localData = codeData.data || {};
+  const nodeId = codeData.id; // Assuming each node has a unique id
+  const localData = codeData.data || {}; // Ensure localData is not undefined
   const formInputs = JSON.parse(codeData.formInputs);
   const optionsvalue = JSON.parse(localStorage.getItem('formFields')) || [];
   
+  // Load stored input values from localStorage
   const storedData = JSON.parse(localStorage.getItem('inputValues')) || {};
   const initialInputValues = storedData[nodeId] || localData;
   
@@ -26,10 +27,8 @@ const AssignPropertyEditor = ({ codeData, updateData }) => {
 
     if (value.trim() === "") {
       delete updatedInputValues[label];
-      console.log("v1")
     } else {
       updatedInputValues[label] = value;
-      console.log("v2")
     }
 
     setInputValues(updatedInputValues);
@@ -39,16 +38,21 @@ const AssignPropertyEditor = ({ codeData, updateData }) => {
     const filteredSuggestions = optionsvalue.filter(option =>
       option.toLowerCase().includes(value.toLowerCase())
     );
-    setSuggestions({ ...suggestions, [label]: filteredSuggestions });
-  };
-
+    setSuggestions({ ...suggestions, [label]: filteredSuggestions });
+  };
 
   const handleSuggestionClick = (suggestion, label) => {
     const updatedInputValues = { ...inputValues, [label]: suggestion };
+    if (suggestion.trim() === "") {
+      delete updatedInputValues[label];
+    } else {
+      updatedInputValues[label] = suggestion;
+    }
     setInputValues(updatedInputValues);
     updateData({ ...localData, [label]: suggestion });
     updateLocalStorage(updatedInputValues);
     setSuggestions({ ...suggestions, [label]: [] });
+    
   };
 
   if (type === "assign" && formInputs) {
@@ -61,8 +65,8 @@ const AssignPropertyEditor = ({ codeData, updateData }) => {
               <input
                 type={input.type}
                 name={input.label}
-                value={inputValues[input.label] || ""}
-                required={input.required}
+                value={inputValues[input.label]}
+                required={input.required} 
                 onChange={(event) => handleChange(event, input.label)}
                 placeholder={`Enter ${input.label}`}
               />

@@ -12,7 +12,7 @@ import EndNode from "../ReactFlow/Nodes/EndNode";
 import AssignNode from "../ReactFlow/Nodes/AssignNode";
 import ConsoleCustomNode from "../ReactFlow/Nodes/ConsoleNode";
 import { Controls, Background } from "react-flow-renderer";
-
+import { v4 as uuidv4 } from 'uuid'; 
 
 const nodeTypes = {
   if: IfNode,
@@ -23,8 +23,11 @@ const nodeTypes = {
 };
 const connectionLineStyle = { stroke: "#fff",animated:true };
 
-let id = 2;
-const getId = () => `node_${id++}`;
+const getId = () => {
+  const uuid = uuidv4(); // Generate a full UUID
+  const shortId = uuid.replace(/\D/g, '').slice(0, 4); // Remove non-digit characters and take the first 4 digits
+  return `node_${shortId}`;
+};
 
 const DiagramAdapter = ({
   nodes,

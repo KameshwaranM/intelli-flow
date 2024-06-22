@@ -1,0 +1,46 @@
+/* variabledef.css */
+
+.field-container {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.input-field {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.remove-button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.remove-button:hover {
+  background-color: darkred;
+}
+
+.modal-field {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.modal-field input {
+  margin-right: 10px;
+}
+
+.modal-field button {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.modal-field button:hover {
+  background-color: darkred;
+}
