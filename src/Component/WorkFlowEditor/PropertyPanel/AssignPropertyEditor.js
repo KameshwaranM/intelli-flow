@@ -1,36 +1,88 @@
-import React from "react";
+import React, { useState } from "react";
+// import './assignproperty.css';
 
 const AssignPropertyEditor = ({ codeData, updateData }) => {
   const type = codeData.type;
-  const localData = codeData.data;
-  const formInputs = JSON.parse(codeData.formInputs );
-    
-  const handleChange = (event,label) => {
-    
-    localData[label]=event.target.value;
-    updateData(localData);
-};
+  const nodeId = codeData.id;
+  const localData = codeData.data || {};
+  const formInputs = JSON.parse(codeData.formInputs);
+  const optionsvalue = JSON.parse(localStorage.getItem('formFields')) || [];
+  
+  const storedData = JSON.parse(localStorage.getItem('inputValues')) || {};
+  const initialInputValues = storedData[nodeId] || localData;
+  
+  const [suggestions, setSuggestions] = useState({});
+  const [inputValues, setInputValues] = useState(initialInputValues);
 
-    if (type === "assign" && formInputs) {
-      
-        return (
-            <form>
-                {formInputs.map((input, index) => (
-                    <label key={index} className="form-label">
-                        {input.label}:
-                        <input
-                            type={input.type}
-                            name={input.label}
-                            value={localData[input.label]}
-                            onChange={(event) => handleChange(event, input.label)}
-                        />
-                    </label>
-                ))}
-            </form>
-        );
+  const updateLocalStorage = (updatedInputValues) => {
+    const storedData = JSON.parse(localStorage.getItem('inputValues')) || {};
+    storedData[nodeId] = updatedInputValues;
+    localStorage.setItem('inputValues', JSON.stringify(storedData));
+  };
+
+  const handleChange = (event, label) => {
+    const { value } = event.target;
+    const updatedInputValues = { ...inputValues };
+
+    if (value.trim() === "") {
+      delete updatedInputValues[label];
+      console.log("v1")
+    } else {
+      updatedInputValues[label] = value;
+      console.log("v2")
     }
 
-    return null;
+    setInputValues(updatedInputValues);
+    updateData({ ...localData, ...updatedInputValues });
+    updateLocalStorage(updatedInputValues);
+
+    const filteredSuggestions = optionsvalue.filter(option =>
+      option.toLowerCase().includes(value.toLowerCase())
+    );
+    setSuggestions({ ...suggestions, [label]: filteredSuggestions });
+  };
+
+
+  const handleSuggestionClick = (suggestion, label) => {
+    const updatedInputValues = { ...inputValues, [label]: suggestion };
+    setInputValues(updatedInputValues);
+    updateData({ ...localData, [label]: suggestion });
+    updateLocalStorage(updatedInputValues);
+    setSuggestions({ ...suggestions, [label]: [] });
+  };
+
+  if (type === "assign" && formInputs) {
+    return (
+      <form>
+        {formInputs.map((input, index) => (
+          <label key={index} className="form-label">
+            {input.label}:
+            <div className="autocomplete-container">
+              <input
+                type={input.type}
+                name={input.label}
+                value={inputValues[input.label] || ""}
+                required={input.required}
+                onChange={(event) => handleChange(event, input.label)}
+                placeholder={`Enter ${input.label}`}
+              />
+              {suggestions[input.label] && suggestions[input.label].length > 0 && (
+                <ul className="suggestions-list">
+                  {suggestions[input.label].map((suggestion, idx) => (
+                    <li key={idx} onClick={() => handleSuggestionClick(suggestion, input.label)}>
+                      {suggestion}
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          </label>
+        ))}
+      </form>
+    );
+  }
+
+  return null;
 };
 
 export default AssignPropertyEditor;
