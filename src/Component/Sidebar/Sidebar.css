@@ -34,6 +34,15 @@
     font-size: 14px !important;
 }
 
+.business-name-p,
+  .project-name-p {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%; 
+    display: block;
+}
+
 .list-container {
     flex: 1;
     overflow-y: auto;
@@ -56,6 +65,15 @@
     border-radius: 5px;
     background-color: #f8f8f8;
     color: black;
+}
+
+.user-profile-useremail,
+    .user-profile-username {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100%; 
+    display: block;
 }
 
 .profile-avatar-container {
@@ -112,8 +130,8 @@
 .css-bshv44-MuiButtonBase-root-MuiListItem-root {
     padding-top: 3px !important;
     padding-bottom: 3px !important;
-    padding-left: 20px !important;
-    margin: 2px 7px;
+    padding-left: 16px !important;
+    margin: 2px 0px !important;
     width: 95%;
     border-radius: 5px !important;
 }
@@ -126,7 +144,7 @@
     padding-top: 3px !important;
     padding-bottom: 3px !important;
     padding-left: 14px !important;
-    margin: 2px 7px !important;
+    margin: 2px 4px !important;
     width: 95% !important;
     border-radius: 5px !important;
 }
@@ -193,4 +211,8 @@
 
 .css-705vv-MuiTableCell-root {
     color: black !important;
+}
+
+.css-19midj6 {
+    padding: 8px !important;
 }

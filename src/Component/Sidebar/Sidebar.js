@@ -38,6 +38,7 @@ import SummarizeIcon from '@mui/icons-material/Summarize';
 import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 import PhonelinkIcon from '@mui/icons-material/Phonelink';
 import SettingsApplicationsIcon from '@mui/icons-material/SettingsApplications';
+import UserEmail from "./User&Email";
 
 const SidebarMenu = () => {
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -57,6 +58,7 @@ useEffect(() => {
 
   const activeStyle = {
     backgroundColor: "#D0D0D0",
+    color : "black"
   };
 
   useEffect(() => {
@@ -255,10 +257,11 @@ useEffect(() => {
                   onClick={handleProfileMenuOpen}
                 >
                   <Avatar alt={username} src="/static/images/avatar/1.jpg" />
-                  <Box className="profile-info">
-                    <Typography variant="body2">Ramanan AR</Typography>
-                    <Typography variant="body2">{username}</Typography>
-                  </Box>
+                  {/* <Box className="profile-info">
+                    <Typography className="user-profile-username">Ramanan AR</Typography>
+                    <Typography className="user-profile-useremail">{username}</Typography>
+                  </Box> */}
+                  <UserEmail />
                 </Box>
                 <Popper
                   id={id}

@@ -317,7 +317,7 @@ const Executions = () => {
                             />
                           </Box>
                         </TableCell>
-                        <TableCell sx={{ padding: "7px 10px" }} align="left">
+                        <TableCell sx={{ padding: "7px 10px" }} align="center">
                           <IconButton
                             onClick={(event) => handleMenuOpen(event, workflow)}
                           >

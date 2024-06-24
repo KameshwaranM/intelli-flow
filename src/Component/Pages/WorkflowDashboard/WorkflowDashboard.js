@@ -24,6 +24,7 @@ import {
   Select,
   LinearProgress,
   TablePagination,
+  Drawer,
 } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -237,11 +238,6 @@ const WorkflowDashboard = () => {
     <Box className="workflowContainer">
       <Sidebar />
       <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
-      {/* {showWorkflowsApp ? (
-          <React.StrictMode>
-            <Workflowsapp />
-          </React.StrictMode>
-        ) : ( */}
         <Container maxWidth="xl">
           <Box className="workflowHeader">
             <h2 className="intelli-flow-right-side-headline">Workflows</h2>
@@ -290,12 +286,12 @@ const WorkflowDashboard = () => {
                   >
                     Last Run
                   </TableCell>
-                  <TableCell
+                  {/* <TableCell
                     align="left"
                     sx={{ fontSize: "15px", fontWeight: "600" , padding: "10px" }}
                   >
                     Next Run
-                  </TableCell>
+                  </TableCell> */}
                   <TableCell
                     align="left"
                     sx={{
@@ -313,7 +309,7 @@ const WorkflowDashboard = () => {
                     Activity
                   </TableCell>
                   <TableCell
-                    align="left"
+                    align="center"
                     sx={{ fontSize: "15px", fontWeight: "600"  }}
                   ></TableCell>
                 </TableRow>
@@ -321,20 +317,21 @@ const WorkflowDashboard = () => {
               <TableBody>
                 {paginatedWorkflows && paginatedWorkflows.length > 0 ? (
                   paginatedWorkflows.map((workflow) => (
-                    workflow && ( // Ensure workflow is defined
+                    workflow && ( 
                       <TableRow
                         key={workflow.createdbyuserid}
                         className="workflowTableRow"
                       >
                         <TableCell sx={{ padding: "7px 10px" }} align="left">
-                          {workflow.workflowname}
+                          {workflow.workflowname}<br />
+                          <span style={{fontSize:"10px"}}>{workflow.createddate}</span>
                         </TableCell>
                         <TableCell sx={{ padding: "7px 10px" }} align="left">
                           {workflow.createddate}
                         </TableCell>
-                        <TableCell sx={{ padding: "7px 10px" }} align="left">
+                        {/* <TableCell sx={{ padding: "7px 10px" }} align="left">
                           {workflow.nextrun || "N/A"}
-                        </TableCell>
+                        </TableCell> */}
                         <TableCell sx={{ padding: "7px 10px" }} align="left">
                           <CircleIcon
                             style={{
@@ -355,7 +352,7 @@ const WorkflowDashboard = () => {
                             />
                           </Box>
                         </TableCell>
-                        <TableCell sx={{ padding: "7px" }} align="left">
+                        <TableCell sx={{ padding: "7px" }} align="center">
                           <IconButton
                             onClick={(event) => handleMenuOpen(event, workflow)}
                           >
@@ -401,7 +398,6 @@ const WorkflowDashboard = () => {
             />
           </TableContainer>
         </Container>
-        {/* )} */}
       </Box>
 
       <Dialog open={openCreateDialog} onClose={handleCreateClose}>

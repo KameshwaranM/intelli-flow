@@ -8,14 +8,14 @@
 
 .input-field {
   flex: 1;
-  margin-right: 10px;
+  margin-right: 5px;
 }
 
 .remove-button {
   background-color: red;
   color: white;
   border: none;
-  padding: 5px;
+  padding: 2.5px;
   cursor: pointer;
 }
 

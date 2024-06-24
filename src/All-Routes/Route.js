@@ -27,6 +27,7 @@ import AccountSettings from "../Component/Pages/Settings/Account-Settings";
 import UserProfile from "../Component/Pages/UserProfile/Profile";
 import ProfileEdit from "../Component/Pages/UserProfile/ProfileEdit";
 import ProfileResetPWD from "../Component/Pages/UserProfile/ResetPassword";
+import Devices from "../Component/Pages/Devices/Devices";
 // import Workflowsapp from "../Component/WorkFlowEditor/App";
 
 
@@ -55,6 +56,7 @@ function Rout() {
           {/* <Route path="/Workflow_Editor" element={<WorkFlowEditor />} /> */}
           <Route path="/Executions" element={<Executions />} />
           <Route path="/Vault" element={<Vault />} />
+          <Route path="/Devices" element={<Devices />} />
           {/* Settings */}
           <Route path="/Account_Settings" element={<AccountSettings />} />
           {/* Workflow Editor */}
