@@ -1,0 +1,10 @@
+.react-formbuilder-cont{
+    /* border: 1px solid rgb(177, 177, 177); */
+    border-radius: 7px;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    margin-top: 20px;
+}
+
+.form-wrap.form-builder .stage-wrap {
+    padding: 10px !important;
+}

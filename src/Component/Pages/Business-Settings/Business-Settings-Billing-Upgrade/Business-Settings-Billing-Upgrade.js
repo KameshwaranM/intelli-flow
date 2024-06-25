@@ -3,7 +3,6 @@ import "./Business-Settings-Billing-Upgrade.css";
 import { useNavigate } from "react-router-dom";
 import BusinessSettingsSidebar from "../../../Sidebar/BusinessSettingsSidebar";
 import { URL_Upgrade_Plan_DATA } from "../../../API/ProjectAPI";
-import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import axios from "axios";
 
 const BusinessSettingsBillingUpgrade = () => {
@@ -40,15 +39,32 @@ const BusinessSettingsBillingUpgrade = () => {
             }
         });
 
-        if (response.data.type === 'success') {
-            window.location.href = response.data.url;
+        if (response.status === 200) {
+            console.log("Response received:", response);
+            if (response.data && response.data.url) {
+                console.log("Redirecting to:", response.data.url);
+                window.location.href = response.data.url;
+            } else {
+                console.error('Invalid response structure: URL not found in the response data', response.data);
+            }
         } else {
-            console.error('Checkout session creation failed:', response.data.message);
+            console.error('Unexpected response status:', response.status, response.data.message || 'No additional message');
         }
     } catch (error) {
-        console.error('Error creating checkout session:', error);
+        if (error.response) {
+            // The request was made and the server responded with a status code outside the range of 2xx
+            console.error('Server responded with error:', error.response.status, error.response.data);
+        } else if (error.request) {
+            // The request was made but no response was received
+            console.error('No response received:', error.request);
+        } else {
+            // Something happened in setting up the request that triggered an Error
+            console.error('Error in request setup:', error.message);
+        }
     }
 };
+
+
 
   // const handleUpgrade = async () => {
   //   try {
@@ -176,12 +192,12 @@ const BusinessSettingsBillingUpgrade = () => {
                 <li>5 Users</li>
                 <li>90 Days Retention</li>
               </ul>
-              <button
+              {/* <button
                 className="select-btn"
                 onClick={handlePlanSelected("small")}
               >
                 SELECT
-              </button>
+              </button> */}
             </div>
             <div className="t-c">
               <input type="checkbox" className="tc-checkbox" />
@@ -213,12 +229,12 @@ const BusinessSettingsBillingUpgrade = () => {
                 <li>3 On-Premise Executors</li>
                 <li>2 Hour Priority Support</li>
               </ul>
-              <button
+              {/* <button
                 className="select-btn"
                 onClick={handlePlanSelected("mid")}
               >
                 SELECT
-              </button>
+              </button> */}
             </div>
             <div className="t-c">
               <input type="checkbox" className="tc-checkbox" />
@@ -254,12 +270,12 @@ const BusinessSettingsBillingUpgrade = () => {
                 <li>Dedicated Support</li>
                 <li>1 Automation Engineer</li>
               </ul>
-              <button
+              {/* <button
                 className="select-btn"
                 onClick={handlePlanSelected("large")}
               >
                 SELECT
-              </button>
+              </button> */}
             </div>
             <div className="t-c">
               <input type="checkbox" className="tc-checkbox" />

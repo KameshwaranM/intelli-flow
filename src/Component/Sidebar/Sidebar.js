@@ -53,9 +53,7 @@ const SidebarMenu = () => {
 useEffect(() => {
   const UserName = localStorage.getItem("userEmail")
   setUserName(UserName)
-}
-
-)
+})
 
   const activeStyle = {
     backgroundColor: "#D0D0D0",
@@ -153,7 +151,7 @@ useEffect(() => {
                 button
                 onClick={() => handleNavigation("/Workflow_Dashboard")}
                 style={{
-                  ...(window.location.pathname === "/Workflow_Dashboard" || window.location.pathname === "/Workflow_Editor" ? activeStyle : {}),
+                  ...(window.location.pathname === "/Workflow_Dashboard" || window.location.pathname === "/Workflow_Editor" || window.location.pathname === "/FlowFormBuilder" ? activeStyle : {}),
                 }}
               >
                 <AccountTreeIcon className="sidebar-icons"/><ListItemText primary="Workflows" />
@@ -245,10 +243,21 @@ useEffect(() => {
         <Divider />
         <Box sx={{ p: 2 }}>
           <Box className="help-container" mb={2}>
-            <IconButton>
+            <List>
+              <ListItem
+                button
+                onClick={() => handleNavigation("/Dashboard")}
+                style={{
+                  ...(window.location.pathname === "/Dashboard" ? activeStyle : {}),
+                }}
+              >
+                <HelpOutlineIcon className="sidebar-icons"/><ListItemText primary="Help" />
+              </ListItem>
+            </List>
+            {/* <IconButton>
               <HelpOutlineIcon />
             </IconButton>
-            <Typography variant="body1">Help</Typography>
+            <Typography variant="body1">Help</Typography> */}
           </Box>
           <Box className="profile-container">
             <ClickAwayListener onClickAway={handleProfileMenuClose}>
@@ -286,15 +295,15 @@ useEffect(() => {
                     </Box>
                     <Divider />
                     {[
-                      "Profile",
-                      "API Keys",
-                      "Preferences",
-                      "Feature previews",
-                      "Security",
-                      "Sign out",
-                    ].map((text) => (
-                      <MenuItem key={text} onClick={handleProfileMenuClose}>
-                        {text}
+                      { text: "Profile", path: "/Your_Profile" },
+                      { text: "API Keys", path: "/API_Keys" },
+                      { text: "Preferences", path: "/Preferences" },
+                      { text: "Feature previews", path: "/Feature_Previews" },
+                      { text: "Security", path: "/Security" },
+                      { text: "Sign out", path: "/Sign_Out" },
+                    ].map((item) => (
+                      <MenuItem key={item.text} onClick={() => handleNavigation(item.path)}>
+                        {item.text}
                       </MenuItem>
                     ))}
                   </Paper>

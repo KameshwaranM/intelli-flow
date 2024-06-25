@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SidebarMenu from '../../Sidebar/Sidebar';
 import "./ResetPwd.css"
 
 function ProfileResetPWD() {
   const navigate = useNavigate(); 
+  const [ username , setUserName] = useState(null);
+
+  useEffect(() => {
+    const UserName = localStorage.getItem("userEmail")
+    setUserName(UserName)
+  })
 
   const [formData, setFormData] = useState({
     email: '',
@@ -49,7 +55,7 @@ function ProfileResetPWD() {
               type="email"
               className="pro-edit-input"
               name="email"
-              value={formData.email}
+              value={username}
               onChange={handleChange}
               placeholder="Enter your email"
               required

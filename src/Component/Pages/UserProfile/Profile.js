@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Box, Typography, Avatar, Paper, IconButton, Menu, MenuItem, Divider, Link } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import EditIcon from '@mui/icons-material/Edit';
@@ -9,6 +9,12 @@ import './Profile.css';
 
 function UserProfile() {
   const navigate = useNavigate();
+  const [ username , setUserName] = useState(null);
+
+  useEffect(() => {
+    const UserName = localStorage.getItem("userEmail")
+    setUserName(UserName)
+  })
 
   const user = {
     name: "Kameshwaran M",
@@ -90,7 +96,7 @@ function UserProfile() {
   
             <Typography variant="body1">Handle: <br/><h5 style={{marginTop:"8px"}}>{user.handle}</h5></Typography>
             <br/>
-            <Typography variant="body1">Email:<br/><h5 style={{marginTop:"8px"}}>{user.email}</h5></Typography>
+            <Typography variant="body1">Email:<br/><h5 style={{marginTop:"8px"}}>{username}</h5></Typography>
             <br/>
             <Typography variant="body1">User ID:<br/><h5 style={{marginTop:"8px"}}>{user.userId}</h5></Typography>
           </Box>

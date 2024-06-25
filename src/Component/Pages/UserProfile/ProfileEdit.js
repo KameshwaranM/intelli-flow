@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SidebarMenu from '../../Sidebar/Sidebar';
 import './ProfileEdit.css'
@@ -6,11 +6,16 @@ import './ProfileEdit.css'
 
 function ProfileEdit() {
   const navigate = useNavigate();
+  const [ username , setUserName] = useState(null);
+
+  useEffect(() => {
+    const UserName = localStorage.getItem("userEmail")
+    setUserName(UserName)
+  })
 
   const [profile, setProfile] = useState({
     name: 'Kameshwaran M',
     handle: 'rho309-cuello-expanse',
-    email: 'kameshwaran1209@gmail.com',
     userId: '2b824005-54da-4911-a0cf-44f3bb9ce90c',
   });
 
@@ -64,7 +69,7 @@ function ProfileEdit() {
                   type="email"
                   placeholder="Email"
                   name="email"
-                  value={profile.email}
+                  value={username}
                   onChange={handleChange}
                   className="pro-edit-input"
                 />

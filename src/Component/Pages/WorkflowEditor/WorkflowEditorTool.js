@@ -9,10 +9,10 @@ const WorkFlowEditorTool = () => {
       <div>
         <Sidebar />
         <div>
-      <React.StrictMode>
+          <React.StrictMode>
             <Workflowsapp />
           </React.StrictMode>
-      </div>
+        </div>
       </div>
     );
   };
