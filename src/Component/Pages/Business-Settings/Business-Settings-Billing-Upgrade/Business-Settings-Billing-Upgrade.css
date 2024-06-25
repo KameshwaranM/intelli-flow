@@ -5,12 +5,13 @@
 }
 
 .bsBillingUpgarde-container{
-    font-size: 18px;
-    padding: 0.8rem;
-    width: 81%;
+    font-size: 16px;
+    padding: 0px 20px;
+    width: 100%;
     display: flex;
     gap: 20px;
     align-items: center;
+    background-color: #f7f7f766 !important;
 }
 
 .bsBillingUpgarde-container .plan{
@@ -19,7 +20,7 @@
     /* height: 520px; */
     padding: 1rem;
     /* width: 27%; */
-    width: 370px;
+    width: 350px;
     height: 77%;
     transition: 0.5s;
     display: flex;
@@ -45,7 +46,7 @@
 }
 
 .plan ul li{
-    font-size: 18px;
+    font-size: 14px;
 }
 
 .select-btn{
@@ -126,5 +127,5 @@
     margin-top: 1rem;
     padding: 5px;
     border: 2px solid darkgrey;
-    border-radius: 5px;
+    border-radius: 5px;
 }

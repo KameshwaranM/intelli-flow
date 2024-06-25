@@ -29,6 +29,7 @@ import AddCircleIcon from "@mui/icons-material/AddCircle";
 import LogoImage from "../../Assets/Intellil-Flow-Logo.png";
 import { ThemeContext } from "../Theme/Theme";
 import "./Sidebar.css";
+import UserEmail from "./User&Email";
 
 
 const BusinessSettingsSidebar = () => {
@@ -48,8 +49,8 @@ const BusinessSettingsSidebar = () => {
   )
 
   const activeStyle = {
-    backgroundColor: "#1976d2",
-    color: "#fff",
+    backgroundColor: "#D0D0D0",
+    color : "black"
   };
 
   useEffect(() => {
@@ -73,7 +74,7 @@ useEffect(() => {
  
   const handleNavigation = (path) => {
     navigate(path);
-  };
+  };
 
   const handleOpenCreateWorkflow = () => {
     navigate("/Create_Project")
@@ -124,7 +125,7 @@ useEffect(() => {
           </Box>
           <Box className="business-name" onClick={handlePopperOpen}>
             <Typography className="business-name-p">{businessname}</Typography>
-            <Typography>{projectname}</Typography>
+            <Typography className="project-name-p">{projectname}</Typography>
           </Box>
         </Box>
         <Divider />
@@ -207,10 +208,7 @@ useEffect(() => {
                   onClick={handleProfileMenuOpen}
                 >
                   <Avatar alt="Ramanan AR" src="/static/images/avatar/1.jpg" />
-                  <Box className="profile-info">
-                    <Typography variant="body2">Ramanan AR</Typography>
-                    <Typography variant="body2">{username}</Typography>
-                  </Box>
+                  <UserEmail />
                 </Box>
                 <Popper
                   id={id}

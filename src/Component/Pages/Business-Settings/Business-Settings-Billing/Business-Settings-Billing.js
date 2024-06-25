@@ -11,8 +11,8 @@ const BusinessSettingsBilling = () => {
         <div className="Billing page Billing-head">
         <h2 className="intelli-flow-right-side-headline">Billing</h2>
           <div className="container mt-5">
-            <div className="row mb-3">
-              <div className="col-md-4 mb-3">
+            <div className="row mb-3 classname-gap-container">
+              <div className="col-md-4 mb-3 classname-billing-card">
                 <div className="card Billingpage-custom-card">
                   <div className="card-body Billingpage-Uniquecard">
                     <h5 className="card-title Billingpage-Uniquetitle">Tier</h5>
@@ -31,7 +31,7 @@ const BusinessSettingsBilling = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-4 mb-3">
+              <div className="col-md-4 mb-3 classname-billing-card">
                 <div className="card Billingpage-custom-card">
                   <div className="card-body Billingpage-Uniquecard">
                     <h5 className="card-title Billingpage-Uniquetitle">
@@ -47,7 +47,7 @@ const BusinessSettingsBilling = () => {
                   </div>
                 </div>
               </div>
-              <div className="col-md-4 mb-3">
+              <div className="col-md-4 mb-3 classname-billing-card">
                 <div className="card Billingpage-custom-card">
                   <div className="card-body Billingpage-Uniquecard">
                     <h5 className="card-title Billingpage-Uniquetitle">
@@ -65,7 +65,7 @@ const BusinessSettingsBilling = () => {
               </div>
             </div>
             <div className="row">
-              <div className="col-md-4">
+              <div className="col-md-4 classname-billing-card">
                 <div className="card Billingpage-custom-card">
                   <div className="card-body Billingpage-Uniquecard">
                     <h5 className="card-title Billingpage-Uniquetitle">

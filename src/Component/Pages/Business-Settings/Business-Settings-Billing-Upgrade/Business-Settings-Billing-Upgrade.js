@@ -1,21 +1,74 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Business-Settings-Billing-Upgrade.css";
 import { useNavigate } from "react-router-dom";
 import BusinessSettingsSidebar from "../../../Sidebar/BusinessSettingsSidebar";
+import { URL_Upgrade_Plan_DATA } from "../../../API/ProjectAPI";
+import axios from "axios";
 
 const BusinessSettingsBillingUpgrade = () => {
   const [planSelected, setPlanSelected] = useState("");
   const navigate = useNavigate();
+  const [sessionKey, setSessionKey] = useState(null);
+
+  useEffect(() => {
+    const sessionKey = localStorage.getItem("sessionKey");
+    setSessionKey(sessionKey);
+  }, []);
+
+  useEffect(() => {
+    if (planSelected !== "") {
+      console.log("plan value",planSelected);
+    }
+  }, [planSelected]);
 
   const handlePlanSelected = (plan) => {
     return () => {
       setPlanSelected(plan);
-      console.log(planSelected);
     };
   };
-  const handleUpgrade = () => {
-    navigate("/billing/upgrade/checkout");
+
+  // const handleUpgrade = async () => {
+  //   try {
+  //     const response = await axios.get(URL_Upgrade_Plan_DATA, {
+  //       headers: {
+  //         'SESSIONKEY': sessionKey,
+  //         'PlanName': planSelected,
+  //       }
+  //     });
+  
+  //     if (response.status === 200) {
+  //       console.log('Upgrade successful', response.data);
+  //     } else {
+  //       console.error('Failed to upgrade the plan');
+  //     }
+  //   } catch (error) {
+  //     console.error('Error:', error);
+  //     console.log('Upgrade plan unsuccessful');
+  //   }
+  // };
+
+  const handleUpgrade = async () => {
+    try {
+      const response = await fetch(URL_Upgrade_Plan_DATA, {
+        method: 'GET',
+        headers: {
+          'SESSIONKEY': sessionKey, 
+          'PlanName': planSelected,
+        },
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message);
+      }
+
+      const responseData = await response.json();
+      window.location.href = responseData.url;
+    } catch (error) {
+      console.error('Error creating checkout session:', error);
+    }
   };
+  
   return (
     <div className="bsBillingUpgarde">
       <BusinessSettingsSidebar />

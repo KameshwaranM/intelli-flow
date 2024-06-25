@@ -6,3 +6,4 @@ export const URL_Get_Project_Name = `${BASE_URL}/project/getallprojectdetails`;
 export const URL_Create_Workflow = `${BASE_URL}/workflow/createworkflow`;
 export const URL_Get_Workflow_Name = `${BASE_URL}/workflow/getallworkflows?projectname=${projectName}`;
 export const URL_GET_Workflow_DATA = `${BASE_URL}/workflowhistory/getworkflowdata`;
+export const URL_Upgrade_Plan_DATA = `${BASE_URL}/create_checkout_session`;

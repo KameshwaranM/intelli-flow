@@ -53,8 +53,8 @@ const WorkflowDashboard = () => {
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(7);
   const [error, setError] = useState("");
-  const [sessionKey, setSessionKey] = useState(null);
   const [showWorkflowsApp, setShowWorkflowsApp] = useState(false);
+  const [sessionKey, setSessionKey] = useState(null);
 
   useEffect(() => {
     const sessionKey = localStorage.getItem("sessionKey");

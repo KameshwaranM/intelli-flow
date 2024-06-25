@@ -10,6 +10,12 @@ const BSBillingCheckout = () => {
   const [cardholderName, setCardholderName] = useState('');
   const [billingAddress, setBillingAddress] = useState('');
   const [country, setCountry] = useState('India');
+  const [sessionKey, setSessionKey] = useState(null);
+
+  useEffect(() => {
+    const sessionKey = localStorage.getItem("sessionKey");
+    setSessionKey(sessionKey);
+  }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
