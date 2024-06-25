@@ -3,12 +3,14 @@ import "./Business-Settings-Billing-Upgrade.css";
 import { useNavigate } from "react-router-dom";
 import BusinessSettingsSidebar from "../../../Sidebar/BusinessSettingsSidebar";
 import { URL_Upgrade_Plan_DATA } from "../../../API/ProjectAPI";
+import { useStripe, useElements, CardElement } from '@stripe/react-stripe-js';
 import axios from "axios";
 
 const BusinessSettingsBillingUpgrade = () => {
   const [planSelected, setPlanSelected] = useState("");
   const navigate = useNavigate();
   const [sessionKey, setSessionKey] = useState(null);
+
 
   useEffect(() => {
     const sessionKey = localStorage.getItem("sessionKey");
@@ -18,6 +20,7 @@ const BusinessSettingsBillingUpgrade = () => {
   useEffect(() => {
     if (planSelected !== "") {
       console.log("plan value",planSelected);
+      localStorage.setItem('PlanValue', planSelected);
     }
   }, [planSelected]);
 
@@ -26,6 +29,26 @@ const BusinessSettingsBillingUpgrade = () => {
       setPlanSelected(plan);
     };
   };
+
+  const handleUpgrade = async (event) => {
+    event.preventDefault();
+
+    try {
+        const response = await axios.post(URL_Upgrade_Plan_DATA, {}, {
+            headers: {
+                'SESSIONKEY': sessionKey,
+            }
+        });
+
+        if (response.data.type === 'success') {
+            window.location.href = response.data.url;
+        } else {
+            console.error('Checkout session creation failed:', response.data.message);
+        }
+    } catch (error) {
+        console.error('Error creating checkout session:', error);
+    }
+};
 
   // const handleUpgrade = async () => {
   //   try {
@@ -47,27 +70,30 @@ const BusinessSettingsBillingUpgrade = () => {
   //   }
   // };
 
-  const handleUpgrade = async () => {
-    try {
-      const response = await fetch(URL_Upgrade_Plan_DATA, {
-        method: 'GET',
-        headers: {
-          'SESSIONKEY': sessionKey, 
-          'PlanName': planSelected,
-        },
-      });
+  // const handleUpgrade = async () => {
+  //   console.log(planSelected,sessionKey)
+  //   try {
+  //     const response = await fetch(URL_Upgrade_Plan_DATA, {
+  //       method: 'PUT',
+  //       headers: {
+  //         SESSIONKEY : sessionKey, 
+  //         PlanName: planSelected,
+  //       },
+  //     });
+  //     console.log(planSelected,sessionKey)
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.message);
-      }
+  //     if (!response === 200){
+  //       const errorData = await response.json();
+  //       throw new Error(errorData.message);
+  //     }
 
-      const responseData = await response.json();
-      window.location.href = responseData.url;
-    } catch (error) {
-      console.error('Error creating checkout session:', error);
-    }
-  };
+  //     const responseData = await response.json();
+  //     window.location.href = responseData.url;
+  //   } catch (error) {
+  //     console.error('Error creating checkout session:', error);
+  //     console.log(planSelected,sessionKey)
+  //   }
+  // };
   
   return (
     <div className="bsBillingUpgarde">

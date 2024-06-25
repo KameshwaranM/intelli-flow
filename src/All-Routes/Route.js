@@ -28,6 +28,7 @@ import UserProfile from "../Component/Pages/UserProfile/Profile";
 import ProfileEdit from "../Component/Pages/UserProfile/ProfileEdit";
 import ProfileResetPWD from "../Component/Pages/UserProfile/ResetPassword";
 import Devices from "../Component/Pages/Devices/Devices";
+import Payment from "../Component/Pages";
 // import Workflowsapp from "../Component/WorkFlowEditor/App";
 
 
@@ -48,6 +49,7 @@ function Rout() {
           <Route path="/Verify_user_code" element={<VerifyEmail />} />
           <Route path="/Reset_Password" element={<CreatePassword />} />
           <Route path="/Set_Region/:id" element={<SetRegion />} />
+          <Route path="/payment" element={<Payment />} />
 
           {/* Tool */}
           <Route path="/Create_Project" element={<FirstLogin />} />
