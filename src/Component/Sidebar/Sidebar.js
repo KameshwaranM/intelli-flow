@@ -50,10 +50,10 @@ const SidebarMenu = () => {
   const [projectname , setProjectName] = useState(null);
   const [ username , setUserName] = useState(null);
 
-useEffect(() => {
-  const UserName = localStorage.getItem("userEmail")
-  setUserName(UserName)
-})
+  useEffect(() => {
+    const UserName = localStorage.getItem("userEmail")
+    setUserName(UserName)
+  })
 
   const activeStyle = {
     backgroundColor: "#D0D0D0",
@@ -63,13 +63,12 @@ useEffect(() => {
   useEffect(() => {
     const BusinessName = localStorage.getItem("businessname")
     setBusinessName(BusinessName)
-  }
-)
-useEffect(() => {
-  const ProjectName = localStorage.getItem("projectname")
-  setProjectName(ProjectName)
-}
-)
+  })
+
+  useEffect(() => {
+    const ProjectName = localStorage.getItem("projectname")
+    setProjectName(ProjectName)
+  })
 
   const handleSettingsClick = () => {
     setSettingsOpen(!settingsOpen);
@@ -127,7 +126,7 @@ useEffect(() => {
         }}
       >
         <Box sx={{ p: 1, display: "flex", flexDirection: "column", gap: 1 }}>
-          <Box className="logo-container">
+          <Box component="button" onClick={() => handleNavigation(window.location.href="/Dashboard")} className="logo-container">
             <img src={LogoImage} alt="Logo" style={{ width: 190 }} />
           </Box>
           <Box className="business-name" onClick={handlePopperOpen}>
@@ -212,8 +211,12 @@ useEffect(() => {
               </ListItem>
               
               {/* Settings */}
-              <ListItem button onClick={handleSettingsClick}>
-                <SettingsApplicationsIcon className="sidebar-icons" /><ListItemText primary="Settings" />
+              <ListItem button onClick={handleSettingsClick}
+              style={{
+                ...(window.location.pathname === "/General" || window.location.pathname === "/Account_Settings" || window.location.pathname === "/On_Prem_Executor" ? activeStyle : {}),
+              }}>
+                <SettingsApplicationsIcon className="sidebar-icons" />
+                <ListItemText primary="Settings" />
                 {settingsOpen ? <ExpandLess /> : <ExpandMore />}
               </ListItem>
               <Collapse in={settingsOpen} timeout="auto" unmountOnExit>
@@ -242,23 +245,21 @@ useEffect(() => {
         </Box>
         <Divider />
         <Box sx={{ p: 2 }}>
-          <Box className="help-container" mb={2}>
-            <List>
+            <>
               <ListItem
                 button
-                onClick={() => handleNavigation("/Dashboard")}
+                onClick={() => handleNavigation("/Help")}
                 style={{
-                  ...(window.location.pathname === "/Dashboard" ? activeStyle : {}),
+                  ...(window.location.pathname === "/Help" ? activeStyle : {}),
                 }}
               >
                 <HelpOutlineIcon className="sidebar-icons"/><ListItemText primary="Help" />
               </ListItem>
-            </List>
+            </>
             {/* <IconButton>
               <HelpOutlineIcon />
             </IconButton>
             <Typography variant="body1">Help</Typography> */}
-          </Box>
           <Box className="profile-container">
             <ClickAwayListener onClickAway={handleProfileMenuClose}>
               <Box>

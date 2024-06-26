@@ -181,25 +181,41 @@ useEffect(() => {
               </ListItem>
               <Collapse in={settingsOpen} timeout="auto" unmountOnExit>
                 <List component="div" disablePadding>
-                  {["General", "Account Settings", "On-Prem Executor"].map(
-                    (text) => (
-                      <ListItem button key={text} sx={{ pl: 4 }}>
-                        <ListItemText primary={text} />
+                      <ListItem button key="General" onClick={() => handleNavigation("/General")} sx={{ pl: 4 , ...(window.location.pathname === "/General" ? activeStyle : {})}}>
+                        <ListItemText
+                          sx={{ paddingLeft: "10px" }}
+                          primary="General"
+                        />
                       </ListItem>
-                    )
-                  )}
+                      <ListItem button key="Account Settings" onClick={() => handleNavigation("/Account_Settings")} sx={{ pl: 4 , ...(window.location.pathname === "/Account_Settings" ? activeStyle : {})}}>
+                        <ListItemText
+                          sx={{ paddingLeft: "10px" }}
+                          primary="Account Settings"
+                        />
+                      </ListItem>
+                      <ListItem button key="On-Prem Executor" onClick={() => handleNavigation("/On_Prem_Executor")} sx={{ pl: 4 , ...(window.location.pathname === "/On_Prem_Executor" ? activeStyle : {})}}>
+                        <ListItemText
+                          sx={{ paddingLeft: "10px" }}
+                          primary="On-Prem Executor"
+                        />
+                      </ListItem>
                 </List>
               </Collapse>
             </List>
         </Box>
         <Divider />
         <Box sx={{ p: 2 }}>
-          <Box className="help-container" mb={2}>
-            <IconButton>
-              <HelpOutlineIcon />
-            </IconButton>
-            <Typography variant="body1">Help</Typography>
-          </Box>
+            <>
+              <ListItem
+                button
+                onClick={() => handleNavigation("/Help")}
+                style={{
+                  ...(window.location.pathname === "/Help" ? activeStyle : {}),
+                }}
+              >
+                <HelpOutlineIcon className="sidebar-icons"/><ListItemText primary="Help" />
+              </ListItem>
+            </>
           <Box className="profile-container">
             <ClickAwayListener onClickAway={handleProfileMenuClose}>
               <Box>
@@ -232,15 +248,15 @@ useEffect(() => {
                     </Box>
                     <Divider />
                     {[
-                      "Profile",
-                      "API Keys",
-                      "Preferences",
-                      "Feature previews",
-                      "Security",
-                      "Sign out",
-                    ].map((text) => (
-                      <MenuItem key={text} onClick={handleProfileMenuClose}>
-                        {text}
+                      { text: "Profile", path: "/Your_Profile" },
+                      { text: "API Keys", path: "/API_Keys" },
+                      { text: "Preferences", path: "/Preferences" },
+                      { text: "Feature previews", path: "/Feature_Previews" },
+                      { text: "Security", path: "/Security" },
+                      { text: "Sign out", path: "/Sign_Out" },
+                    ].map((item) => (
+                      <MenuItem key={item.text} onClick={() => handleNavigation(item.path)}>
+                        {item.text}
                       </MenuItem>
                     ))}
                   </Paper>
