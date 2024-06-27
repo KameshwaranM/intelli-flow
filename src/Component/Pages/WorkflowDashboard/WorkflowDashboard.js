@@ -35,6 +35,7 @@ import {
   URL_Create_Workflow,
   URL_Delete_Workflow_Name,
   URL_GET_Workflow_DATA,
+  URL_GET_Workflow_Form,
   URL_Get_Workflow_Name,
 } from "../../API/ProjectAPI";
 import axios from "axios";
@@ -261,9 +262,9 @@ const WorkflowDashboard = () => {
     page * rowsPerPage + rowsPerPage
   );
 
-  const handleOpenForm = () =>{
-    window.location.href = `/FlowFormBuilder?workflowname=${selectedWorkflow.workflowname}`
-  }
+  // const handleOpenForm = () =>{
+  //   window.location.href = `/FlowFormBuilder?workflowname=${selectedWorkflow.workflowname}`
+  // }
 
 
   const handleOpenEditor = async (event) => {
@@ -287,8 +288,35 @@ const WorkflowDashboard = () => {
         window.location.href = `/Workflow_Editor?Id=${res.data.id}`;
         // const iframeUrl = `http://localhost:3001?projectId=${res.data.id}`;
         // window.location.href = '/Workflow_Editor'; 
-        // setShowWorkflowsApp(true);
         
+      } else {
+        console.log("Failed to send data. Status code:", res.status);
+      }
+    } catch (error) {
+      console.log("Error:", error);
+      const errorMessage = error.response?.data?.message || "No message available";
+      console.log("Response data message:", errorMessage);
+    }
+  };
+
+  const handleOpenForm = async (event) => {
+    event.preventDefault();
+    try {
+      const API = URL_GET_Workflow_Form;
+      const res = await axios.post(API, {
+        projectname: localStorage.getItem("projectname"),
+        workflowname: selectedWorkflow.workflowname,
+      }, {
+        headers: {
+          SESSIONKEY: sessionKey,
+        },
+      });
+  
+      if (res.status === 200) {
+        console.log("Data sent successfully:", res.data.data);
+        const formData = JSON.stringify(res.data.data);
+        localStorage.setItem('restoreform', formData);
+        window.location.href = `/FlowFormBuilder?workflowname=${selectedWorkflow.workflowname}`
       } else {
         console.log("Failed to send data. Status code:", res.status);
       }

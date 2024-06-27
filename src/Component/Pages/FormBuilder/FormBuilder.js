@@ -1,8 +1,8 @@
 import $ from "jquery";
 import React, { Component, createRef, useEffect, useState } from "react";
 import SidebarMenu from "../../Sidebar/Sidebar";
-import './Formbuilder.css'
-import { URL_Create_Workflow_Form } from "../../API/ProjectAPI";
+import './Formbuilder.css';
+import { URL_Create_Workflow_Form, URL_GET_Workflow_Form,  } from "../../API/ProjectAPI"; // Add your API URL for fetching form data
 import { useLocation, useSearchParams } from "react-router-dom";
 import { ToastContainer, toast, Bounce } from "react-toastify";
 
@@ -12,78 +12,105 @@ window.$ = $;
 require("jquery-ui-sortable");
 require("formBuilder");
 
-const formData = [];
-
-
 class FormBuilder extends Component {
-    fb = createRef();
-    formBuilderInstance = null;
-  
-    componentDidMount() {
-      this.initializeFormBuilder();
-    }
-  
-    initializeFormBuilder = () => {
-      this.formBuilderInstance = $(this.fb.current).formBuilder({
-          formData,
-          i18n: {
-              locale: 'en-US',
-              messages: {
-                  'en-US': {
-                      header: "Header",
-                  }
-              }
-          }
-      });
-  
-      $(this.fb.current).on('click', '.btn-group>.btn:last-child:not(:first-child)', this.handleSubmit);
+  fb = createRef();
+  formBuilderInstance = null;
+  state = {
+    formData: [], // Initialize formData as state
+  };
+
+  componentDidMount() {
+    this.fetchFormData();
   }
 
-  handleSubmit = async () => {
+  fetchFormData = async () => {
     try {
-      // Get the form data from the form builder instance
-      const savedFormData = this.formBuilderInstance.actions.getData();
-      console.log("Form Data:", JSON.stringify(savedFormData));
-  
-      // Set up the request headers
       const requestHeaders = {
         'Content-Type': 'application/json',
         'SESSIONKEY': this.props.sessionKey,
       };
   
-      // Create the request body as a JSON string
       const requestBody = JSON.stringify({
-        formcontent: JSON.stringify(savedFormData),
         workflowname: this.props.workflowname,
       });
   
-      // Send the POST request using fetch API
-      const response = await fetch(URL_Create_Workflow_Form, {
+      const response = await fetch(URL_GET_Workflow_Form, {
         method: 'POST',
         headers: requestHeaders,
         body: requestBody,
       });
   
-      // Parse the response as JSON
+      if (response.status === 401) {
+        this.handleApiError('Unauthorized access. Please check your session key.');
+        return;
+      }
+  
+      const data = await response.json();
+  
+      if (response.ok) {
+        this.setState({ formData: data.data }, this.initializeFormBuilder);
+      } else {
+        this.handleApiError(data.message || 'Failed to fetch form data');
+      }
+    } catch (error) {
+      console.error("Error during API call:", error);
+      this.handleApiError(`Error: ${error.message}`);
+    }
+  };
+
+  initializeFormBuilder = () => {
+    this.formBuilderInstance = $(this.fb.current).formBuilder({
+      formData: this.state.formData,
+      i18n: {
+        locale: 'en-US',
+        messages: {
+          'en-US': {
+            header: "Header",
+          }
+        }
+      }
+    });
+
+    $(this.fb.current).on('click', '.btn-group>.btn:last-child:not(:first-child)', this.handleSubmit);
+  };
+
+  handleSubmit = async () => {
+    try {
+      const savedFormData = this.formBuilderInstance.actions.getData();
+      console.log("Form Data:", JSON.stringify(savedFormData));
+
+      const requestHeaders = {
+        'Content-Type': 'application/json',
+        'SESSIONKEY': this.props.sessionKey,
+      };
+
+      const requestBody = JSON.stringify({
+        formcontent: JSON.stringify(savedFormData),
+        workflowname: this.props.workflowname,
+      });
+
+      const response = await fetch(URL_Create_Workflow_Form, {
+        method: 'POST',
+        headers: requestHeaders,
+        body: requestBody,
+      });
+
       const data = await response.json();
       console.log("API Response:", data);
-  
-      // Handle API response (success or error)
+
       if (response.ok) {
         this.handleApiResponse(data.message || "Form submitted successfully!");
       } else {
         const errorText = `${data.message || 'Unknown error'}`;
         this.handleApiError(errorText);
       }
-  
+
     } catch (error) {
       console.error("Error during API call:", error);
-      // Handle network errors or exceptions
       this.handleApiError(`Error: ${error.message}`);
     }
-  }
-  
-  // Method to handle API response toast notification
+  };
+
   handleApiResponse = (message) => {
     toast.success(message, {
       position: "bottom-right",
@@ -96,9 +123,8 @@ class FormBuilder extends Component {
       theme: "colored",
       transition: Bounce,
     });
-  }
-  
-  // Method to handle API error toast notification
+  };
+
   handleApiError = (errorText) => {
     toast.error(errorText, {
       position: "bottom-right",
@@ -111,13 +137,11 @@ class FormBuilder extends Component {
       theme: "colored",
       transition: Bounce,
     });
-  }
-  
-
+  };
 
   render() {
     return (
-      <div style={{width:"100%" , padding:"0px 20px"}}>
+      <div style={{ width: "100%", padding: "0px 20px" }}>
         <div className="react-formbuilder-cont" id="fb-editor" ref={this.fb} />
       </div>
     );
@@ -132,15 +156,22 @@ function FlowFormBuilder() {
 
   useEffect(() => {
     const sessionKey = localStorage.getItem("sessionKey");
+    console.log("Session Key from localStorage:", sessionKey);
     setSessionKey(sessionKey);
   }, []);
+
+  // Render the FormBuilder only if sessionKey is available
   return (
-    <div style={{display:"flex"}}>
-        <SidebarMenu />
-        <React.StrictMode>
-            <FormBuilder sessionKey={sessionKey} workflowname={workflowname} />
-        </React.StrictMode>
-        <ToastContainer />
+    <div style={{ display: "flex" }}>
+      <SidebarMenu />
+      <React.StrictMode>
+        {sessionKey && workflowname ? (
+          <FormBuilder sessionKey={sessionKey} workflowname={workflowname} />
+        ) : (
+          <div>Loading...</div> // or show some other loading indicator
+        )}
+      </React.StrictMode>
+      <ToastContainer />
     </div>
   );
 }
