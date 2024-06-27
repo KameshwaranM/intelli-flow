@@ -29,6 +29,7 @@ import ProfileEdit from "../Component/Pages/UserProfile/ProfileEdit";
 import ProfileResetPWD from "../Component/Pages/UserProfile/ResetPassword";
 import Devices from "../Component/Pages/Devices/Devices";
 import FlowFormBuilder from "../Component/Pages/FormBuilder/FormBuilder";
+import Invoice from "../Component/Invoice/Invoice";
 // import Workflowsapp from "../Component/WorkFlowEditor/App";
 
 
@@ -80,6 +81,9 @@ function Rout() {
           <Route path="/Your_Profile" element={<UserProfile />} />
           <Route path="/Profile_Your_Edit" element={<ProfileEdit />} />
           <Route path="/Profile_Reset_PWD" element={<ProfileResetPWD />} />
+
+          {/* Invoice */}
+          <Route path="/Invoice" element={<Invoice />} />
         </Routes>
       </Router>
     </div>
