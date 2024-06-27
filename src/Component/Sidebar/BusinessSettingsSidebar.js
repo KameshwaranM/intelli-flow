@@ -120,7 +120,7 @@ useEffect(() => {
           }}
       >
         <Box sx={{ p: 1, display: "flex", flexDirection: "column", gap: 1 }}>
-          <Box className="logo-container">
+          <Box component="button" onClick={() => handleNavigation(window.location.href="/Dashboard")} className="logo-container">
             <img src={LogoImage} alt="Logo" style={{ width: 190 }} />
           </Box>
           <Box className="business-name" onClick={handlePopperOpen}>

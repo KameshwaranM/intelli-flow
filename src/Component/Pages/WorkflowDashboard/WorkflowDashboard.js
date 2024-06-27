@@ -24,7 +24,6 @@ import {
   Select,
   LinearProgress,
   TablePagination,
-  Drawer,
 } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -34,6 +33,7 @@ import "./WorkflowDashboard.css";
 import Sidebar from "../../Sidebar/Sidebar";
 import {
   URL_Create_Workflow,
+  URL_Delete_Workflow_Name,
   URL_GET_Workflow_DATA,
   URL_Get_Workflow_Name,
 } from "../../API/ProjectAPI";
@@ -156,6 +156,9 @@ const WorkflowDashboard = () => {
   
         if (Array.isArray(data.data)) {
           setWorkflows(data.data);
+          // data.data.forEach((workflow) => {
+          //   console.log("Workflow ID:", workflow.workflowid);
+          // });
         } else {
           console.error("Invalid data format");
           setError("Invalid data format");
@@ -172,11 +175,70 @@ const WorkflowDashboard = () => {
   }, []);
   
 
-  const handleDeleteWorkflow = () => {
-    setWorkflows(workflows.filter((workflow) => workflow !== selectedWorkflow));
-    handleDeleteClose();
-    handleMenuClose();
+
+  const handleDeleteWorkflow = async () => {
+    try {
+      const sessionKey = localStorage.getItem('sessionKey');
+      if (!sessionKey) {
+        throw new Error('Session key not found');
+      }
+  
+      const requestOptions = {
+        method: 'DELETE',
+        headers: {
+          'SESSIONKEY': sessionKey,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          workflowname: selectedWorkflow.workflowname
+        })
+      };
+  
+      const response = await fetch(URL_Delete_Workflow_Name, requestOptions);
+  
+      if (!response.ok) {
+        // Handle specific HTTP error status
+        const errorResponse = await response.json();
+        throw new Error(errorResponse.message || 'Failed to delete the workflow');
+      }
+  
+      const data = await response.json();
+      console.log('Item deleted successfully', data);
+      
+      setWorkflows(workflows.filter((workflow) => workflow !== selectedWorkflow));
+      handleDeleteClose();
+      handleMenuClose();
+  
+      toast.success("Workflow Deleted Successfully", {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+      });
+  
+    } catch (error) {
+      console.error('Error deleting item:', error.message || error.toString());
+  
+      toast.error(`Error: ${error.message || error.toString()}`, {
+        position: "bottom-right",
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        theme: "colored",
+        transition: Bounce,
+      });
+    }
   };
+
+  
 
   const filteredWorkflows = workflows.filter(
     (workflow) =>
@@ -198,6 +260,10 @@ const WorkflowDashboard = () => {
     page * rowsPerPage,
     page * rowsPerPage + rowsPerPage
   );
+
+  const handleOpenForm = () =>{
+    window.location.href = `/FlowFormBuilder?workflowname=${selectedWorkflow.workflowname}`
+  }
 
 
   const handleOpenEditor = async (event) => {
@@ -232,7 +298,34 @@ const WorkflowDashboard = () => {
       console.log("Response data message:", errorMessage);
     }
   };
+
+
+  // const handleDeleteOpen = async (selectedWorkflow) => {
+  //   try {
+  //     const sessionKey = localStorage.getItem('sessionKey'); 
+  //     const requestOptions = {
+  //       method: 'DELETE',
+  //       headers: {
+  //         'SESSIONKEY': sessionKey,
+  //         'Content-Type': 'application/json' 
+  //       },
+  //       body:{
+  //         workflowname: selectedWorkflow.workflowname 
+  //       }
+  //     };
   
+  //     const response = await fetch(URL_Delete_Workflow_Name, requestOptions);
+  
+  //     if (!response.ok) {
+  //       throw new Error('Network response was not ok');
+  //     }
+      
+  //     const data = await response.json();
+  //     console.log('Item deleted successfully', data);
+  //   } catch (error) {
+  //     console.error('Error deleting item', error);
+  //   }
+  // };
   
   return (
     <Box className="workflowContainer">
@@ -284,7 +377,7 @@ const WorkflowDashboard = () => {
                     align="left"
                     sx={{ fontSize: "15px", fontWeight: "600" , padding: "10px" }}
                   >
-                    Last Run
+                    Description
                   </TableCell>
                   {/* <TableCell
                     align="left"
@@ -316,18 +409,18 @@ const WorkflowDashboard = () => {
               </TableHead>
               <TableBody>
                 {paginatedWorkflows && paginatedWorkflows.length > 0 ? (
-                  paginatedWorkflows.map((workflow) => (
+                  paginatedWorkflows.map((workflow  , index) => (
                     workflow && ( 
                       <TableRow
-                        key={workflow.createdbyuserid}
+                        key={index}
                         className="workflowTableRow"
                       >
                         <TableCell sx={{ padding: "7px 10px" }} align="left">
                           {workflow.workflowname}<br />
-                          <span style={{fontSize:"10px"}}>{workflow.createddate}</span>
+                          <span style={{fontSize:"10px"}}>created {workflow.createddate}</span>
                         </TableCell>
                         <TableCell sx={{ padding: "7px 10px" }} align="left">
-                          {workflow.createddate}
+                          {workflow.description}
                         </TableCell>
                         {/* <TableCell sx={{ padding: "7px 10px" }} align="left">
                           {workflow.nextrun || "N/A"}
@@ -344,9 +437,8 @@ const WorkflowDashboard = () => {
                           <Box sx={{ display: "flex", alignItems: "left" }}>
                             <LinearProgress
                               variant="buffer"
-                              value={workflow.activity}
-                              sx={{ flexGrow: 1, mr: 1 }}
-                              color="success"
+                              value={0.5}
+                              sx={{ flexGrow: 1, mr: 1 , color: workflow.status }}
                               valueBuffer={100 - workflow.activity}
                               className="activityProgress"
                             />
@@ -364,8 +456,8 @@ const WorkflowDashboard = () => {
                             onClose={handleMenuClose}
                           >
                             <MenuItem onClick={handleOpenEditor}>Edit</MenuItem>
-                            <MenuItem onClick={handleDeleteOpen}>Delete</MenuItem>
-                            <MenuItem onClick={handleOpenEditor}>Create Form</MenuItem>
+                            <MenuItem onClick={() => handleDeleteOpen(workflow.workflowid)}>Delete</MenuItem>
+                            <MenuItem onClick={handleOpenForm}>Create Form</MenuItem>
                             <MenuItem onClick={() => alert("Run")}>Run</MenuItem>
                           </Menu>
                         </TableCell>

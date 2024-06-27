@@ -5,7 +5,6 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 
 
-// Render the main App component into the 'root' element
 ReactDOM.render(
   <React.StrictMode>
     <App />
@@ -13,5 +12,4 @@ ReactDOM.render(
   document.getElementById('root')
 );
 
-// Performance monitoring
 reportWebVitals();

@@ -49,8 +49,7 @@ function Rout() {
           <Route path="/Verify_user_code" element={<VerifyEmail />} />
           <Route path="/Reset_Password" element={<CreatePassword />} />
           <Route path="/Set_Region/:id" element={<SetRegion />} />
-          <Route path="/FlowFormBuilder" element={<FlowFormBuilder />} />
-
+          
           {/* Tool */}
           <Route path="/Create_Project" element={<FirstLogin />} />
           <Route path="/Dashboard" element={<Dashboard />} />
@@ -59,12 +58,16 @@ function Rout() {
           <Route path="/Executions" element={<Executions />} />
           <Route path="/Vault" element={<Vault />} />
           <Route path="/Devices" element={<Devices />} />
+
           {/* Settings */}
           <Route path="/Account_Settings" element={<AccountSettings />} />
+
           {/* Workflow Editor */}
           <Route path="/Workflow_Editor" element={<WorkFlowEditorTool />} />
+          <Route path="/FlowFormBuilder" element={<FlowFormBuilder />} />
           {/* <Route path="/Workflowsapp" element={<Workflowsapp />} /> */}
           {/* <Route path="/SIDEBARUIDEMO" element={<SIDEBARUIDEMO />} /> */}
+
           {/* BusinessName Settings */}
           <Route path="/BusinessName/Settings/Account" element={<BusinessSettingsAccount />} />
           <Route path="/BusinessName/Settings/Project" element={<BusinessSettingsProjects />} />
@@ -72,6 +75,7 @@ function Rout() {
           <Route path="/BusinessName/Settings/Billing" element={<BusinessSettingsBilling />} />
           <Route path="/BusinessName/Settings/Billing/Upgrade" element={<BusinessSettingsBillingUpgrade />} />
           {/* <Route path="/UIComponent" element={<UIComponent />} /> */}
+          
           {/* Profile Info */}
           <Route path="/Your_Profile" element={<UserProfile />} />
           <Route path="/Profile_Your_Edit" element={<ProfileEdit />} />

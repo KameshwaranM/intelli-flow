@@ -2,9 +2,57 @@
     /* border: 1px solid rgb(177, 177, 177); */
     border-radius: 7px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    margin-top: 20px;
+    margin-top: 30px;
 }
 
 .form-wrap.form-builder .stage-wrap {
     padding: 10px !important;
+}
+
+.form-wrap.form-builder .cb-wrap {
+    max-width: none !important;
+    width: 35% !important;
+}
+
+.form-wrap.form-builder .frmb {
+    max-width: 65% !important;
+    min-height: fit-content !important;
+}
+
+.form-wrap.form-builder .cb-wrap .form-actions {
+    float: none !important;
+    margin-top: 5px;
+    width: 100%;
+    justify-content: space-around;
+    padding: 7px 4px 2px 0px;
+}
+.form-wrap.form-builder.formbuilder-embedded-bootstrap .btn-group {
+    /* position: relative; */
+    display: flex !important;
+    vertical-align: middle;
+}
+
+.form-wrap.form-builder.formbuilder-embedded-bootstrap .btn-group>.btn:first-child:not(:last-child):not(.dropdown-toggle) {
+    display: none;
+}
+
+.form-wrap.form-builder.formbuilder-embedded-bootstrap .btn-group>.btn:not(:first-child):not(:last-child):not(.dropdown-toggle) {
+    display: none;
+}
+
+.form-wrap.form-builder.formbuilder-embedded-bootstrap .btn-group>.btn:last-child:not(:first-child) {
+    background-color: #1976d2;
+    border-radius: 4px !important;
+}
+
+.formbuilder-icon-autocomplete{
+    display: none;
+}
+
+.formbuilder-icon-button{
+    display: none;
+}
+
+.formbuilder-icon-paragraph {
+    display: none;
 }
