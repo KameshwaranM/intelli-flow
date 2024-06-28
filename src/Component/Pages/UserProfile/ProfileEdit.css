@@ -1,8 +1,3 @@
-html, body {
-  height: 100%;
-  margin: 0;
-}
-
 .user-profile-edit-root {
   display: flex;
   justify-content: flex-start;

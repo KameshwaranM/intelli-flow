@@ -57,6 +57,7 @@ const Invoice = () => {
   }
 
   return (
+    <Box>
     <Paper className="invoice-container">
       <Box className="invoice-header">
         <Typography variant="h4" color="primary">
@@ -117,6 +118,7 @@ const Invoice = () => {
         <Typography variant="body1">Due Date: {invoiceData.dueDate}</Typography>
       </Box>
     </Paper>
+    </Box>
   );
 };
 
